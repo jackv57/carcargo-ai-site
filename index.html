@@ -20,8 +20,8 @@
 </header>
 
 <!-- ===== HERO ===== -->
-<section id="hero" class="hero">
-  <div class="container center">
+<section class="hero center">
+  <div class="container">
     <h1>CAR CAR GO</h1>
     <p class="subtitle" data-i18n="hero_subtitle"></p>
     <a href="#booking" class="cta-btn" data-i18n="cta_booking"></a>
@@ -65,10 +65,10 @@
   <div class="container">
     <h2 data-i18n="service_title"></h2>
     <div class="grid-2">
-      <div class="card">
+      <div class="card center">
         <strong data-i18n="service_airport"></strong>
       </div>
-      <div class="card">
+      <div class="card center">
         <strong data-i18n="service_charter"></strong>
       </div>
     </div>
@@ -96,12 +96,10 @@
   <div class="container">
     <h2 data-i18n="booking_title"></h2>
 
-    <form
-      id="booking-form"
+    <form id="booking-form"
       method="POST"
       action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85"
-      class="card form"
-    >
+      class="card form">
 
       <h3 data-i18n="form_basic"></h3>
       <input type="text" name="full_name" required placeholder="Full Name" />
@@ -143,9 +141,15 @@
 
       <button type="submit" class="cta-btn" data-i18n="form_submit"></button>
     </form>
+
+    <!-- ===== SUCCESS ===== -->
+    <div id="success-message" class="card center" style="display:none; margin-top:32px;">
+      <h3 data-i18n="success_title"></h3>
+      <p data-i18n="success_desc"></p>
+    </div>
+
   </div>
 </section>
-
 
 <!-- ===== SCRIPT ===== -->
 <script>
@@ -174,16 +178,14 @@ const T = {
     after_point_4: "No LINE installation required",
     booking_title: "Booking Request",
     form_basic: "Basic Information",
-    form_name: "Full Name",
-    form_email: "Email",
-    form_contact: "Phone / WhatsApp",
     form_service: "Service Type",
     airport_title: "Airport Transfer Details",
     charter_title: "Charter Service Details",
     form_extra: "Additional Information",
-    form_submit: "Submit Booking"
+    form_submit: "Submit Booking",
+    success_title: "✅ Booking Submitted Successfully",
+    success_desc: "Thank you for your booking. Our team will contact you shortly with driver and vehicle details."
   },
-
   zh: {
     hero_subtitle: "AI 機場接送與包車預約，無需安裝 App。",
     cta_booking: "立即預約",
@@ -208,16 +210,14 @@ const T = {
     after_point_4: "不需 LINE",
     booking_title: "預約申請",
     form_basic: "基本資料",
-    form_name: "姓名",
-    form_email: "Email",
-    form_contact: "電話 / WhatsApp",
     form_service: "服務類型",
     airport_title: "機場接送資訊",
     charter_title: "包車資訊",
     form_extra: "其他資訊",
-    form_submit: "送出預約"
+    form_submit: "送出預約",
+    success_title: "✅ 預約成功",
+    success_desc: "我們已收到您的預約，將儘快提供司機與車輛資訊。"
   },
-
   jp: {
     hero_subtitle: "AI対応の空港送迎・チャーター予約。アプリ不要。",
     cta_booking: "予約する",
@@ -242,16 +242,14 @@ const T = {
     after_point_4: "LINE不要",
     booking_title: "予約申請",
     form_basic: "基本情報",
-    form_name: "氏名",
-    form_email: "メール",
-    form_contact: "電話 / WhatsApp",
     form_service: "サービス種類",
     airport_title: "空港送迎情報",
     charter_title: "チャーター情報",
     form_extra: "追加情報",
-    form_submit: "予約送信"
+    form_submit: "予約送信",
+    success_title: "✅ 予約完了",
+    success_desc: "ご予約ありがとうございます。後ほどドライバーと車両情報をご案内します。"
   },
-
   kr: {
     hero_subtitle: "AI 기반 공항 픽업 및 차량 전세 예약. 앱 설치 불필요.",
     cta_booking: "예약하기",
@@ -276,40 +274,46 @@ const T = {
     after_point_4: "LINE 불필요",
     booking_title: "예약 요청",
     form_basic: "기본 정보",
-    form_name: "이름",
-    form_email: "이메일",
-    form_contact: "전화 / WhatsApp",
     form_service: "서비스 유형",
     airport_title: "공항 픽업 정보",
     charter_title: "차량 전세 정보",
     form_extra: "추가 정보",
-    form_submit: "예약 제출"
+    form_submit: "예약 제출",
+    success_title: "✅ 예약 완료",
+    success_desc: "예약이 접수되었습니다. 곧 기사 및 차량 정보를 안내드립니다."
   }
 };
 
 function setLang(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.dataset.i18n;
-    if (T[lang] && T[lang][key]) {
-      el.innerText = T[lang][key];
-    }
+    if (T[lang] && T[lang][key]) el.innerText = T[lang][key];
   });
 }
-
-// 預設語言
 setLang("zh");
 
-// 接送 / 包車切換
 const s = document.getElementById("service_type");
 const a = document.getElementById("airport-fields");
 const c = document.getElementById("charter-fields");
 
-if (s) {
-  s.onchange = () => {
-    a.style.display = "none";
-    c.style.display = "none";
-    if (s.value === "airport") a.style.display = "block";
-    if (s.value === "charter") c.style.display = "block";
-  };
-}
+s.onchange = () => {
+  a.style.display = "none";
+  c.style.display = "none";
+  if (s.value === "airport") a.style.display = "block";
+  if (s.value === "charter") c.style.display = "block";
+};
+
+const form = document.getElementById("booking-form");
+const success = document.getElementById("success-message");
+
+form.addEventListener("submit", () => {
+  setTimeout(() => {
+    form.style.display = "none";
+    success.style.display = "block";
+    success.scrollIntoView({ behavior: "smooth" });
+  }, 500);
+});
 </script>
+
+</body>
+</html>
