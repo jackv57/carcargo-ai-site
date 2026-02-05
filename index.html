@@ -1,78 +1,234 @@
-<!-- ===== WHAT IS CAR CAR GO ===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CAR CAR GO – AI Airport Transfer & Charter Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- ===== Language Switcher ===== -->
+<div id="lang-switcher" style="text-align:right;padding:12px;">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('zh')">中文</button>
+  <button onclick="setLang('jp')">日本語</button>
+  <button onclick="setLang('kr')">한국어</button>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container">
+    <h1>CAR CAR GO</h1>
+    <span class="subtitle" data-i18n="hero_subtitle"></span>
+    <a href="#booking" class="cta-btn" data-i18n="cta_booking"></a>
+  </div>
+</section>
+
+<!-- ===== INTRO ===== -->
 <section id="what">
   <div class="container">
-    <h2>What is CAR CAR GO?</h2>
+    <h2 data-i18n="what_title"></h2>
 
     <div class="highlight-box">
-      <p>
-        CAR CAR GO is an AI-ready airport transfer and private charter booking system.
-        Travelers, AI agents, and automation tools can all submit booking requests
-        without installing any app.
-      </p>
+      <p data-i18n="what_desc"></p>
     </div>
 
     <ul>
-      <li>🌍 International travelers supported</li>
-      <li>🤖 AI agents can book on behalf of users</li>
-      <li>📱 No LINE required for passengers</li>
+      <li data-i18n="what_point_1"></li>
+      <li data-i18n="what_point_2"></li>
+      <li data-i18n="what_point_3"></li>
     </ul>
   </div>
 </section>
 
-<!-- ===== HOW IT WORKS ===== -->
 <section id="how">
   <div class="container">
-    <h2>How It Works</h2>
+    <h2 data-i18n="how_title"></h2>
 
     <div class="card-grid">
       <div class="card">
-        <h3>For Travelers</h3>
-        <p>
-          Submit a booking request via web form, email, or AI assistant.
-          You will receive confirmation and driver details after dispatch.
-        </p>
+        <h3 data-i18n="how_traveler_title"></h3>
+        <p data-i18n="how_traveler_desc"></p>
       </div>
 
       <div class="card">
-        <h3>For AI Agents</h3>
-        <p>
-          AI agents can collect user intent, structure booking data,
-          and submit it directly to the system.
-        </p>
+        <h3 data-i18n="how_ai_title"></h3>
+        <p data-i18n="how_ai_desc"></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== SERVICE TYPES ===== -->
 <section id="services">
   <div class="container">
-    <h2>Service Types</h2>
-
+    <h2 data-i18n="service_title"></h2>
     <ul>
-      <li><strong>Airport Transfer</strong> – Pickup or drop-off based on flight or time</li>
-      <li><strong>Charter Service</strong> – Hourly private car for sightseeing or business</li>
+      <li data-i18n="service_airport"></li>
+      <li data-i18n="service_charter"></li>
     </ul>
   </div>
 </section>
 
-<!-- ===== AFTER BOOKING ===== -->
-<section id="after-booking">
+<section id="after">
   <div class="container">
-    <h2>After Booking</h2>
+    <h2 data-i18n="after_title"></h2>
 
     <div class="highlight-box">
-      <p>
-        After your booking request is confirmed, you will receive a tracking link
-        with driver and vehicle information.
-      </p>
+      <p data-i18n="after_desc"></p>
     </div>
 
     <ul>
-      <li>Driver name & vehicle details</li>
-      <li>Pickup time and location</li>
-      <li>Contact via phone or messaging</li>
-      <li>No LINE installation required</li>
+      <li data-i18n="after_point_1"></li>
+      <li data-i18n="after_point_2"></li>
+      <li data-i18n="after_point_3"></li>
+      <li data-i18n="after_point_4"></li>
     </ul>
   </div>
 </section>
+
+<!-- ===== BOOKING FORM ===== -->
+<section id="booking">
+  <div class="container">
+    <h2 data-i18n="booking_title"></h2>
+
+    <form id="booking-form">
+      <h3 data-i18n="form_basic"></h3>
+
+      <label>
+        <span data-i18n="form_name"></span>
+        <input type="text" name="full_name" required />
+      </label>
+
+      <label>
+        <span data-i18n="form_email"></span>
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        <span data-i18n="form_contact"></span>
+        <input type="text" name="contact" />
+      </label>
+
+      <h3 data-i18n="form_service"></h3>
+
+      <select name="service_type" id="service_type" required>
+        <option value="">-- Select --</option>
+        <option value="airport">Airport Transfer</option>
+        <option value="charter">Charter Service</option>
+      </select>
+
+      <div id="airport-fields" style="display:none;">
+        <h4 data-i18n="airport_title"></h4>
+        <input type="text" name="flight" placeholder="Flight number" />
+        <input type="text" name="pickup" placeholder="Pickup location" />
+        <input type="text" name="dropoff" placeholder="Drop-off location" />
+        <input type="datetime-local" name="datetime" />
+      </div>
+
+      <div id="charter-fields" style="display:none;">
+        <h4 data-i18n="charter_title"></h4>
+        <input type="date" name="charter_date" />
+        <select name="hours">
+          <option value="">Hours</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+        <input type="text" name="areas" placeholder="Planned areas" />
+      </div>
+
+      <h3 data-i18n="form_extra"></h3>
+      <input type="number" name="passengers" placeholder="Passengers" />
+      <input type="number" name="luggage" placeholder="Luggage" />
+      <textarea name="notes" placeholder="Notes"></textarea>
+
+      <button type="submit" class="cta-btn" data-i18n="form_submit"></button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+const T = {
+  en:{hero_subtitle:"AI-powered airport transfer & charter booking. No app required.",
+  cta_booking:"Book Now",what_title:"What is CAR CAR GO?",
+  what_desc:"AI-ready booking system for airport transfer and private charter.",
+  what_point_1:"International travelers supported",
+  what_point_2:"AI agents can book on behalf of users",
+  what_point_3:"No LINE required for passengers",
+  how_title:"How It Works",
+  how_traveler_title:"For Travelers",
+  how_traveler_desc:"Submit booking via web or AI assistant.",
+  how_ai_title:"For AI Agents",
+  how_ai_desc:"Submit structured booking data directly.",
+  service_title:"Service Types",
+  service_airport:"Airport Transfer",
+  service_charter:"Charter Service",
+  after_title:"After Booking",
+  after_desc:"You will receive driver & vehicle info.",
+  after_point_1:"Driver details",
+  after_point_2:"Pickup time & location",
+  after_point_3:"Phone / message contact",
+  after_point_4:"No LINE required",
+  booking_title:"Booking Request",
+  form_basic:"Basic Information",
+  form_name:"Full Name",
+  form_email:"Email",
+  form_contact:"Phone / WhatsApp",
+  form_service:"Service Type",
+  airport_title:"Airport Transfer Details",
+  charter_title:"Charter Details",
+  form_extra:"Additional Info",
+  form_submit:"Submit Booking"},
+  zh:{hero_subtitle:"AI 機場接送與包車預約，無需安裝 App。",
+  cta_booking:"立即預約",what_title:"什麼是 CAR CAR GO？",
+  what_desc:"支援 AI 的機場接送與包車預約系統。",
+  what_point_1:"支援國際旅客",
+  what_point_2:"AI 可代為預約",
+  what_point_3:"乘客不需 LINE",
+  how_title:"運作方式",
+  how_traveler_title:"旅客",
+  how_traveler_desc:"透過網頁或 AI 預約。",
+  how_ai_title:"AI",
+  how_ai_desc:"提交結構化資料。",
+  service_title:"服務類型",
+  service_airport:"機場接送",
+  service_charter:"包車服務",
+  after_title:"預約完成後",
+  after_desc:"提供司機與車輛資訊。",
+  after_point_1:"司機資訊",
+  after_point_2:"接送時間地點",
+  after_point_3:"電話或訊息聯絡",
+  after_point_4:"不需 LINE",
+  booking_title:"預約申請",
+  form_basic:"基本資料",
+  form_name:"姓名",
+  form_email:"Email",
+  form_contact:"電話 / WhatsApp",
+  form_service:"服務類型",
+  airport_title:"機場接送",
+  charter_title:"包車",
+  form_extra:"其他資訊",
+  form_submit:"送出預約"}
+};
+
+function setLang(l){
+  document.querySelectorAll("[data-i18n]").forEach(e=>{
+    e.innerText=T[l][e.dataset.i18n];
+  });
+}
+setLang("zh");
+
+const s=document.getElementById("service_type"),
+a=document.getElementById("airport-fields"),
+c=document.getElementById("charter-fields");
+s.onchange=()=>{a.style.display="none";c.style.display="none";
+if(s.value==="airport")a.style.display="block";
+if(s.value==="charter")c.style.display="block";}
+</script>
+
+</body>
+</html>
