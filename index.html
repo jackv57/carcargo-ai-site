@@ -10,32 +10,32 @@
 <body>
 
 <!-- ===== Language Switcher ===== -->
-<div id="lang-switcher" style="text-align:right;padding:12px;">
-  <button onclick="setLang('en')">EN</button>
-  <button onclick="setLang('zh')">中文</button>
-  <button onclick="setLang('jp')">日本語</button>
-  <button onclick="setLang('kr')">한국어</button>
-</div>
+<header class="topbar">
+  <div class="container right">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('zh')">中文</button>
+    <button onclick="setLang('jp')">日本語</button>
+    <button onclick="setLang('kr')">한국어</button>
+  </div>
+</header>
 
 <!-- ===== HERO ===== -->
-<section id="hero">
-  <div class="container">
+<section id="hero" class="hero">
+  <div class="container center">
     <h1>CAR CAR GO</h1>
-    <span class="subtitle" data-i18n="hero_subtitle"></span>
+    <p class="subtitle" data-i18n="hero_subtitle"></p>
     <a href="#booking" class="cta-btn" data-i18n="cta_booking"></a>
   </div>
 </section>
 
-<!-- ===== INTRO ===== -->
-<section id="what">
+<!-- ===== WHAT ===== -->
+<section class="section">
   <div class="container">
     <h2 data-i18n="what_title"></h2>
-
-    <div class="highlight-box">
+    <div class="card highlight">
       <p data-i18n="what_desc"></p>
     </div>
-
-    <ul>
+    <ul class="list">
       <li data-i18n="what_point_1"></li>
       <li data-i18n="what_point_2"></li>
       <li data-i18n="what_point_3"></li>
@@ -43,16 +43,15 @@
   </div>
 </section>
 
-<section id="how">
+<!-- ===== HOW ===== -->
+<section class="section muted">
   <div class="container">
     <h2 data-i18n="how_title"></h2>
-
-    <div class="card-grid">
+    <div class="grid-2">
       <div class="card">
         <h3 data-i18n="how_traveler_title"></h3>
         <p data-i18n="how_traveler_desc"></p>
       </div>
-
       <div class="card">
         <h3 data-i18n="how_ai_title"></h3>
         <p data-i18n="how_ai_desc"></p>
@@ -61,25 +60,29 @@
   </div>
 </section>
 
-<section id="services">
+<!-- ===== SERVICES ===== -->
+<section class="section">
   <div class="container">
     <h2 data-i18n="service_title"></h2>
-    <ul>
-      <li data-i18n="service_airport"></li>
-      <li data-i18n="service_charter"></li>
-    </ul>
+    <div class="grid-2">
+      <div class="card">
+        <strong data-i18n="service_airport"></strong>
+      </div>
+      <div class="card">
+        <strong data-i18n="service_charter"></strong>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="after">
+<!-- ===== AFTER ===== -->
+<section class="section muted">
   <div class="container">
     <h2 data-i18n="after_title"></h2>
-
-    <div class="highlight-box">
+    <div class="card highlight">
       <p data-i18n="after_desc"></p>
     </div>
-
-    <ul>
+    <ul class="list">
       <li data-i18n="after_point_1"></li>
       <li data-i18n="after_point_2"></li>
       <li data-i18n="after_point_3"></li>
@@ -88,37 +91,26 @@
   </div>
 </section>
 
-<!-- ===== BOOKING FORM ===== -->
-<section id="booking">
+<!-- ===== BOOKING ===== -->
+<section id="booking" class="section dark">
   <div class="container">
     <h2 data-i18n="booking_title"></h2>
 
     <form
-  id="booking-form"
-  method="POST"
-  action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85"
->
+      id="booking-form"
+      method="POST"
+      action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85"
+      class="card form"
+    >
+
       <h3 data-i18n="form_basic"></h3>
-
-      <label>
-        <span data-i18n="form_name"></span>
-        <input type="text" name="full_name" required />
-      </label>
-
-      <label>
-        <span data-i18n="form_email"></span>
-        <input type="email" name="email" required />
-      </label>
-
-      <label>
-        <span data-i18n="form_contact"></span>
-        <input type="text" name="contact" />
-      </label>
+      <input type="text" name="full_name" required placeholder="Full Name" />
+      <input type="email" name="email" required placeholder="Email" />
+      <input type="text" name="contact" placeholder="Phone / WhatsApp" />
 
       <h3 data-i18n="form_service"></h3>
-
       <select name="service_type" id="service_type" required>
-        <option value="">-- Select --</option>
+        <option value="">Select</option>
         <option value="airport">Airport Transfer</option>
         <option value="charter">Charter Service</option>
       </select>
@@ -153,6 +145,7 @@
     </form>
   </div>
 </section>
+
 
 <!-- ===== SCRIPT ===== -->
 <script>
