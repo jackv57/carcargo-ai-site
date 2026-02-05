@@ -1,260 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>CAR CAR GO – AI Airport Transfer & Charter Booking</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-
-<!-- ===== Language Switcher ===== -->
-<div id="lang-switcher" style="text-align:right;padding:10px;">
-  <button onclick="setLang('en')">EN</button>
-  <button onclick="setLang('zh')">中文</button>
-  <button onclick="setLang('jp')">日本語</button>
-  <button onclick="setLang('kr')">한국어</button>
-</div>
-
-<!-- ===== HERO ===== -->
-<section id="hero">
+<!-- ===== WHAT IS CAR CAR GO ===== -->
+<section id="what">
   <div class="container">
-    <h1>CAR CAR GO</h1>
-    <span class="subtitle" data-i18n="hero_subtitle"></span>
-    <a href="#booking" class="cta-btn" data-i18n="cta_booking"></a>
+    <h2>What is CAR CAR GO?</h2>
+
+    <div class="highlight-box">
+      <p>
+        CAR CAR GO is an AI-ready airport transfer and private charter booking system.
+        Travelers, AI agents, and automation tools can all submit booking requests
+        without installing any app.
+      </p>
+    </div>
+
+    <ul>
+      <li>🌍 International travelers supported</li>
+      <li>🤖 AI agents can book on behalf of users</li>
+      <li>📱 No LINE required for passengers</li>
+    </ul>
   </div>
 </section>
 
-<!-- ===== BOOKING ===== -->
-<section id="booking">
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how">
   <div class="container">
-    <h2 data-i18n="booking_title"></h2>
+    <h2>How It Works</h2>
 
-    <!-- ===== BOOKING FORM ===== -->
-    <form id="booking-form">
-
-      <h3 data-i18n="form_basic_title"></h3>
-
-      <label>
-        <span data-i18n="form_name"></span>
-        <input type="text" name="full_name" required />
-      </label>
-
-      <label>
-        <span data-i18n="form_email"></span>
-        <input type="email" name="email" required />
-      </label>
-
-      <label>
-        <span data-i18n="form_contact"></span>
-        <input type="text" name="contact" />
-      </label>
-
-      <h3 data-i18n="form_service_title"></h3>
-
-      <label>
-        <select name="service_type" id="service_type" required>
-          <option value="">-- Select --</option>
-          <option value="airport_transfer">Airport Transfer</option>
-          <option value="charter">Charter Service</option>
-        </select>
-      </label>
-
-      <!-- Airport Transfer -->
-      <div id="airport-fields" style="display:none;">
-        <h4 data-i18n="form_airport_title"></h4>
-
-        <label>
-          <span data-i18n="form_flight"></span>
-          <input type="text" name="flight_number" />
-        </label>
-
-        <label>
-          <span data-i18n="form_pickup"></span>
-          <input type="text" name="pickup_location" />
-        </label>
-
-        <label>
-          <span data-i18n="form_dropoff"></span>
-          <input type="text" name="dropoff_location" />
-        </label>
-
-        <label>
-          <span data-i18n="form_datetime"></span>
-          <input type="datetime-local" name="pickup_datetime" />
-        </label>
+    <div class="card-grid">
+      <div class="card">
+        <h3>For Travelers</h3>
+        <p>
+          Submit a booking request via web form, email, or AI assistant.
+          You will receive confirmation and driver details after dispatch.
+        </p>
       </div>
 
-      <!-- Charter -->
-      <div id="charter-fields" style="display:none;">
-        <h4 data-i18n="form_charter_title"></h4>
-
-        <label>
-          <span data-i18n="form_charter_date"></span>
-          <input type="date" name="charter_date" />
-        </label>
-
-        <label>
-          <span data-i18n="form_charter_hours"></span>
-          <select name="charter_hours">
-            <option value="">-- Select --</option>
-            <option value="4">4</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-            <option value="10">10</option>
-          </select>
-        </label>
-
-        <label>
-          <span data-i18n="form_charter_area"></span>
-          <input type="text" name="charter_areas" />
-        </label>
+      <div class="card">
+        <h3>For AI Agents</h3>
+        <p>
+          AI agents can collect user intent, structure booking data,
+          and submit it directly to the system.
+        </p>
       </div>
-
-      <h3 data-i18n="form_extra_title"></h3>
-
-      <label>
-        <span data-i18n="form_passengers"></span>
-        <input type="number" name="passengers" min="1" />
-      </label>
-
-      <label>
-        <span data-i18n="form_luggage"></span>
-        <input type="number" name="luggage" min="0" />
-      </label>
-
-      <label>
-        <span data-i18n="form_notes"></span>
-        <textarea name="notes"></textarea>
-      </label>
-
-      <button type="submit" class="cta-btn" data-i18n="form_submit"></button>
-
-    </form>
+    </div>
   </div>
 </section>
 
-<!-- ===== I18N + LOGIC ===== -->
-<script>
-const translations = {
-  en: {
-    hero_subtitle: "AI-powered airport transfer & charter booking. No app required.",
-    cta_booking: "Book Now",
-    booking_title: "Booking Request",
-    form_basic_title: "Basic Information",
-    form_name: "Full Name",
-    form_email: "Email",
-    form_contact: "Phone / WhatsApp",
-    form_service_title: "Service Type",
-    form_airport_title: "Airport Transfer Details",
-    form_flight: "Flight Number",
-    form_pickup: "Pickup Location",
-    form_dropoff: "Drop-off Location",
-    form_datetime: "Pickup Date & Time",
-    form_charter_title: "Charter Service Details",
-    form_charter_date: "Charter Date",
-    form_charter_hours: "Estimated Hours",
-    form_charter_area: "Planned Areas / Cities",
-    form_extra_title: "Additional Information",
-    form_passengers: "Passengers",
-    form_luggage: "Luggage Count",
-    form_notes: "Special Requests",
-    form_submit: "Submit Booking"
-  },
-  zh: {
-    hero_subtitle: "AI 機場接送與包車預約，無需安裝 App。",
-    cta_booking: "立即預約",
-    booking_title: "預約申請",
-    form_basic_title: "基本資料",
-    form_name: "姓名",
-    form_email: "Email",
-    form_contact: "電話 / WhatsApp",
-    form_service_title: "服務類型",
-    form_airport_title: "機場接送資訊",
-    form_flight: "航班號碼",
-    form_pickup: "上車地點",
-    form_dropoff: "下車地點",
-    form_datetime: "接送時間",
-    form_charter_title: "包車資訊",
-    form_charter_date: "包車日期",
-    form_charter_hours: "使用時數",
-    form_charter_area: "行程區域",
-    form_extra_title: "其他資訊",
-    form_passengers: "乘客人數",
-    form_luggage: "行李數量",
-    form_notes: "備註需求",
-    form_submit: "送出預約"
-  },
-  jp: {
-    hero_subtitle: "AI対応 空港送迎・チャーター予約。",
-    cta_booking: "予約する",
-    booking_title: "予約申請",
-    form_basic_title: "基本情報",
-    form_name: "氏名",
-    form_email: "メール",
-    form_contact: "電話 / WhatsApp",
-    form_service_title: "サービス種類",
-    form_airport_title: "空港送迎",
-    form_flight: "便名",
-    form_pickup: "乗車場所",
-    form_dropoff: "降車場所",
-    form_datetime: "日時",
-    form_charter_title: "チャーター",
-    form_charter_date: "利用日",
-    form_charter_hours: "利用時間",
-    form_charter_area: "エリア",
-    form_extra_title: "追加情報",
-    form_passengers: "人数",
-    form_luggage: "荷物",
-    form_notes: "要望",
-    form_submit: "送信"
-  },
-  kr: {
-    hero_subtitle: "AI 공항 픽업 및 차량 전세 예약.",
-    cta_booking: "예약하기",
-    booking_title: "예약 요청",
-    form_basic_title: "기본 정보",
-    form_name: "이름",
-    form_email: "이메일",
-    form_contact: "전화 / WhatsApp",
-    form_service_title: "서비스 유형",
-    form_airport_title: "공항 픽업",
-    form_flight: "항공편",
-    form_pickup: "픽업 장소",
-    form_dropoff: "도착지",
-    form_datetime: "날짜 및 시간",
-    form_charter_title: "차량 전세",
-    form_charter_date: "이용 날짜",
-    form_charter_hours: "이용 시간",
-    form_charter_area: "이동 지역",
-    form_extra_title: "추가 정보",
-    form_passengers: "인원",
-    form_luggage: "짐",
-    form_notes: "요청사항",
-    form_submit: "예약 제출"
-  }
-};
+<!-- ===== SERVICE TYPES ===== -->
+<section id="services">
+  <div class="container">
+    <h2>Service Types</h2>
 
-function setLang(lang) {
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    el.innerText = translations[lang][el.dataset.i18n];
-  });
-}
-setLang("en");
+    <ul>
+      <li><strong>Airport Transfer</strong> – Pickup or drop-off based on flight or time</li>
+      <li><strong>Charter Service</strong> – Hourly private car for sightseeing or business</li>
+    </ul>
+  </div>
+</section>
 
-// Service type logic
-const serviceType = document.getElementById("service_type");
-const airportFields = document.getElementById("airport-fields");
-const charterFields = document.getElementById("charter-fields");
+<!-- ===== AFTER BOOKING ===== -->
+<section id="after-booking">
+  <div class="container">
+    <h2>After Booking</h2>
 
-serviceType.addEventListener("change", function () {
-  airportFields.style.display = "none";
-  charterFields.style.display = "none";
-  if (this.value === "airport_transfer") airportFields.style.display = "block";
-  if (this.value === "charter") charterFields.style.display = "block";
-});
-</script>
+    <div class="highlight-box">
+      <p>
+        After your booking request is confirmed, you will receive a tracking link
+        with driver and vehicle information.
+      </p>
+    </div>
 
-</body>
-</html>
+    <ul>
+      <li>Driver name & vehicle details</li>
+      <li>Pickup time and location</li>
+      <li>Contact via phone or messaging</li>
+      <li>No LINE installation required</li>
+    </ul>
+  </div>
+</section>
