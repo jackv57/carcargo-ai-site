@@ -47,8 +47,111 @@
   <section id="booking">
     <div class="container">
       <h2 data-i18n="booking_title"></h2>
+<form id="booking-form">
 
-      <div class="card-grid">
+  <!-- ===== 基本資料 ===== -->
+  <h3 data-i18n="form_basic_title">Basic Information</h3>
+
+  <label>
+    <span data-i18n="form_name">Full Name</span>
+    <input type="text" name="full_name" required />
+  </label>
+
+  <label>
+    <span data-i18n="form_email">Email</span>
+    <input type="email" name="email" required />
+  </label>
+
+  <label>
+    <span data-i18n="form_contact">Phone / WhatsApp (optional)</span>
+    <input type="text" name="contact" />
+  </label>
+
+  <!-- ===== 服務類型 ===== -->
+  <h3 data-i18n="form_service_title">Service Type</h3>
+
+  <label>
+    <select name="service_type" id="service_type" required>
+      <option value="">-- Select --</option>
+      <option value="airport_transfer">Airport Transfer</option>
+      <option value="charter">Charter Service</option>
+    </select>
+  </label>
+
+  <!-- ===== 接送專用 ===== -->
+  <div id="airport-fields" style="display:none;">
+    <h4 data-i18n="form_airport_title">Airport Transfer Details</h4>
+
+    <label>
+      <span data-i18n="form_flight">Flight Number (if any)</span>
+      <input type="text" name="flight_number" />
+    </label>
+
+    <label>
+      <span data-i18n="form_pickup">Pickup Location</span>
+      <input type="text" name="pickup_location" />
+    </label>
+
+    <label>
+      <span data-i18n="form_dropoff">Drop-off Location</span>
+      <input type="text" name="dropoff_location" />
+    </label>
+
+    <label>
+      <span data-i18n="form_datetime">Pickup Date & Time</span>
+      <input type="datetime-local" name="pickup_datetime" />
+    </label>
+  </div>
+
+  <!-- ===== 包車專用 ===== -->
+  <div id="charter-fields" style="display:none;">
+    <h4 data-i18n="form_charter_title">Charter Service Details</h4>
+
+    <label>
+      <span data-i18n="form_charter_date">Charter Date</span>
+      <input type="date" name="charter_date" />
+    </label>
+
+    <label>
+      <span data-i18n="form_charter_hours">Estimated Hours</span>
+      <select name="charter_hours">
+        <option value="">-- Select --</option>
+        <option value="4">4 hours</option>
+        <option value="6">6 hours</option>
+        <option value="8">8 hours</option>
+        <option value="10">10 hours</option>
+      </select>
+    </label>
+
+    <label>
+      <span data-i18n="form_charter_area">Planned Areas / Cities</span>
+      <input type="text" name="charter_areas" />
+    </label>
+  </div>
+
+  <!-- ===== 其他資訊 ===== -->
+  <h3 data-i18n="form_extra_title">Additional Information</h3>
+
+  <label>
+    <span data-i18n="form_passengers">Passengers</span>
+    <input type="number" name="passengers" min="1" />
+  </label>
+
+  <label>
+    <span data-i18n="form_luggage">Luggage Count</span>
+    <input type="number" name="luggage" min="0" />
+  </label>
+
+  <label>
+    <span data-i18n="form_notes">Special Requests / Notes</span>
+    <textarea name="notes" rows="3"></textarea>
+  </label>
+
+  <button type="submit" class="cta-btn" data-i18n="form_submit">
+    Submit Booking Request
+  </button>
+
+</form>      <div class="card-grid">
         <div class="card">
           <h3 data-i18n="traveler_title"></h3>
           <p data-i18n="traveler_desc"></p>
