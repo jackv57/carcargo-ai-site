@@ -153,82 +153,166 @@
 <!-- ===== SCRIPT ===== -->
 <script>
 const T = {
-  en:{hero_subtitle:"AI-powered airport transfer & charter booking. No app required.",
-  cta_booking:"Book Now",what_title:"What is CAR CAR GO?",
-  what_desc:"AI-ready booking system for airport transfer and private charter.",
-  what_point_1:"International travelers supported",
-  what_point_2:"AI agents can book on behalf of users",
-  what_point_3:"No LINE required for passengers",
-  how_title:"How It Works",
-  how_traveler_title:"For Travelers",
-  how_traveler_desc:"Submit booking via web or AI assistant.",
-  how_ai_title:"For AI Agents",
-  how_ai_desc:"Submit structured booking data directly.",
-  service_title:"Service Types",
-  service_airport:"Airport Transfer",
-  service_charter:"Charter Service",
-  after_title:"After Booking",
-  after_desc:"You will receive driver & vehicle info.",
-  after_point_1:"Driver details",
-  after_point_2:"Pickup time & location",
-  after_point_3:"Phone / message contact",
-  after_point_4:"No LINE required",
-  booking_title:"Booking Request",
-  form_basic:"Basic Information",
-  form_name:"Full Name",
-  form_email:"Email",
-  form_contact:"Phone / WhatsApp",
-  form_service:"Service Type",
-  airport_title:"Airport Transfer Details",
-  charter_title:"Charter Details",
-  form_extra:"Additional Info",
-  form_submit:"Submit Booking"},
-  zh:{hero_subtitle:"AI 機場接送與包車預約，無需安裝 App。",
-  cta_booking:"立即預約",what_title:"什麼是 CAR CAR GO？",
-  what_desc:"支援 AI 的機場接送與包車預約系統。",
-  what_point_1:"支援國際旅客",
-  what_point_2:"AI 可代為預約",
-  what_point_3:"乘客不需 LINE",
-  how_title:"運作方式",
-  how_traveler_title:"旅客",
-  how_traveler_desc:"透過網頁或 AI 預約。",
-  how_ai_title:"AI",
-  how_ai_desc:"提交結構化資料。",
-  service_title:"服務類型",
-  service_airport:"機場接送",
-  service_charter:"包車服務",
-  after_title:"預約完成後",
-  after_desc:"提供司機與車輛資訊。",
-  after_point_1:"司機資訊",
-  after_point_2:"接送時間地點",
-  after_point_3:"電話或訊息聯絡",
-  after_point_4:"不需 LINE",
-  booking_title:"預約申請",
-  form_basic:"基本資料",
-  form_name:"姓名",
-  form_email:"Email",
-  form_contact:"電話 / WhatsApp",
-  form_service:"服務類型",
-  airport_title:"機場接送",
-  charter_title:"包車",
-  form_extra:"其他資訊",
-  form_submit:"送出預約"}
+  en: {
+    hero_subtitle: "AI-powered airport transfer & charter booking. No app required.",
+    cta_booking: "Book Now",
+    what_title: "What is CAR CAR GO?",
+    what_desc: "AI-ready booking system for airport transfer and private charter.",
+    what_point_1: "International travelers supported",
+    what_point_2: "AI agents can book on behalf of users",
+    what_point_3: "No LINE required for passengers",
+    how_title: "How It Works",
+    how_traveler_title: "For Travelers",
+    how_traveler_desc: "Submit booking via web form or AI assistant.",
+    how_ai_title: "For AI Agents",
+    how_ai_desc: "Submit structured booking data directly.",
+    service_title: "Service Types",
+    service_airport: "Airport Transfer",
+    service_charter: "Charter Service",
+    after_title: "After Booking",
+    after_desc: "You will receive driver & vehicle information.",
+    after_point_1: "Driver name & vehicle details",
+    after_point_2: "Pickup time and location",
+    after_point_3: "Contact via phone or messaging",
+    after_point_4: "No LINE installation required",
+    booking_title: "Booking Request",
+    form_basic: "Basic Information",
+    form_name: "Full Name",
+    form_email: "Email",
+    form_contact: "Phone / WhatsApp",
+    form_service: "Service Type",
+    airport_title: "Airport Transfer Details",
+    charter_title: "Charter Service Details",
+    form_extra: "Additional Information",
+    form_submit: "Submit Booking"
+  },
+
+  zh: {
+    hero_subtitle: "AI 機場接送與包車預約，無需安裝 App。",
+    cta_booking: "立即預約",
+    what_title: "什麼是 CAR CAR GO？",
+    what_desc: "支援 AI 的機場接送與包車預約系統。",
+    what_point_1: "支援國際旅客",
+    what_point_2: "AI 可代為預約",
+    what_point_3: "乘客不需 LINE",
+    how_title: "運作方式",
+    how_traveler_title: "旅客",
+    how_traveler_desc: "可透過網頁或 AI 助手送出預約。",
+    how_ai_title: "AI 代理",
+    how_ai_desc: "提交結構化預約資料。",
+    service_title: "服務類型",
+    service_airport: "機場接送",
+    service_charter: "包車服務",
+    after_title: "預約完成後",
+    after_desc: "將提供司機與車輛資訊。",
+    after_point_1: "司機資訊",
+    after_point_2: "接送時間與地點",
+    after_point_3: "電話或訊息聯絡",
+    after_point_4: "不需 LINE",
+    booking_title: "預約申請",
+    form_basic: "基本資料",
+    form_name: "姓名",
+    form_email: "Email",
+    form_contact: "電話 / WhatsApp",
+    form_service: "服務類型",
+    airport_title: "機場接送資訊",
+    charter_title: "包車資訊",
+    form_extra: "其他資訊",
+    form_submit: "送出預約"
+  },
+
+  jp: {
+    hero_subtitle: "AI対応の空港送迎・チャーター予約。アプリ不要。",
+    cta_booking: "予約する",
+    what_title: "CAR CAR GOとは？",
+    what_desc: "AI対応の空港送迎・チャーター予約システムです。",
+    what_point_1: "海外旅行者対応",
+    what_point_2: "AIが代理で予約可能",
+    what_point_3: "LINE不要",
+    how_title: "利用方法",
+    how_traveler_title: "旅行者向け",
+    how_traveler_desc: "WebフォームまたはAIで予約できます。",
+    how_ai_title: "AIエージェント",
+    how_ai_desc: "構造化された予約データを直接送信。",
+    service_title: "サービス内容",
+    service_airport: "空港送迎",
+    service_charter: "チャーターサービス",
+    after_title: "予約後",
+    after_desc: "ドライバーと車両情報をお送りします。",
+    after_point_1: "ドライバー情報",
+    after_point_2: "乗車時間・場所",
+    after_point_3: "電話またはメッセージ",
+    after_point_4: "LINE不要",
+    booking_title: "予約申請",
+    form_basic: "基本情報",
+    form_name: "氏名",
+    form_email: "メール",
+    form_contact: "電話 / WhatsApp",
+    form_service: "サービス種類",
+    airport_title: "空港送迎情報",
+    charter_title: "チャーター情報",
+    form_extra: "追加情報",
+    form_submit: "予約送信"
+  },
+
+  kr: {
+    hero_subtitle: "AI 기반 공항 픽업 및 차량 전세 예약. 앱 설치 불필요.",
+    cta_booking: "예약하기",
+    what_title: "CAR CAR GO란?",
+    what_desc: "AI 지원 공항 픽업 및 차량 전세 예약 시스템입니다.",
+    what_point_1: "해외 여행자 지원",
+    what_point_2: "AI 대리 예약 가능",
+    what_point_3: "LINE 불필요",
+    how_title: "이용 방법",
+    how_traveler_title: "여행자",
+    how_traveler_desc: "웹 또는 AI를 통해 예약할 수 있습니다.",
+    how_ai_title: "AI 에이전트",
+    how_ai_desc: "구조화된 예약 데이터를 직접 제출.",
+    service_title: "서비스 유형",
+    service_airport: "공항 픽업",
+    service_charter: "차량 전세",
+    after_title: "예약 후",
+    after_desc: "기사 및 차량 정보를 제공합니다.",
+    after_point_1: "기사 정보",
+    after_point_2: "픽업 시간 및 장소",
+    after_point_3: "전화 또는 메시지",
+    after_point_4: "LINE 불필요",
+    booking_title: "예약 요청",
+    form_basic: "기본 정보",
+    form_name: "이름",
+    form_email: "이메일",
+    form_contact: "전화 / WhatsApp",
+    form_service: "서비스 유형",
+    airport_title: "공항 픽업 정보",
+    charter_title: "차량 전세 정보",
+    form_extra: "추가 정보",
+    form_submit: "예약 제출"
+  }
 };
 
-function setLang(l){
-  document.querySelectorAll("[data-i18n]").forEach(e=>{
-    e.innerText=T[l][e.dataset.i18n];
+function setLang(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (T[lang] && T[lang][key]) {
+      el.innerText = T[lang][key];
+    }
   });
 }
+
+// 預設語言
 setLang("zh");
 
-const s=document.getElementById("service_type"),
-a=document.getElementById("airport-fields"),
-c=document.getElementById("charter-fields");
-s.onchange=()=>{a.style.display="none";c.style.display="none";
-if(s.value==="airport")a.style.display="block";
-if(s.value==="charter")c.style.display="block";}
-</script>
+// 接送 / 包車切換
+const s = document.getElementById("service_type");
+const a = document.getElementById("airport-fields");
+const c = document.getElementById("charter-fields");
 
-</body>
-</html>
+if (s) {
+  s.onchange = () => {
+    a.style.display = "none";
+    c.style.display = "none";
+    if (s.value === "airport") a.style.display = "block";
+    if (s.value === "charter") c.style.display = "block";
+  };
+}
+</script>
