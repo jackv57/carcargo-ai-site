@@ -211,3 +211,103 @@ body {
     padding: 60px 0;
   }
 }
+/* ===== Figma Fine Tuning Layer ===== */
+
+/* Typography 微調（更像設計稿） */
+h1 {
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  letter-spacing: -0.015em;
+}
+
+p {
+  font-size: 16px;
+}
+
+/* Hero 區塊更像 Figma */
+.hero {
+  padding: 140px 0;
+}
+
+.hero .subtitle {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* Section 間距（對齊 Figma spacing） */
+.section {
+  padding: 96px 0;
+}
+
+.section h2 {
+  margin-bottom: 40px;
+}
+
+/* Card 更像設計稿（圓角 + 陰影） */
+.card {
+  border-radius: 20px;
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.06),
+    0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+/* Service 卡片視覺強化 */
+#services .card {
+  text-align: center;
+  padding: 40px 32px;
+}
+
+#services .card strong {
+  font-size: 20px;
+}
+
+/* 表單視覺更乾淨 */
+.form input,
+.form select,
+.form textarea {
+  background: #ffffff;
+}
+
+.section.dark .form input,
+.section.dark .form select,
+.section.dark .form textarea {
+  background: #020617;
+}
+
+/* CTA Button 更像 Figma */
+.cta-btn {
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+/* 語言切換按鈕視覺 */
+.topbar button {
+  transition: all 0.2s ease;
+}
+
+.topbar button:hover {
+  transform: translateY(-1px);
+}
+
+/* 手機版微調（Figma Mobile） */
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 0;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .card {
+    padding: 28px;
+  }
+}
