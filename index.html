@@ -96,7 +96,8 @@
   <div class="container">
     <h2 data-i18n="booking_title"></h2>
 
-    <form id="booking-form"
+    <form
+      id="booking-form"
       method="POST"
       action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85"
       class="card form">
@@ -142,10 +143,11 @@
       <button type="submit" class="cta-btn" data-i18n="form_submit"></button>
     </form>
 
-    <!-- ===== SUCCESS ===== -->
+    <!-- ===== SUCCESS MESSAGE ===== -->
     <div id="success-message" class="card center" style="display:none; margin-top:32px;">
       <h3 data-i18n="success_title"></h3>
       <p data-i18n="success_desc"></p>
+      <p data-i18n="success_contact"></p>
     </div>
 
   </div>
@@ -184,7 +186,8 @@ const T = {
     form_extra: "Additional Information",
     form_submit: "Submit Booking",
     success_title: "✅ Booking Submitted Successfully",
-    success_desc: "Thank you for your booking. Our team will contact you shortly with driver and vehicle details."
+    success_desc: "Your booking has been received.",
+    success_contact: "We will contact you via Email or Phone / WhatsApp with driver and vehicle details."
   },
   zh: {
     hero_subtitle: "AI 機場接送與包車預約，無需安裝 App。",
@@ -216,7 +219,8 @@ const T = {
     form_extra: "其他資訊",
     form_submit: "送出預約",
     success_title: "✅ 預約成功",
-    success_desc: "我們已收到您的預約，將儘快提供司機與車輛資訊。"
+    success_desc: "我們已收到您的預約。",
+    success_contact: "將透過 Email 或 電話 / WhatsApp 與您聯絡，提供司機與車輛資訊。"
   },
   jp: {
     hero_subtitle: "AI対応の空港送迎・チャーター予約。アプリ不要。",
@@ -248,7 +252,8 @@ const T = {
     form_extra: "追加情報",
     form_submit: "予約送信",
     success_title: "✅ 予約完了",
-    success_desc: "ご予約ありがとうございます。後ほどドライバーと車両情報をご案内します。"
+    success_desc: "ご予約を受け付けました。",
+    success_contact: "後ほど Email または 電話 / WhatsApp にて、ドライバーと車両情報をご連絡します。"
   },
   kr: {
     hero_subtitle: "AI 기반 공항 픽업 및 차량 전세 예약. 앱 설치 불필요.",
@@ -280,7 +285,8 @@ const T = {
     form_extra: "추가 정보",
     form_submit: "예약 제출",
     success_title: "✅ 예약 완료",
-    success_desc: "예약이 접수되었습니다. 곧 기사 및 차량 정보를 안내드립니다."
+    success_desc: "예약이 접수되었습니다.",
+    success_contact: "Email 또는 전화 / WhatsApp 으로 기사 및 차량 정보를 안내드립니다."
   }
 };
 
