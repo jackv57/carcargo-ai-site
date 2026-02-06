@@ -10,16 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== 1. 核心設定 (Core Styles) ===== */
+    /* ===== 1. 核心設定 (Core Styles - 深色主題) ===== */
     :root {
-      --primary: #00A3FF; /* Figma 的亮藍色 */
+      --primary: #00A3FF; /* 亮藍色 */
       --primary-hover: #008ECC;
-      --bg-dark: #0F172A; /* 深藍色 Header/Footer 背景 */
-      --bg-light: #F8FAFC; /* 淺灰白色主要背景 */
-      --text-dark: #1E293B; /* 深色文字 */
-      --text-muted: #64748B; /* 次要文字 */
-      --text-light: #F8FAFC; /* 淺色文字 (用於深色背景) */
-      --border-light: #E2E8F0;
+      --bg-main: #0F172A; /* 主要深藍背景 */
+      --bg-card: #1E293B; /* 卡片背景 (比主要背景稍亮) */
+      --bg-input: #020617; /* 輸入框背景 (最深) */
+      --text-light: #F8FAFC; /* 主要白字 */
+      --text-muted: #94A3B8; /* 次要灰字 */
+      --border-dark: #334155; /* 深色邊框 */
       --accent-green: #10B981; /* 綠色強調 */
     }
 
@@ -27,28 +27,38 @@
     
     body {
       font-family: 'Inter', 'Noto Sans TC', sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-dark);
+      background-color: var(--bg-main);
+      color: var(--text-light);
       line-height: 1.7;
       scroll-behavior: smooth;
     }
 
     /* ===== 2. 通用元件 (Components) ===== */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-    h1, h2, h3, h4 { font-weight: 700; margin-bottom: 1rem; color: var(--text-dark); }
+    h1, h2, h3, h4 { font-weight: 700; margin-bottom: 1rem; color: white; }
     p { color: var(--text-muted); margin-bottom: 1rem; }
     
-    /* 深色區塊專用樣式 (Header/Hero/Footer) */
-    .dark-section { background-color: var(--bg-dark); color: var(--text-light); }
-    .dark-section h1, .dark-section h2, .dark-section h3 { color: var(--text-light); }
-    .dark-section p { color: #94A3B8; }
+    /* Header/Hero 專用漸層背景 */
+    .hero-gradient-section {
+      background: linear-gradient(180deg, #0F172A 0%, #172554 100%);
+      color: var(--text-light);
+    }
 
-    /* 按鈕組 (Hero區域用) */
+    /* 波浪分隔線容器 */
+    .wave-container {
+      line-height: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .wave-container svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      fill: var(--bg-main); /* 波浪顏色需與下方主背景相同 */
+    }
+
+    /* 按鈕組 */
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 14px 28px; background-color: var(--primary); color: white;
@@ -59,45 +69,46 @@
     .btn.secondary { background-color: transparent; color: var(--primary); }
     .btn.secondary:hover { background-color: var(--primary); color: white; }
 
-    /* 卡片 */
+    /* 卡片 (深色版) */
     .card {
-      background-color: white; border-radius: 16px; padding: 32px; margin-bottom: 24px;
-      border: 1px solid var(--border-light); box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+      background-color: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 24px;
+      border: 1px solid var(--border-dark); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     }
 
-    /* 表格樣式 */
+    /* 表格樣式 (深色版) */
     .styled-table {
-      width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white;
-      border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light);
+      width: 100%; border-collapse: collapse; margin-bottom: 20px; background: rgba(0,0,0,0.2);
+      border-radius: 8px; overflow: hidden; border: 1px solid var(--border-dark);
     }
     .styled-table th, .styled-table td {
-      padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-light); color: var(--text-dark);
+      padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-dark); color: var(--text-light);
     }
-    .styled-table th { background-color: #F1F5F9; font-weight: 600; }
+    .styled-table th { background-color: rgba(255,255,255,0.05); font-weight: 600; }
     .price-tag { color: var(--primary); font-weight: bold; }
 
-    /* AI 說明區塊 */
+    /* AI 說明區塊 (深色版) */
     .ai-box {
-      background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; padding: 24px; margin-bottom: 30px;
+      background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px; padding: 24px; margin-bottom: 30px;
     }
     .ai-box code {
-      display: block; background: #064E3B; padding: 12px; border-radius: 6px;
+      display: block; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px;
       font-family: monospace; color: #A7F3D0; margin-top: 12px; font-size: 0.9rem;
     }
 
     /* 列表樣式 */
     ul.check-list { list-style: none; }
-    ul.check-list li { margin-bottom: 10px; padding-left: 28px; position: relative; }
+    ul.check-list li { margin-bottom: 10px; padding-left: 28px; position: relative; color: var(--text-muted); }
     ul.check-list li::before { content: "✓"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
     /* ===== 3. 區塊佈局 ===== */
     header { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .header-content { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;}
+    .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; color: white;}
     .logo::before { content: "C"; display: inline-block; background: var(--primary); color: white; width: 32px; height: 32px; border-radius: 8px; text-align: center; line-height: 32px; }
-    .hero { text-align: center; padding: 80px 0 100px; }
+    .hero { text-align: center; padding: 80px 0 40px; /* 減少下方 padding 讓波浪更靠近 */ }
     .hero h1 { font-size: 2.5rem; margin-bottom: 16px; }
-    .hero .subtitle { font-size: 1.2rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;}
+    .hero .subtitle { font-size: 1.2rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; color: #CBD5E1;}
     .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
     .section-padding { padding: 60px 0; }
     .lang-switcher button {
@@ -106,26 +117,24 @@
     }
     .lang-switcher button:hover, .lang-switcher button.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-    /* ===== 4. 表單樣式 (含新版切換按鈕) ===== */
-    label { display: block; margin-bottom: 8px; font-size: 0.95rem; font-weight: 600; color: var(--text-dark); }
+    /* ===== 4. 表單樣式 (深色版) ===== */
+    label { display: block; margin-bottom: 8px; font-size: 0.95rem; font-weight: 600; color: var(--text-light); }
     input, select, textarea {
-      width: 100%; padding: 12px 16px; background-color: #F8FAFC; border: 1px solid var(--border-light);
-      border-radius: 8px; color: var(--text-dark); font-size: 1rem; margin-bottom: 24px; outline: none; transition: border 0.2s;
+      width: 100%; padding: 12px 16px; background-color: var(--bg-input); border: 1px solid var(--border-dark);
+      border-radius: 8px; color: var(--text-light); font-size: 1rem; margin-bottom: 24px; outline: none; transition: border 0.2s;
     }
     input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 163, 255, 0.1); }
+    input::placeholder, textarea::placeholder { color: #475569; }
     .hidden { display: none; }
     
-    /* 新增：表單類型切換按鈕樣式 */
-    .form-toggle-group {
-      display: flex; gap: 12px; margin-bottom: 32px;
-    }
+    /* 表單類型切換按鈕 (深色版) */
+    .form-toggle-group { display: flex; gap: 12px; margin-bottom: 32px; }
     .form-toggle-btn {
-      flex: 1; padding: 14px; text-align: center; border-radius: 8px; border: 2px solid var(--border-light);
-      background: white; color: var(--text-muted); font-weight: 600; cursor: pointer; transition: all 0.2s;
+      flex: 1; padding: 14px; text-align: center; border-radius: 8px; border: 2px solid var(--border-dark);
+      background: var(--bg-input); color: var(--text-muted); font-weight: 600; cursor: pointer; transition: all 0.2s;
     }
-    .form-toggle-btn.active {
-      border-color: var(--primary); background: var(--primary); color: white;
-    }
+    .form-toggle-btn:hover { border-color: var(--primary); color: var(--text-light); }
+    .form-toggle-btn.active { border-color: var(--primary); background: var(--primary); color: white; }
 
     /* RWD */
     @media (min-width: 768px) {
@@ -139,7 +148,7 @@
 
 <body>
 
-  <div class="dark-section">
+  <div class="hero-gradient-section">
     <header>
       <div class="container header-content">
         <div class="logo">CAR CAR GO</div>
@@ -158,10 +167,16 @@
       
       <div class="btn-group">
         <a href="#booking-section" class="btn" data-i18n="btn_book_web">立即預約 (Web/AI)</a>
-        <a href="https://line.me/R/ti/p/@YourLineID" target="_blank" class="btn secondary" data-i18n="btn_book_line">LINE 官方帳號預約</a>
+        <a href="https://line.me/R/ti/p/@YourLineID" target="_blank" class="btn secondary" data-i18n="btn_book_line">LINE 自動化預約</a>
       </div>
-      <p style="margin-top: 16px; font-size: 0.9rem;" data-i18n="hero_note">* 兩種方式皆可，AI 助理請使用網頁表單。</p>
+      <p style="margin-top: 16px; font-size: 0.9rem; color: #94A3B8;" data-i18n="hero_note">* 兩種方式皆可，AI 助理請使用網頁表單。</p>
     </section>
+
+    <div class="wave-container">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+        </svg>
+    </div>
   </div>
 
   <main>
@@ -183,7 +198,7 @@
       </div>
     </section>
 
-    <section class="section-padding container" style="background: #F1F5F9; border-radius: 24px;">
+    <section class="section-padding container">
       <h2 class="section-title" data-i18n="service_title">服務項目</h2>
       <div class="grid-2">
         <div class="card">
@@ -262,11 +277,12 @@
       </div>
     </section>
 
-    <section id="booking-section" class="section-padding container" style="background: white; border-radius: 24px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);">
+    <section id="booking-section" class="section-padding container">
       <h2 class="section-title" data-i18n="form_title">立即預約</h2>
       <p style="text-align: center; margin-bottom: 40px;" data-i18n="form_subtitle">請填寫下方表單，或由 AI 助理協助您整理資訊後填寫。</p>
       
       <div style="max-width: 700px; margin: 0 auto;">
+        <div class="card" style="border-top: 4px solid var(--primary);">
         <form id="booking-form" method="POST" action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85">
           
           <h4 style="color: var(--primary); margin-bottom: 20px;" data-i18n="f_basic_title">基本資料</h4>
@@ -335,6 +351,7 @@
 
           <button type="submit" class="btn" style="width: 100%; margin-top: 24px;" data-i18n="btn_submit">送出預約 Submit Booking</button>
         </form>
+        </div>
       </div>
     </section>
 
@@ -348,8 +365,8 @@
 
   </main>
 
-  <div class="dark-section" style="margin-top: 80px;">
-    <footer class="container" style="padding: 40px 0; text-align: center; font-size: 0.9rem; color: #94A3B8;">
+  <div style="margin-top: 80px;">
+    <footer class="container" style="padding: 40px 0; text-align: center; font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid var(--border-dark);">
       <div class="logo" style="justify-content: center; margin-bottom: 20px;">CAR CAR GO</div>
       <p>&copy; 2026 CAR CAR GO. Powered by AI Automation.</p>
       <p data-i18n="footer_note">本網站結構符合 AI 語意分析標準。</p>
@@ -357,7 +374,7 @@
   </div>
 
   <script>
-    // ===== 1. 完整多國語言翻譯字典 (Translations) =====
+    // ===== 1. 完整多國語言翻譯字典 (Translations) - 內容不變 =====
     const T = {
       zh: {
         hero_title: "AI Ready 機場接送與包車服務",
@@ -673,7 +690,7 @@
       }
     };
 
-    // ===== 2. 語言切換邏輯 =====
+    // ===== 2. 語言切換邏輯 (不變) =====
     function setLang(lang) {
       document.documentElement.lang = lang === 'zh' ? 'zh-TW' : lang;
       document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -693,7 +710,7 @@
     }
     setLang("zh");
 
-    // ===== 3. 表單互動邏輯 (更新版：支援按鈕切換) =====
+    // ===== 3. 表單互動邏輯 (不變) =====
     const toggleBtns = document.querySelectorAll('.form-toggle-btn');
     const hiddenInput = document.getElementById('service_type_hidden');
     const airportFields = document.getElementById("airport-fields");
@@ -701,15 +718,10 @@
 
     toggleBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        // 1. 更新 UI 狀態 (移除舊的 active, 新增新的 active)
         toggleBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        // 2. 更新隱藏 input 的值 (這才是真正送出表單的值)
         const value = btn.dataset.value;
         hiddenInput.value = value;
-
-        // 3. 切換對應欄位的顯示/隱藏
         airportFields.style.display = value === "airport" ? "block" : "none";
         charterFields.style.display = value === "charter" ? "block" : "none";
       });
