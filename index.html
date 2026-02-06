@@ -14,12 +14,16 @@
     :root {
       --primary: #0EA5E9; /* 天空藍 Sky Blue */
       --primary-hover: #0284C7;
+      --bg-deep-purple: #240046; /* 新增：深紫色背景 */
       --bg-dark-footer: #0F172A; /* 深藍頁尾 */
       --bg-light-main: #FFFFFF; /* 白底 */
+      --bg-content-gray: #F8FAFC; /* 內容區淺灰底 */
       --text-dark: #0F172A; 
       --text-body: #475569;
       --text-muted: #94A3B8;
+      --text-light-on-dark: #F8FAFC; /* 深色背景上的淺色字 */
       --border-light: #E2E8F0;
+      --border-on-dark: rgba(255, 255, 255, 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,7 +47,7 @@
     .section-subtitle { text-align: center; color: #64748B; margin-bottom: 50px; font-size: 1.1rem; }
     .section-padding { padding: 80px 0; }
     
-    /* 強調色文字 */
+    /* 強調色文字 (天空藍) */
     .text-accent { color: var(--primary); }
 
     /* 按鈕 */
@@ -57,43 +61,52 @@
     .btn.secondary:hover { background-color: var(--primary); color: white; }
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* ===== 3. Header & Hero (修改項目 1, 2, 3) ===== */
+    /* ===== 3. Header & Hero (配色修正) ===== */
     header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: rgba(255, 255, 255, 1); /* 預設純白 */
-      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-deep-purple); /* 改為深紫色 */
+      border-bottom: 1px solid var(--border-on-dark);
       padding: 15px 0;
       transition: all 0.3s ease;
     }
     /* 捲動時的半透明狀態 */
     header.scrolled {
-        background: rgba(255, 255, 255, 0.85); /* 半透明白 */
-        backdrop-filter: blur(10px); /* 毛玻璃效果 */
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        background: rgba(36, 0, 70, 0.85); /* 半透明深紫色 (RGB of #240046) */
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         border-bottom-color: transparent;
     }
     .header-content { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
+    .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-light-on-dark); /* Logo改白色 */ display: flex; align-items: center; gap: 10px; }
     .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
 
-    /* Hero Section */
-    .hero-section { background-color: var(--bg-light-main); padding-bottom: 0; text-align: center; }
+    /* Hero Section (配色修正) */
+    .hero-section {
+        background-color: var(--bg-deep-purple); /* 改為深紫色 */
+        padding-bottom: 0; text-align: center; color: var(--text-light-on-dark);
+    }
     
-    /* 新增：Hero 上方標籤 (修改項目 2) */
+    /* Hero 上方標籤 */
     .hero-badge {
         display: inline-flex; align-items: center; gap: 8px;
-        background: #E0F2FE; color: #0284C7;
+        background: rgba(14, 165, 233, 0.15); /* 微調背景透明度以適應深色底 */
+        color: var(--primary);
         padding: 8px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
-        margin-bottom: 24px;
+        margin-bottom: 24px; border: 1px solid rgba(14, 165, 233, 0.3);
     }
     .hero-badge svg { width: 18px; height: 18px; fill: currentColor; }
 
-    .hero-section h1 { font-size: 2.8rem; margin-bottom: 24px; line-height: 1.2; }
-    .hero-section .subtitle { color: var(--text-body); font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    /* Hero 標題與文字 */
+    .hero-section h1 {
+        font-size: 2.8rem; margin-bottom: 24px; line-height: 1.2;
+        color: white; /* 確保 "AI Ready" 為白色 */
+    }
+    .hero-section .subtitle { color: rgba(255, 255, 255, 0.8); font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-note { color: rgba(255, 255, 255, 0.6) !important; }
     
     /* 波浪分隔線 */
-    .wave-container { line-height: 0; width: 100%; overflow: hidden; margin-top: -1px; }
-    .wave-container svg { display: block; width: 100%; height: auto; fill: #F8FAFC; /* 配合下方區塊背景色 */ }
+    .wave-container { line-height: 0; width: 100%; overflow: hidden; margin-top: -1px; background-color: var(--bg-deep-purple); /* 容器背景跟隨 Hero */ }
+    .wave-container svg { display: block; width: 100%; height: auto; fill: var(--bg-content-gray); /* 波浪顏色配合下方內容區塊 */ }
 
     /* ===== 4. 內容區塊 ===== */
     /* 服務卡片 */
@@ -110,17 +123,17 @@
     }
     .icon-square svg { width: 32px; height: 32px; fill: white; }
 
-    /* Why Choose & API Badge (修改項目 4) */
+    /* Why Choose & API Badge */
     .feature-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
     .feature-item { text-align: center; padding: 20px; }
     .icon-square.center { margin-left: auto; margin-right: auto; }
     
-    /* 新增：API 宣告橢圓區塊 */
+    /* API 宣告橢圓區塊 */
     .api-badge-container { text-align: center; margin-top: 60px; }
     .api-badge {
         display: inline-block;
         background: #F0F9FF; border: 2px solid var(--primary);
-        padding: 16px 40px; border-radius: 100px; /* 橢圓形 */
+        padding: 16px 40px; border-radius: 100px;
         color: var(--primary); font-weight: 700; font-size: 1.1rem;
         letter-spacing: 0.05em;
     }
@@ -152,12 +165,12 @@
 
     .hidden { display: none; }
     
-    /* 語言切換 */
-    .lang-switcher button { background: transparent; border: 1px solid var(--border-light); color: var(--text-muted); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500;}
-    .lang-switcher button:hover { border-color: var(--primary); color: var(--primary); }
+    /* 語言切換按鈕 (適應深色背景) */
+    .lang-switcher button { background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.7); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500;}
+    .lang-switcher button:hover { border-color: var(--primary); color: white; }
     .lang-switcher button.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-    /* ===== 5. 全新深色頁尾 (修改項目 1-地) ===== */
+    /* ===== 5. 深色頁尾 ===== */
     .dark-footer {
         background-color: var(--bg-dark-footer);
         color: var(--text-muted);
@@ -226,14 +239,14 @@
           <a href="#booking-section" class="btn" data-i18n="btn_book_web">立即預約 (Web/AI)</a>
           <a href="https://line.me/R/ti/p/@YourLineID" target="_blank" class="btn secondary" data-i18n="btn_book_line">LINE 自動化預約</a>
         </div>
-        <p style="text-align: center; margin-top: 16px; font-size: 0.9rem; color: #64748B;" data-i18n="hero_note">* 兩種方式皆可，AI 助理請使用網頁表單。</p>
+        <p class="hero-note" style="text-align: center; margin-top: 16px; font-size: 0.9rem;" data-i18n="hero_note">* 兩種方式皆可，AI 助理請使用網頁表單。</p>
       </div>
       <div class="wave-container">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,229.3C640,245,800,267,960,266.7C1120,267,1280,245,1360,234.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
       </div>
     </section>
 
-    <div style="background-color: #F8FAFC;">
+    <div style="background-color: var(--bg-content-gray);">
         <section class="section-padding container">
         <h2 class="section-title" data-i18n="service_title">Our Services</h2>
         <p class="section-subtitle" data-i18n="service_subtitle">Choose the service that fits your travel needs</p>
@@ -247,7 +260,7 @@
             </div>
             <div class="service-card">
             <div class="icon-square">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
             </div>
             <h3 data-i18n="svc_charter_title">Charter Service</h3>
             <p data-i18n="svc_charter_desc">Flexible private car rental by hour for your business or leisure</p>
@@ -441,7 +454,7 @@
   </footer>
 
   <script>
-    // ===== Header 捲動效果 (修改項目 1) =====
+    // Header 捲動效果
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) {
@@ -454,7 +467,6 @@
     const T = {
       zh: {
         hero_badge: "AI 驅動的預約引擎",
-        // 修改項目 3：在翻譯中加入 HTML span 實現變色
         hero_title: "AI Ready <span class='text-accent'>機場接送與包車服務</span>",
         hero_subtitle: "支援 AI Agent 代訂・規則透明・安全可靠",
         btn_book_web: "立即預約 (Web/AI)",
@@ -744,14 +756,12 @@
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.dataset.i18n;
         if (T[lang] && T[lang][key]) {
-           // 重要：改用 innerHTML 以支援 HTML 標籤 (如 span)
            el.innerHTML = T[lang][key];
         }
       });
       document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
     }
-    // 初始化語言
     setLang("zh");
 
     const toggleBtns = document.querySelectorAll('.form-toggle-btn');
