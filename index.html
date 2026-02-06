@@ -10,17 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== 1. 核心設定 (Core Styles) ===== */
+    /* ===== 1. 核心設定 ===== */
     :root {
-      --primary: #0EA5E9; /* 截圖中的亮藍色 (Sky Blue) */
+      --primary: #0EA5E9; /* 亮藍色 */
       --primary-hover: #0284C7;
-      --bg-dark-header: #0F172A; /* 深藍色 Header 背景 */
-      --bg-light-main: #FFFFFF; /* 白色主背景 */
-      --text-dark: #0F172A; /* 深色標題文字 */
-      --text-body: #475569; /* 內文灰色 */
-      --text-light: #F8FAFC; /* 淺色文字 (用於深色背景) */
-      --border-light: #E2E8F0; /* 淺色邊框 */
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --bg-dark-header: #0F172A; /* 深藍 Header */
+      --bg-light-main: #FFFFFF; /* 白底 */
+      --text-dark: #0F172A; 
+      --text-body: #475569;
+      --text-light: #F8FAFC;
+      --border-light: #E2E8F0;
+      --accent-green: #10B981;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +33,7 @@
       scroll-behavior: smooth;
     }
 
-    /* ===== 2. 通用元件 (Components) ===== */
+    /* ===== 2. 通用元件 ===== */
     .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
     h1, h2, h3, h4 { font-weight: 800; margin-bottom: 0.5rem; color: var(--text-dark); letter-spacing: -0.025em; }
@@ -43,19 +43,13 @@
     .section-subtitle { text-align: center; color: #64748B; margin-bottom: 50px; font-size: 1.1rem; }
     .section-padding { padding: 80px 0; }
 
-    /* 圖示色塊 (Icon Square) - 核心設計元素 */
+    /* 圖示色塊 */
     .icon-square {
-      width: 64px; height: 64px;
-      background-color: var(--primary);
-      border-radius: 16px; /* 圓角矩形 */
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-      color: white; /* Icon 顏色 */
-      flex-shrink: 0;
+      width: 64px; height: 64px; background-color: var(--primary);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; color: white; flex-shrink: 0;
     }
     .icon-square svg { width: 32px; height: 32px; fill: white; }
-    
-    /* 置中圖示 (用於 Why Choose) */
     .icon-square.center { margin-left: auto; margin-right: auto; }
 
     /* 按鈕 */
@@ -64,14 +58,23 @@
       border-radius: 8px; text-decoration: none; font-weight: 600; border: 2px solid var(--primary);
       cursor: pointer; transition: all 0.2s; text-align: center; font-size: 1rem; min-width: 180px;
     }
-    .btn:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); transform: translateY(-2px); }
+    .btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); border-color: var(--primary-hover); }
     .btn.secondary { background-color: transparent; color: var(--primary); }
     .btn.secondary:hover { background-color: var(--primary); color: white; }
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* ===== 3. 特殊區塊樣式 ===== */
-    
-    /* Header & Hero (深色背景) */
+    /* AI 說明區塊 (綠色框) */
+    .ai-box {
+      background: #ECFDF5; border: 1px solid #A7F3D0;
+      border-radius: 16px; padding: 30px; margin-bottom: 30px;
+    }
+    .ai-box code {
+      display: block; background: #064E3B; padding: 15px;
+      border-radius: 8px; font-family: monospace; color: #A7F3D0;
+      margin-top: 15px; font-size: 0.9rem; line-height: 1.5;
+    }
+
+    /* ===== 3. 區塊樣式 ===== */
     .hero-section { background-color: var(--bg-dark-header); color: var(--text-light); padding-bottom: 0; }
     .hero-section h1 { color: var(--text-light); font-size: 2.5rem; margin-bottom: 16px; text-align: center; }
     .hero-section .subtitle { color: #CBD5E1; text-align: center; margin-bottom: 40px; font-size: 1.2rem; }
@@ -80,67 +83,59 @@
     .logo { font-size: 1.5rem; font-weight: 900; color: white; display: flex; align-items: center; gap: 10px; }
     .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
     
-    /* 波浪分隔線 */
     .wave-container { line-height: 0; width: 100%; overflow: hidden; background-color: var(--bg-dark-header); }
     .wave-container svg { display: block; width: 100%; height: auto; fill: var(--bg-light-main); }
 
-    /* 服務卡片 (Services) - 復刻截圖樣式 */
+    /* 服務卡片 */
     .service-card {
-      background: white; border: 1px solid var(--border-light);
-      border-radius: 16px; padding: 40px;
-      transition: all 0.3s ease; height: 100%;
-      text-align: left; /* 截圖中的文字是靠左的 */
-      box-shadow: var(--card-shadow);
+      background: white; border: 1px solid var(--border-light); border-radius: 16px; padding: 40px;
+      transition: all 0.3s ease; height: 100%; text-align: left;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
-    .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); border-color: var(--primary); }
-    .service-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .service-card p { font-size: 1rem; color: #64748B; margin-bottom: 0; }
+    .service-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
 
-    /* Why Choose 區塊 */
-    .feature-grid {
-      display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px;
-    }
+    /* Why Choose */
+    .feature-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
     .feature-item { text-align: center; padding: 20px; }
-    .feature-item h4 { font-size: 1.2rem; margin-bottom: 10px; }
-    .feature-item p { font-size: 0.95rem; color: #64748B; line-height: 1.5; }
 
-    /* 表格與表單 */
-    .styled-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); }
-    .styled-table th, .styled-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-light); }
-    .styled-table th { background-color: #F1F5F9; font-weight: 600; color: var(--text-dark); }
+    /* 規則與表格 */
+    .rule-card {
+        background: white; padding: 30px; border-radius: 16px; 
+        border: 1px solid var(--border-light); height: 100%;
+    }
+    .styled-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; background: #F8FAFC; border-radius: 8px; overflow: hidden; }
+    .styled-table td { padding: 12px 16px; border-bottom: 1px solid #E2E8F0; font-size: 0.95rem; }
     .price-tag { color: var(--primary); font-weight: bold; }
-
-    /* 表單樣式 */
-    .booking-card { background: white; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); padding: 40px; border: 1px solid var(--border-light); }
-    label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
-    input, select, textarea { width: 100%; padding: 12px 16px; background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-dark); font-size: 1rem; margin-bottom: 24px; outline: none; transition: all 0.2s; }
-    input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); background: white; }
     
-    /* 表單切換按鈕 */
+    /* 列表 */
+    ul.check-list { list-style: none; margin-top: 10px; }
+    ul.check-list li { margin-bottom: 10px; padding-left: 28px; position: relative; font-size: 0.95rem; }
+    ul.check-list li::before { content: "✓"; color: var(--accent-green); position: absolute; left: 0; font-weight: bold; }
+
+    /* 表單 */
+    .booking-card { background: white; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); padding: 40px; border: 1px solid var(--border-light); }
+    label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
+    input, select, textarea { width: 100%; padding: 12px 16px; background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; margin-bottom: 24px; outline: none; transition: all 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; }
+    
     .form-toggle-group { display: flex; gap: 16px; margin-bottom: 32px; }
     .form-toggle-btn { flex: 1; padding: 16px; text-align: center; border-radius: 12px; border: 2px solid var(--border-light); background: white; color: #64748B; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px;}
     .form-toggle-btn svg { width: 24px; height: 24px; fill: #64748B; transition: fill 0.2s; }
-    .form-toggle-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .form-toggle-btn:hover svg { fill: var(--primary); }
     .form-toggle-btn.active { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
     .form-toggle-btn.active svg { fill: var(--primary); }
 
     .hidden { display: none; }
     
-    /* 語言切換 */
-    .lang-switcher button { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #94A3B8; padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; }
-    .lang-switcher button:hover, .lang-switcher button.active { background: rgba(255,255,255,0.1); color: white; border-color: white; }
+    .lang-switcher button { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #94A3B8; padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; }
+    .lang-switcher button.active { background: rgba(255,255,255,0.1); color: white; border-color: white; }
 
-    /* RWD */
     @media (min-width: 768px) {
       .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
       .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
       .hero-section h1 { font-size: 3.5rem; }
     }
     @media (max-width: 767px) {
-      .feature-grid { grid-template-columns: 1fr; gap: 40px; } /* 手機版 Why Choose 垂直排 */
-      .form-toggle-group { gap: 10px; }
-      .form-toggle-btn { padding: 12px; font-size: 0.9rem; }
+      .feature-grid { grid-template-columns: 1fr; gap: 40px; }
     }
   </style>
 </head>
@@ -150,9 +145,7 @@
   <div class="hero-section">
     <header>
       <div class="container header-content">
-        <div class="logo">
-          <div class="logo-icon">C</div> CAR CAR GO
-        </div>
+        <div class="logo"><div class="logo-icon">C</div> CAR CAR GO</div>
         <div class="lang-switcher">
           <button onclick="setLang('zh')" class="active">中文</button>
           <button onclick="setLang('en')">EN</button>
@@ -165,7 +158,6 @@
     <div class="container" style="padding: 80px 24px 60px;">
       <h1 data-i18n="hero_title">AI Ready 機場接送與包車服務</h1>
       <p class="subtitle" data-i18n="hero_subtitle">支援 AI Agent 代訂・規則透明・安全可靠</p>
-      
       <div class="btn-group">
         <a href="#booking-section" class="btn" data-i18n="btn_book_web">立即預約 (Web/AI)</a>
         <a href="https://line.me/R/ti/p/@YourLineID" target="_blank" class="btn secondary" data-i18n="btn_book_line">LINE 自動化預約</a>
@@ -183,7 +175,6 @@
     <section class="section-padding container">
       <h2 class="section-title" data-i18n="service_title">Our Services</h2>
       <p class="section-subtitle" data-i18n="service_subtitle">Choose the service that fits your travel needs</p>
-      
       <div class="grid-2">
         <div class="service-card">
           <div class="icon-square">
@@ -192,10 +183,9 @@
           <h3 data-i18n="svc_airport_title">Airport Transfer</h3>
           <p data-i18n="svc_airport_desc">Professional pickup and drop-off service from/to any airport</p>
         </div>
-
         <div class="service-card">
           <div class="icon-square">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
           </div>
           <h3 data-i18n="svc_charter_title">Charter Service</h3>
           <p data-i18n="svc_charter_desc">Flexible private car rental by hour for your business or leisure</p>
@@ -206,35 +196,76 @@
     <section class="section-padding container">
       <h2 class="section-title" data-i18n="why_title">Why Choose CAR CAR GO</h2>
       <p class="section-subtitle" data-i18n="why_subtitle">Modern technology meets reliable service</p>
-      
       <div class="grid-4 feature-grid">
         <div class="feature-item">
-          <div class="icon-square center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-          </div>
+          <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
           <h4 data-i18n="why_1_title">API Key Secured</h4>
-          <p data-i18n="why_1_desc">Bank-level encryption for all transactions</p>
+          <p data-i18n="why_1_desc">Bank-level encryption</p>
         </div>
         <div class="feature-item">
-          <div class="icon-square center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 13h-2.18c-.37-3.95-3.52-7.1-7.47-7.48V2h-4.7v3.52C3.7 5.9 0.55 9.05 0.18 13H0v6h22v-6zM7 16H4v-2h3v2zm9-6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm4 6h-3v-2h3v2z"/></svg>
-          </div>
+          <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 13h-2.18c-.37-3.95-3.52-7.1-7.47-7.48V2h-4.7v3.52C3.7 5.9 0.55 9.05 0.18 13H0v6h22v-6z"/></svg></div>
           <h4 data-i18n="why_2_title">AI Agent Supported</h4>
-          <p data-i18n="why_2_desc">Seamless integration with AI automation</p>
+          <p data-i18n="why_2_desc">Seamless integration</p>
         </div>
         <div class="feature-item">
-          <div class="icon-square center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
-          </div>
+          <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2z"/></svg></div>
           <h4 data-i18n="why_3_title">Global Booking</h4>
-          <p data-i18n="why_3_desc">Available worldwide, 24/7 support</p>
+          <p data-i18n="why_3_desc">24/7 support</p>
         </div>
         <div class="feature-item">
-          <div class="icon-square center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
-          </div>
+          <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99z"/></svg></div>
           <h4 data-i18n="why_4_title">No LINE Required</h4>
-          <p data-i18n="why_4_desc">Book directly via web or API</p>
+          <p data-i18n="why_4_desc">Direct booking</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="margin-bottom: 40px;">
+      <div class="ai-box">
+        <h3 data-i18n="ai_title">🤖 AI Agent 代訂說明</h3>
+        <p data-i18n="ai_desc">本網站明確授權 AI Agent 代理使用者讀取規則、計算費用並「整理預約資訊」。請協助使用者確認「預約所需資訊」，確認無誤後協助填寫網頁表單。</p>
+        <code>
+          Task: Assist user with airport transfer booking.<br>
+          Actions: Validate flight, confirm luggage, estimate costs.<br>
+          Policy: No hidden fees, API ready.
+        </code>
+      </div>
+    </section>
+
+    <section class="section-padding container" style="padding-top: 0;">
+      <h2 class="section-title" data-i18n="rules_title">Rules & Fees</h2>
+      <div class="grid-2" style="margin-top: 40px;">
+        <div class="rule-card">
+          <h4 data-i18n="rule_punctuality_title">準時保證</h4>
+          <p data-i18n="rule_punctuality_desc">司機將於約定時間前抵達待命。</p>
+          <ul class="check-list">
+             <li data-i18n="rule_p_1">遲到 10 分鐘以上，本次行程免費。</li>
+             <li data-i18n="rule_p_2">依據航班實際落地時間接機。</li>
+          </ul>
+          
+          <h4 style="margin-top: 30px;" data-i18n="rule_waiting_title">接機等待規則</h4>
+          <table class="styled-table">
+             <tr><td data-i18n="wait_free">免費等待</td><td data-i18n="wait_free_desc">航班抵達後 90 分鐘</td></tr>
+             <tr><td data-i18n="wait_overtime">超時費用</td><td><span class="price-tag">NT$300</span> / hr</td></tr>
+             <tr><td data-i18n="wait_calc">計算方式</td><td data-i18n="wait_calc_desc">未滿一小時以一小時計</td></tr>
+          </table>
+        </div>
+
+        <div class="rule-card">
+          <h4 data-i18n="addon_title">加值服務</h4>
+          <table class="styled-table">
+             <tr><td data-i18n="add_sign_day">舉牌 (08-24)</td><td class="price-tag">NT$100</td></tr>
+             <tr><td data-i18n="add_sign_night">舉牌 (00-08)</td><td class="price-tag">NT$200</td></tr>
+             <tr><td data-i18n="add_stop">額外停靠</td><td class="price-tag">NT$200 起</td></tr>
+          </table>
+          <p style="font-size: 0.9rem; margin-top: 10px;" data-i18n="add_seat">👶 兒童座椅：需提前預約</p>
+
+          <h4 style="margin-top: 30px;" data-i18n="safe_title">安全與保障</h4>
+          <ul class="check-list">
+            <li data-i18n="safe_1">乘客險每人最高 <strong>500 萬</strong>。</li>
+            <li data-i18n="safe_2">嚴禁疲勞駕駛，夜間不加價。</li>
+            <li data-i18n="safe_3">車內提供免費瓶裝水。</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -245,7 +276,6 @@
       
       <div class="booking-card">
         <form id="booking-form" method="POST" action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85">
-          
           <label data-i18n="f_svc_title">Service Type *</label>
           <div class="form-toggle-group">
             <div class="form-toggle-btn active" data-value="airport">
@@ -259,96 +289,39 @@
           </div>
           <input type="hidden" name="service_type" id="service_type_hidden" value="airport">
 
-          <h4 style="margin-bottom: 20px; color: var(--text-dark); border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_personal">Personal Information</h4>
+          <h4 style="margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_personal">Personal Information</h4>
           <div class="grid-2">
-            <div>
-              <label data-i18n="f_name">Full Name *</label>
-              <input type="text" name="full_name" required placeholder="John Doe" />
-            </div>
-            <div>
-              <label data-i18n="f_email">Email Address *</label>
-              <input type="email" name="email" required placeholder="john@example.com" />
-            </div>
+            <div><label data-i18n="f_name">Full Name *</label><input type="text" name="full_name" required placeholder="John Doe" /></div>
+            <div><label data-i18n="f_email">Email Address *</label><input type="email" name="email" required placeholder="john@example.com" /></div>
           </div>
-          <label data-i18n="f_contact">Contact Number *</label>
-          <input type="text" name="contact" placeholder="+1 234 567 8900" />
+          <label data-i18n="f_contact">Contact Number *</label><input type="text" name="contact" placeholder="+1 234 567 8900" />
 
-          <h4 style="margin-top: 20px; margin-bottom: 20px; color: var(--text-dark); border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_trip">Trip Details</h4>
-
+          <h4 style="margin-top: 20px; margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_trip">Trip Details</h4>
           <div id="airport-fields">
-            <label data-i18n="f_flight">Flight Number</label>
-            <input type="text" name="flight" placeholder="AA123" />
-            
-            <label data-i18n="f_time">Pickup Date & Time</label>
-            <input type="datetime-local" name="datetime" />
-
+            <label data-i18n="f_flight">Flight Number</label><input type="text" name="flight" placeholder="AA123" />
+            <label data-i18n="f_time">Pickup Date & Time</label><input type="datetime-local" name="datetime" />
             <div class="grid-2">
-              <div>
-                <label data-i18n="f_pickup">Pickup Location *</label>
-                <input type="text" name="pickup" placeholder="Airport Terminal" />
-              </div>
-              <div>
-                <label data-i18n="f_dropoff">Drop-off Location *</label>
-                <input type="text" name="dropoff" placeholder="Hotel Address" />
-              </div>
+              <div><label data-i18n="f_pickup">Pickup Location *</label><input type="text" name="pickup" placeholder="Terminal" /></div>
+              <div><label data-i18n="f_dropoff">Drop-off Location *</label><input type="text" name="dropoff" placeholder="Hotel" /></div>
             </div>
           </div>
-
           <div id="charter-fields" class="hidden">
-            <label data-i18n="f_c_date">Date</label>
-            <input type="date" name="charter_date" />
-            
+            <label data-i18n="f_c_date">Date</label><input type="date" name="charter_date" />
             <label data-i18n="f_c_hours">Duration</label>
             <select name="hours">
               <option value="4" data-i18n="opt_4h">Half-day (4 Hours)</option>
               <option value="8" data-i18n="opt_8h">Full-day (8 Hours)</option>
-              <option value="10" data-i18n="opt_10h">Full-day (10 Hours)</option>
             </select>
-            
-            <label data-i18n="f_c_plan">Planned Areas</label>
-            <input type="text" name="areas" placeholder="City Tour..." />
+            <label data-i18n="f_c_plan">Planned Areas</label><input type="text" name="areas" placeholder="City Tour..." />
           </div>
 
           <div class="grid-2">
-            <div>
-               <label data-i18n="f_passengers">Passengers</label>
-               <input type="number" name="passengers" placeholder="0" />
-            </div>
-            <div>
-               <label data-i18n="f_luggage">Luggage</label>
-               <input type="number" name="luggage" placeholder="0" />
-            </div>
+            <div><label data-i18n="f_passengers">Passengers</label><input type="number" name="passengers" placeholder="0" /></div>
+            <div><label data-i18n="f_luggage">Luggage</label><input type="number" name="luggage" placeholder="0" /></div>
           </div>
-          
-          <label data-i18n="f_notes">Notes</label>
-          <textarea name="notes" rows="3" placeholder="Special requests..."></textarea>
-
-          <button type="submit" class="btn" style="width: 100%; margin-top: 10px;" data-i18n="btn_submit">Submit Booking</button>
+          <label data-i18n="f_notes">Notes</label><textarea name="notes" rows="3" placeholder="Special requests..."></textarea>
+          <button type="submit" class="btn" style="width: 100%;" data-i18n="btn_submit">Submit Booking</button>
         </form>
-      </div>
-    </section>
-
-    <section class="section-padding container">
-      <h2 class="section-title" data-i18n="rules_title">Rules & Fees</h2>
-      <div class="grid-2" style="margin-top: 40px;">
-        <div style="background: white; padding: 30px; border-radius: 16px; border: 1px solid #E2E8F0;">
-          <h4 data-i18n="rule_punctuality_title">Punctuality Guarantee</h4>
-          <p data-i18n="rule_punctuality_desc">Drivers arrive early. If late > 10 mins, trip is free.</p>
-          
-          <h4 style="margin-top: 20px;" data-i18n="rule_waiting_title">Waiting Rules</h4>
-          <table class="styled-table" style="margin-top:10px;">
-             <tr><td data-i18n="wait_free">Free Waiting</td><td data-i18n="wait_free_desc">90 mins after landing</td></tr>
-             <tr><td data-i18n="wait_overtime">Overtime</td><td><span class="price-tag">NT$300</span> / hr</td></tr>
-          </table>
-        </div>
-        <div style="background: white; padding: 30px; border-radius: 16px; border: 1px solid #E2E8F0;">
-          <h4 data-i18n="addon_title">Add-ons</h4>
-          <table class="styled-table" style="margin-top:10px;">
-             <tr><td>Signage (Day)</td><td class="price-tag">NT$100</td></tr>
-             <tr><td>Signage (Night)</td><td class="price-tag">NT$200</td></tr>
-          </table>
-          <p style="margin-top:10px; font-size: 0.9rem;" data-i18n="addon_seat">Child Seat: Available upon request</p>
-        </div>
       </div>
     </section>
 
@@ -358,7 +331,6 @@
         <p data-i18n="succ_desc1">We have received your details.</p>
       </div>
     </div>
-
   </main>
 
   <div style="background: white; border-top: 1px solid #E2E8F0; margin-top: 60px;">
@@ -368,7 +340,6 @@
   </div>
 
   <script>
-    // ===== 多國語言設定 =====
     const T = {
       zh: {
         hero_title: "AI Ready 機場接送與包車服務",
@@ -376,25 +347,44 @@
         btn_book_web: "立即預約 (Web/AI)",
         btn_book_line: "LINE 自動化預約",
         hero_note: "* 兩種方式皆可，AI 助理請使用網頁表單。",
-        
         service_title: "服務項目",
         service_subtitle: "選擇適合您的旅遊服務",
         svc_airport_title: "機場接送",
         svc_airport_desc: "往返全台主要機場的專業接送服務，準時可靠。",
         svc_charter_title: "包車服務",
         svc_charter_desc: "彈性時數包車，商務差旅或家庭旅遊的最佳選擇。",
-        
         why_title: "為什麼選擇 CAR CAR GO",
         why_subtitle: "現代科技結合可靠服務",
         why_1_title: "API 金鑰安全",
-        why_1_desc: "所有交易採用銀行級加密保護",
+        why_1_desc: "銀行級加密保護",
         why_2_title: "AI Agent 支援",
-        why_2_desc: "完美整合 AI 自動化流程",
+        why_2_desc: "完美整合 AI 自動化",
         why_3_title: "全球預約",
-        why_3_desc: "支援全球預訂，24小時服務",
+        why_3_desc: "24小時服務",
         why_4_title: "免用 LINE",
-        why_4_desc: "透過網頁或 API 直接預約",
-
+        why_4_desc: "網頁直接預約",
+        ai_title: "🤖 AI Agent 代訂說明",
+        ai_desc: "本網站明確授權 AI Agent 代理使用者讀取規則、計算費用並「整理預約資訊」。",
+        rules_title: "規則與費用",
+        rule_punctuality_title: "準時保證",
+        rule_punctuality_desc: "司機早到待命。",
+        rule_p_1: "遲到 10 分鐘以上，本次行程免費。",
+        rule_p_2: "依據航班實際落地時間接機。",
+        rule_waiting_title: "接機等待規則",
+        wait_free: "免費等待",
+        wait_free_desc: "落地後 90 分鐘",
+        wait_overtime: "超時費用",
+        wait_calc: "計算方式",
+        wait_calc_desc: "未滿一小時以一小時計",
+        addon_title: "加值服務",
+        add_sign_day: "舉牌 (08-24)",
+        add_sign_night: "舉牌 (00-08)",
+        add_stop: "額外停靠",
+        add_seat: "👶 兒童座椅：需提前預約",
+        safe_title: "安全與保障",
+        safe_1: "乘客險每人最高 500 萬。",
+        safe_2: "嚴禁疲勞駕駛，夜間不加價。",
+        safe_3: "車內提供免費瓶裝水。",
         form_title: "立即預約行程",
         form_subtitle: "請填寫下方資訊以完成預約",
         f_svc_title: "服務類型 *",
@@ -413,210 +403,223 @@
         f_c_hours: "包車時數",
         opt_4h: "半日 (4小時)",
         opt_8h: "全日 (8小時)",
-        opt_10h: "全日 (10小時)",
         f_c_plan: "預計行程",
         f_passengers: "人數",
         f_luggage: "行李數",
         f_notes: "備註需求",
         btn_submit: "送出預約",
-        
-        rules_title: "規則與費用",
-        rule_punctuality_title: "準時保證",
-        rule_punctuality_desc: "司機早到待命。遲到10分鐘以上行程免費。",
-        rule_waiting_title: "等待規則",
-        wait_free: "免費等待",
-        wait_free_desc: "落地後 90 分鐘",
-        wait_overtime: "超時費",
-        addon_title: "加值服務",
-        addon_seat: "兒童座椅：請提前預約",
         succ_title: "預約已送出！",
         succ_desc1: "我們已收到您的資料，將盡快與您聯繫。"
       },
       en: {
-        hero_title: "AI-Ready Airport Transfer & Charter",
-        hero_subtitle: "AI Friendly · Transparent Rules · Safe & Reliable",
+        hero_title: "AI-Ready Airport Transfer",
+        hero_subtitle: "AI Friendly · Safe & Reliable",
         btn_book_web: "Book Now (Web/AI)",
-        btn_book_line: "LINE Automated Booking",
+        btn_book_line: "LINE Booking",
         hero_note: "* AI agents please use the web form.",
-        
         service_title: "Our Services",
-        service_subtitle: "Choose the service that fits your travel needs",
+        service_subtitle: "Choose the service that fits your needs",
         svc_airport_title: "Airport Transfer",
-        svc_airport_desc: "Professional pickup and drop-off service from/to any airport.",
+        svc_airport_desc: "Professional pickup and drop-off service.",
         svc_charter_title: "Charter Service",
-        svc_charter_desc: "Flexible private car rental by hour for your business or leisure.",
-        
+        svc_charter_desc: "Flexible private car rental by hour.",
         why_title: "Why Choose CAR CAR GO",
-        why_subtitle: "Modern technology meets reliable service",
-        why_1_title: "API Key Secured",
-        why_1_desc: "Bank-level encryption for all transactions",
-        why_2_title: "AI Agent Supported",
-        why_2_desc: "Seamless integration with AI automation",
+        why_subtitle: "Modern technology meets reliability",
+        why_1_title: "API Secured",
+        why_1_desc: "Bank-level encryption",
+        why_2_title: "AI Supported",
+        why_2_desc: "Seamless integration",
         why_3_title: "Global Booking",
-        why_3_desc: "Available worldwide, 24/7 support",
+        why_3_desc: "24/7 support",
         why_4_title: "No LINE Required",
-        why_4_desc: "Book directly via web or API",
-
-        form_title: "Book Your Ride",
-        form_subtitle: "Fill in the details below to complete your booking",
-        f_svc_title: "Service Type *",
-        opt_airport: "Airport Transfer",
-        opt_charter: "Charter Service",
-        sec_personal: "Personal Information",
-        f_name: "Full Name *",
-        f_email: "Email Address *",
-        f_contact: "Contact Number *",
-        sec_trip: "Trip Details",
-        f_flight: "Flight Number",
-        f_time: "Pickup Date & Time",
-        f_pickup: "Pickup Location *",
-        f_dropoff: "Drop-off Location *",
-        f_c_date: "Date",
-        f_c_hours: "Duration",
-        opt_4h: "Half-day (4 Hours)",
-        opt_8h: "Full-day (8 Hours)",
-        opt_10h: "Full-day (10 Hours)",
-        f_c_plan: "Planned Areas",
-        f_passengers: "Passengers",
-        f_luggage: "Luggage",
-        f_notes: "Notes",
-        btn_submit: "Submit Booking",
-        
+        why_4_desc: "Book via web",
+        ai_title: "🤖 AI Agent Instructions",
+        ai_desc: "Authorized for AI Agents to read rules and book.",
         rules_title: "Rules & Fees",
         rule_punctuality_title: "Punctuality Guarantee",
-        rule_punctuality_desc: "Drivers arrive early. Late > 10 mins = Free.",
+        rule_punctuality_desc: "Drivers arrive early.",
+        rule_p_1: "Late > 10 mins = Free Trip.",
+        rule_p_2: "Tracking actual flight time.",
         rule_waiting_title: "Waiting Rules",
         wait_free: "Free Waiting",
         wait_free_desc: "90 mins after landing",
         wait_overtime: "Overtime",
+        wait_calc: "Calculation",
+        wait_calc_desc: "Less than 1 hr = 1 hr",
         addon_title: "Add-ons",
-        addon_seat: "Child Seat: Upon request",
-        succ_title: "Booking Submitted!",
-        succ_desc1: "We have received your details."
+        add_sign_day: "Signage (Day)",
+        add_sign_night: "Signage (Night)",
+        add_stop: "Extra Stop",
+        add_seat: "👶 Child Seat: Upon request",
+        safe_title: "Safety & Security",
+        safe_1: "Insurance up to 5 Million NTD.",
+        safe_2: "No night surcharge.",
+        safe_3: "Free bottled water.",
+        form_title: "Book Your Ride",
+        form_subtitle: "Fill in the details below",
+        f_svc_title: "Service Type *",
+        opt_airport: "Airport Transfer",
+        opt_charter: "Charter Service",
+        sec_personal: "Personal Info",
+        f_name: "Full Name *",
+        f_email: "Email *",
+        f_contact: "Phone *",
+        sec_trip: "Trip Details",
+        f_flight: "Flight No.",
+        f_time: "Pickup Time",
+        f_pickup: "Pickup Loc *",
+        f_dropoff: "Drop-off Loc *",
+        f_c_date: "Date",
+        f_c_hours: "Duration",
+        opt_4h: "Half-day",
+        opt_8h: "Full-day",
+        f_c_plan: "Plan",
+        f_passengers: "Pax",
+        f_luggage: "Luggage",
+        f_notes: "Notes",
+        btn_submit: "Submit Booking",
+        succ_title: "Submitted!",
+        succ_desc1: "We received your booking."
       },
       jp: {
         hero_title: "AI対応 空港送迎＆チャーター",
-        hero_subtitle: "AI予約対応・透明なルール・安全安心",
-        btn_book_web: "今すぐ予約 (Web/AI)",
+        hero_subtitle: "AI予約対応・安全安心",
+        btn_book_web: "今すぐ予約",
         btn_book_line: "LINE 自動予約",
-        hero_note: "* AIアシスタントはWebフォームをご利用ください。",
-        
+        hero_note: "* AIはWebフォームをご利用ください。",
         service_title: "サービス内容",
-        service_subtitle: "ニーズに合わせた移動サービスをお選びください",
+        service_subtitle: "最適なプランをお選びください",
         svc_airport_title: "空港送迎",
-        svc_airport_desc: "台湾全土の主要空港へのプロフェッショナルな送迎サービス。",
-        svc_charter_title: "チャーターサービス",
-        svc_charter_desc: "ビジネスや観光に最適な時間貸切プライベートカー。",
-        
-        why_title: "CAR CAR GOが選ばれる理由",
-        why_subtitle: "最新技術と信頼のサービス",
-        why_1_title: "APIセキュリティ",
-        why_1_desc: "銀行レベルの暗号化通信",
-        why_2_title: "AIエージェント対応",
-        why_2_desc: "AI自動化とのシームレスな統合",
-        why_3_title: "グローバル予約",
-        why_3_desc: "世界中から24時間予約可能",
+        svc_airport_desc: "台湾全土の主要空港への送迎。",
+        svc_charter_title: "チャーター",
+        svc_charter_desc: "ビジネスや観光に最適な貸切。",
+        why_title: "選ばれる理由",
+        why_subtitle: "最新技術と信頼",
+        why_1_title: "セキュリティ",
+        why_1_desc: "銀行レベルの暗号化",
+        why_2_title: "AI対応",
+        why_2_desc: "スムーズな統合",
+        why_3_title: "グローバル",
+        why_3_desc: "24時間対応",
         why_4_title: "LINE不要",
-        why_4_desc: "WebまたはAPIから直接予約",
-
-        form_title: "予約する",
-        form_subtitle: "以下のフォームに必要な情報を入力してください",
-        f_svc_title: "サービス種類 *",
-        opt_airport: "空港送迎",
-        opt_charter: "チャーター",
-        sec_personal: "お客様情報",
-        f_name: "お名前 *",
-        f_email: "メールアドレス *",
-        f_contact: "電話番号 *",
-        sec_trip: "行程詳細",
-        f_flight: "フライト便名",
-        f_time: "送迎日時",
-        f_pickup: "乗車場所 *",
-        f_dropoff: "降車場所 *",
-        f_c_date: "利用日",
-        f_c_hours: "利用時間",
-        opt_4h: "半日 (4時間)",
-        opt_8h: "1日 (8時間)",
-        opt_10h: "1日 (10時間)",
-        f_c_plan: "予定ルート",
-        f_passengers: "人数",
-        f_luggage: "荷物",
-        f_notes: "備考",
-        btn_submit: "予約送信",
-        
+        why_4_desc: "Webから直接予約",
+        ai_title: "🤖 AI予約説明",
+        ai_desc: "AIエージェントによる代理予約を許可。",
         rules_title: "ルールと料金",
-        rule_punctuality_title: "時間厳守保証",
-        rule_punctuality_desc: "10分以上の遅刻は無料。",
+        rule_punctuality_title: "時間厳守",
+        rule_punctuality_desc: "早めに到着します。",
+        rule_p_1: "10分遅刻で無料。",
+        rule_p_2: "実際の着陸時間に対応。",
         rule_waiting_title: "待機ルール",
         wait_free: "無料待機",
         wait_free_desc: "着陸後90分",
         wait_overtime: "延長料金",
+        wait_calc: "計算",
+        wait_calc_desc: "1時間未満は1時間",
         addon_title: "オプション",
-        addon_seat: "チャイルドシート：要予約",
+        add_sign_day: "看板 (昼)",
+        add_sign_night: "看板 (夜)",
+        add_stop: "追加停車",
+        add_seat: "👶 チャイルドシート：要予約",
+        safe_title: "安全保証",
+        safe_1: "保険最高500万台湾ドル。",
+        safe_2: "夜間割増なし。",
+        safe_3: "無料ミネラルウォーター。",
+        form_title: "予約する",
+        form_subtitle: "詳細を入力してください",
+        f_svc_title: "サービス *",
+        opt_airport: "空港送迎",
+        opt_charter: "チャーター",
+        sec_personal: "お客様情報",
+        f_name: "お名前 *",
+        f_email: "メール *",
+        f_contact: "電話番号 *",
+        sec_trip: "行程",
+        f_flight: "便名",
+        f_time: "日時",
+        f_pickup: "乗車地 *",
+        f_dropoff: "降車地 *",
+        f_c_date: "日付",
+        f_c_hours: "時間",
+        opt_4h: "半日",
+        opt_8h: "1日",
+        f_c_plan: "ルート",
+        f_passengers: "人数",
+        f_luggage: "荷物",
+        f_notes: "備考",
+        btn_submit: "予約送信",
         succ_title: "送信完了！",
-        succ_desc1: "予約内容を受け付けました。"
+        succ_desc1: "受け付けました。"
       },
       kr: {
-        hero_title: "AI 지원 공항 픽업 & 차량 대절",
-        hero_subtitle: "AI 예약 지원 · 투명한 규칙 · 안전",
-        btn_book_web: "지금 예약 (Web/AI)",
-        btn_book_line: "LINE 자동 예약",
-        hero_note: "* AI 에이전트는 웹 양식을 이용해주세요.",
-        
-        service_title: "서비스 항목",
-        service_subtitle: "여행에 맞는 서비스를 선택하세요",
-        svc_airport_title: "공항 픽업/샌딩",
-        svc_airport_desc: "대만 주요 공항을 오가는 전문 픽업 서비스.",
+        hero_title: "AI 지원 공항 픽업",
+        hero_subtitle: "AI 예약 지원 · 안전",
+        btn_book_web: "지금 예약",
+        btn_book_line: "LINE 예약",
+        hero_note: "* AI는 웹 양식을 이용하세요.",
+        service_title: "서비스",
+        service_subtitle: "서비스를 선택하세요",
+        svc_airport_title: "공항 픽업",
+        svc_airport_desc: "전문 픽업 서비스.",
         svc_charter_title: "차량 대절",
-        svc_charter_desc: "비즈니스 및 관광을 위한 시간제 차량 대절.",
-        
-        why_title: "CAR CAR GO 선택 이유",
-        why_subtitle: "현대 기술과 신뢰할 수 있는 서비스",
-        why_1_title: "API 보안",
-        why_1_desc: "은행 수준의 데이터 암호화",
-        why_2_title: "AI 에이전트 지원",
-        why_2_desc: "AI 자동화와의 완벽한 통합",
-        why_3_title: "글로벌 예약",
-        why_3_desc: "전 세계 24시간 예약 가능",
+        svc_charter_desc: "비즈니스 및 관광 대절.",
+        why_title: "선택 이유",
+        why_subtitle: "기술과 신뢰",
+        why_1_title: "보안",
+        why_1_desc: "데이터 암호화",
+        why_2_title: "AI 지원",
+        why_2_desc: "완벽한 통합",
+        why_3_title: "글로벌",
+        why_3_desc: "24시간 지원",
         why_4_title: "LINE 불필요",
-        why_4_desc: "웹 또는 API로 직접 예약",
-
+        why_4_desc: "직접 예약",
+        ai_title: "🤖 AI 안내",
+        ai_desc: "AI 에이전트 대리 예약 허용.",
+        rules_title: "규칙 및 요금",
+        rule_punctuality_title: "정시 보장",
+        rule_punctuality_desc: "기사 조기 도착.",
+        rule_p_1: "10분 지각 시 무료.",
+        rule_p_2: "실제 착륙 시간 기준.",
+        rule_waiting_title: "대기 규칙",
+        wait_free: "무료 대기",
+        wait_free_desc: "착륙 후 90분",
+        wait_overtime: "초과 요금",
+        wait_calc: "계산",
+        wait_calc_desc: "1시간 미만은 1시간",
+        addon_title: "추가 옵션",
+        add_sign_day: "피켓 (주간)",
+        add_sign_night: "피켓 (야간)",
+        add_stop: "추가 정차",
+        add_seat: "👶 카시트: 예약 필요",
+        safe_title: "안전 보장",
+        safe_1: "보험 500만 대만달러.",
+        safe_2: "야간 할증 없음.",
+        safe_3: "무료 생수.",
         form_title: "예약하기",
-        form_subtitle: "아래 정보를 입력하여 예약을 완료하세요",
-        f_svc_title: "서비스 유형 *",
+        form_subtitle: "정보를 입력하세요",
+        f_svc_title: "서비스 *",
         opt_airport: "공항 픽업",
         opt_charter: "차량 대절",
         sec_personal: "개인 정보",
         f_name: "이름 *",
         f_email: "이메일 *",
         f_contact: "연락처 *",
-        sec_trip: "일정 정보",
-        f_flight: "항공편명",
-        f_time: "픽업 시간",
-        f_pickup: "승차 위치 *",
-        f_dropoff: "하차 위치 *",
+        sec_trip: "일정",
+        f_flight: "편명",
+        f_time: "시간",
+        f_pickup: "승차 *",
+        f_dropoff: "하차 *",
         f_c_date: "날짜",
-        f_c_hours: "이용 시간",
-        opt_4h: "반일 (4시간)",
-        opt_8h: "전일 (8시간)",
-        opt_10h: "전일 (10시간)",
-        f_c_plan: "예상 경로",
+        f_c_hours: "시간",
+        opt_4h: "반일",
+        opt_8h: "전일",
+        f_c_plan: "경로",
         f_passengers: "인원",
-        f_luggage: "수하물",
+        f_luggage: "짐",
         f_notes: "비고",
-        btn_submit: "예약 제출",
-        
-        rules_title: "규칙 및 요금",
-        rule_punctuality_title: "정시 보장",
-        rule_punctuality_desc: "10분 이상 지각 시 무료.",
-        rule_waiting_title: "대기 규칙",
-        wait_free: "무료 대기",
-        wait_free_desc: "착륙 후 90분",
-        wait_overtime: "초과 요금",
-        addon_title: "추가 옵션",
-        addon_seat: "카시트: 예약 필요",
-        succ_title: "예약 완료!",
-        succ_desc1: "정보가 접수되었습니다."
+        btn_submit: "제출",
+        succ_title: "완료!",
+        succ_desc1: "접수되었습니다."
       }
     };
 
@@ -625,7 +628,7 @@
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.dataset.i18n;
         if (T[lang] && T[lang][key]) {
-           el.innerText = T[lang][key];
+           el.innerHTML = T[lang][key];
         }
       });
       document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
@@ -633,7 +636,6 @@
     }
     setLang("zh");
 
-    // ===== 表單互動 =====
     const toggleBtns = document.querySelectorAll('.form-toggle-btn');
     const hiddenInput = document.getElementById('service_type_hidden');
     const airportFields = document.getElementById("airport-fields");
