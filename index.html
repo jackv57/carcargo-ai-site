@@ -14,16 +14,15 @@
     :root {
       --primary: #0EA5E9; /* 天空藍 Sky Blue */
       --primary-hover: #0284C7;
-      --bg-deep-purple: #240046; /* 新增：深紫色背景 */
+      --bg-deep-purple: #240046; /* 深紫色背景 (用於 Hero) */
       --bg-dark-footer: #0F172A; /* 深藍頁尾 */
-      --bg-light-main: #FFFFFF; /* 白底 */
+      --bg-light-main: #FFFFFF; /* 白底 (用於 Header 和內容) */
       --bg-content-gray: #F8FAFC; /* 內容區淺灰底 */
-      --text-dark: #0F172A; 
+      --text-dark: #0F172A; /* 深色文字 */
       --text-body: #475569;
       --text-muted: #94A3B8;
       --text-light-on-dark: #F8FAFC; /* 深色背景上的淺色字 */
-      --border-light: #E2E8F0;
-      --border-on-dark: rgba(255, 255, 255, 0.1);
+      --border-light: #E2E8F0; /* 淺色邊框 */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,35 +60,40 @@
     .btn.secondary:hover { background-color: var(--primary); color: white; }
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* ===== 3. Header & Hero (配色修正) ===== */
+    /* ===== 3. Header & Hero (修正重點) ===== */
+    
+    /* Header: 初始狀態為純白色 */
     header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: var(--bg-deep-purple); /* 改為深紫色 */
-      border-bottom: 1px solid var(--border-on-dark);
+      background: var(--bg-light-main); /* 純白色背景 */
+      border-bottom: 1px solid var(--border-light); /* 淺色邊框 */
       padding: 15px 0;
       transition: all 0.3s ease;
     }
-    /* 捲動時的半透明狀態 */
+    
+    /* Header: 捲動狀態為半透明白色 */
     header.scrolled {
-        background: rgba(36, 0, 70, 0.85); /* 半透明深紫色 (RGB of #240046) */
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.85); /* 半透明白色 */
+        backdrop-filter: blur(10px); /* 毛玻璃效果 */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* 輕微陰影 */
         border-bottom-color: transparent;
     }
+    
     .header-content { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-light-on-dark); /* Logo改白色 */ display: flex; align-items: center; gap: 10px; }
+    /* Logo 文字顏色改回深色，以便在白底上顯示 */
+    .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
     .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
 
-    /* Hero Section (配色修正) */
+    /* Hero Section (維持深紫色) */
     .hero-section {
-        background-color: var(--bg-deep-purple); /* 改為深紫色 */
+        background-color: var(--bg-deep-purple);
         padding-bottom: 0; text-align: center; color: var(--text-light-on-dark);
     }
     
     /* Hero 上方標籤 */
     .hero-badge {
         display: inline-flex; align-items: center; gap: 8px;
-        background: rgba(14, 165, 233, 0.15); /* 微調背景透明度以適應深色底 */
+        background: rgba(14, 165, 233, 0.15);
         color: var(--primary);
         padding: 8px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
         margin-bottom: 24px; border: 1px solid rgba(14, 165, 233, 0.3);
@@ -99,14 +103,14 @@
     /* Hero 標題與文字 */
     .hero-section h1 {
         font-size: 2.8rem; margin-bottom: 24px; line-height: 1.2;
-        color: white; /* 確保 "AI Ready" 為白色 */
+        color: white;
     }
     .hero-section .subtitle { color: rgba(255, 255, 255, 0.8); font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
     .hero-note { color: rgba(255, 255, 255, 0.6) !important; }
     
     /* 波浪分隔線 */
-    .wave-container { line-height: 0; width: 100%; overflow: hidden; margin-top: -1px; background-color: var(--bg-deep-purple); /* 容器背景跟隨 Hero */ }
-    .wave-container svg { display: block; width: 100%; height: auto; fill: var(--bg-content-gray); /* 波浪顏色配合下方內容區塊 */ }
+    .wave-container { line-height: 0; width: 100%; overflow: hidden; margin-top: -1px; background-color: var(--bg-deep-purple); }
+    .wave-container svg { display: block; width: 100%; height: auto; fill: var(--bg-content-gray); }
 
     /* ===== 4. 內容區塊 ===== */
     /* 服務卡片 */
@@ -165,9 +169,14 @@
 
     .hidden { display: none; }
     
-    /* 語言切換按鈕 (適應深色背景) */
-    .lang-switcher button { background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.7); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500;}
-    .lang-switcher button:hover { border-color: var(--primary); color: white; }
+    /* 語言切換按鈕 (適應白色背景) */
+    .lang-switcher button {
+        background: transparent;
+        border: 1px solid var(--border-light); /* 淺色邊框 */
+        color: var(--text-muted); /* 深灰色文字 */
+        padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500;
+    }
+    .lang-switcher button:hover { border-color: var(--primary); color: var(--primary); }
     .lang-switcher button.active { background: var(--primary); color: white; border-color: var(--primary); }
 
     /* ===== 5. 深色頁尾 ===== */
