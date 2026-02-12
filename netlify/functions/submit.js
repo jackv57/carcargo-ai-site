@@ -6,14 +6,14 @@ exports.handler = async function(event, context) {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  // 2. 從 Netlify 的保險箱讀取真正的 Make.com 網址
+  // 2. 從 Netlify 的環境變數讀取 Make.com 網址
   const makeUrl = process.env.MAKE_WEBHOOK_URL;
 
   if (!makeUrl) {
     return { statusCode: 500, body: "Server Error: Webhook URL not set." };
   }
 
-  // 3. 準備轉傳資料
+  // 3. 準備將表單資料轉傳給 Make
   const formData = event.body;
 
   return new Promise((resolve, reject) => {
@@ -26,11 +26,10 @@ exports.handler = async function(event, context) {
     };
 
     const req = https.request(makeUrl, options, (res) => {
+      // 只要 Make 回傳 2xx 都算成功
       if (res.statusCode >= 200 && res.statusCode < 300) {
         resolve({
           statusCode: 200,
-          // 重新導向回你的網站首頁，並帶上 success 參數
-          headers: { Location: '/?status=success' }, 
           body: "Success"
         });
       } else {
@@ -45,6 +44,7 @@ exports.handler = async function(event, context) {
       resolve({ statusCode: 500, body: "Internal Server Error" });
     });
 
+    // 送出資料
     req.write(formData);
     req.end();
   });
