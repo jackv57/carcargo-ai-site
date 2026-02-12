@@ -4,214 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CAR CAR GO – AI Ready Airport Transfer & Charter</title>
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-
   <style>
-    /* ===== 1. 核心設定 ===== */
     :root {
-      --primary: #0EA5E9; /* 天空藍 Sky Blue */
-      --primary-hover: #0284C7;
-      --bg-deep-purple: #240046; /* 深紫色背景 (用於 Hero) */
-      --bg-dark-footer: #0F172A; /* 深藍頁尾 */
-      --bg-light-main: #FFFFFF; /* 白底 (用於 Header 和內容) */
-      --bg-content-gray: #F8FAFC; /* 內容區淺灰底 */
-      --text-dark: #0F172A; /* 深色文字 */
-      --text-body: #475569;
-      --text-muted: #94A3B8;
-      --text-light-on-dark: #F8FAFC; /* 深色背景上的淺色字 */
-      --border-light: #E2E8F0; /* 淺色邊框 */
+      --primary: #0EA5E9; --primary-hover: #0284C7;
+      --bg-deep-purple: #240046; --bg-dark-footer: #0F172A;
+      --bg-light-main: #FFFFFF; --bg-content-gray: #F8FAFC;
+      --text-dark: #0F172A; --text-body: #475569; --text-muted: #94A3B8;
+      --text-light-on-dark: #F8FAFC; --border-light: #E2E8F0;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      font-family: 'Inter', 'Noto Sans TC', sans-serif;
-      background-color: var(--bg-light-main);
-      color: var(--text-body);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      padding-top: 70px; /* 為了固定Header預留空間 */
-    }
-
-    /* ===== 2. 通用元件 ===== */
+    body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: var(--bg-light-main); color: var(--text-body); line-height: 1.6; scroll-behavior: smooth; padding-top: 70px; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-
     h1, h2, h3, h4, h5 { font-weight: 800; margin-bottom: 0.5rem; color: var(--text-dark); letter-spacing: -0.025em; }
     p { color: var(--text-body); margin-bottom: 1rem; }
-    
     .section-title { text-align: center; margin-bottom: 10px; font-size: 2rem; }
     .section-subtitle { text-align: center; color: #64748B; margin-bottom: 50px; font-size: 1.1rem; }
     .section-padding { padding: 80px 0; }
-    
-    /* 強調色文字 (天空藍) */
     .text-accent { color: var(--primary); }
-
-    /* 按鈕 */
-    .btn {
-      display: inline-block; padding: 14px 28px; background-color: var(--primary); color: white;
-      border-radius: 8px; text-decoration: none; font-weight: 600; border: 2px solid var(--primary);
-      cursor: pointer; transition: all 0.2s; text-align: center; font-size: 1rem; min-width: 180px;
-    }
+    .btn { display: inline-block; padding: 14px 28px; background-color: var(--primary); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; border: 2px solid var(--primary); cursor: pointer; transition: all 0.2s; text-align: center; font-size: 1rem; min-width: 180px; }
     .btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); border-color: var(--primary-hover); }
     .btn.secondary { background-color: transparent; color: var(--primary); }
     .btn.secondary:hover { background-color: var(--primary); color: white; }
+    .btn:disabled { background-color: #cbd5e1; border-color: #cbd5e1; cursor: not-allowed; transform: none; }
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-
-    /* ===== 3. Header & Hero ===== */
-    
-    /* Header: 初始狀態為純白色 */
-    header {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: var(--bg-light-main);
-      border-bottom: 1px solid var(--border-light);
-      padding: 15px 0;
-      transition: all 0.3s ease;
-    }
-    
-    /* Header: 捲動狀態為半透明白色 */
-    header.scrolled {
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        border-bottom-color: transparent;
-    }
-    
+    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: var(--bg-light-main); border-bottom: 1px solid var(--border-light); padding: 15px 0; transition: all 0.3s ease; }
+    header.scrolled { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border-bottom-color: transparent; }
     .header-content { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
     .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
-
-    /* Hero Section (維持深紫色) */
-    .hero-section {
-        background-color: var(--bg-deep-purple);
-        padding-bottom: 0; text-align: center; color: var(--text-light-on-dark);
-    }
-    
-    /* Hero 上方標籤 */
-    .hero-badge {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: rgba(14, 165, 233, 0.15);
-        color: var(--primary);
-        padding: 8px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
-        margin-bottom: 24px; border: 1px solid rgba(14, 165, 233, 0.3);
-    }
+    .hero-section { background-color: var(--bg-deep-purple); padding-bottom: 0; text-align: center; color: var(--text-light-on-dark); }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(14, 165, 233, 0.15); color: var(--primary); padding: 8px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(14, 165, 233, 0.3); }
     .hero-badge svg { width: 18px; height: 18px; fill: currentColor; }
-
-    /* Hero 標題與文字 */
-    .hero-section h1 {
-        font-size: 2.8rem; margin-bottom: 24px; line-height: 1.2;
-        color: white;
-    }
+    .hero-section h1 { font-size: 2.8rem; margin-bottom: 24px; line-height: 1.2; color: white; }
     .hero-section .subtitle { color: rgba(255, 255, 255, 0.8); font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
     .hero-note { color: rgba(255, 255, 255, 0.6) !important; }
-    
-    /* 波浪分隔線 */
     .wave-container { line-height: 0; width: 100%; overflow: hidden; margin-top: -1px; background-color: var(--bg-deep-purple); }
     .wave-container svg { display: block; width: 100%; height: auto; fill: var(--bg-content-gray); }
-
-    /* ===== 4. 內容區塊 ===== */
-    .service-card {
-      background: white; border: 1px solid var(--border-light); border-radius: 16px; padding: 40px;
-      transition: all 0.3s ease; height: 100%; text-align: left;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    }
+    .service-card { background: white; border: 1px solid var(--border-light); border-radius: 16px; padding: 40px; transition: all 0.3s ease; height: 100%; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .service-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
-    .icon-square {
-      width: 64px; height: 64px; background-color: var(--primary);
-      border-radius: 16px; display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px; color: white; flex-shrink: 0;
-    }
+    .icon-square { width: 64px; height: 64px; background-color: var(--primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: white; flex-shrink: 0; }
     .icon-square svg { width: 32px; height: 32px; fill: white; }
-
     .feature-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
     .feature-item { text-align: center; padding: 20px; }
     .icon-square.center { margin-left: auto; margin-right: auto; }
-    
     .api-badge-container { text-align: center; margin-top: 60px; }
-    .api-badge {
-        display: inline-block;
-        background: #F0F9FF; border: 2px solid var(--primary);
-        padding: 16px 40px; border-radius: 100px;
-        color: var(--primary); font-weight: 700; font-size: 1.1rem;
-        letter-spacing: 0.05em;
-    }
-
+    .api-badge { display: inline-block; background: #F0F9FF; border: 2px solid var(--primary); padding: 16px 40px; border-radius: 100px; color: var(--primary); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; }
     .rule-card { background: white; padding: 30px; border-radius: 16px; border: 1px solid var(--border-light); height: 100%; }
     .styled-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; background: #F8FAFC; border-radius: 8px; overflow: hidden; }
     .styled-table td { padding: 12px 16px; border-bottom: 1px solid #E2E8F0; font-size: 0.95rem; }
     .price-tag { color: var(--primary); font-weight: bold; }
     ul.check-list { list-style: none; margin-top: 10px; }
     ul.check-list li { margin-bottom: 10px; padding-left: 28px; position: relative; font-size: 0.95rem; }
-    ul.check-list li::before { content: "✓"; color: var(--accent-green); position: absolute; left: 0; font-weight: bold; }
-
+    ul.check-list li::before { content: "✓"; color: #10B981; position: absolute; left: 0; font-weight: bold; }
     .ai-box { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 16px; padding: 30px; margin-bottom: 30px; }
     .ai-box code { display: block; background: #064E3B; padding: 15px; border-radius: 8px; font-family: monospace; color: #A7F3D0; margin-top: 15px; font-size: 0.9rem; }
-
-    /* 表單 */
     .booking-card { background: white; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); padding: 40px; border: 1px solid var(--border-light); }
     label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     input, select, textarea { width: 100%; padding: 12px 16px; background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; margin-bottom: 24px; outline: none; transition: all 0.2s; }
     input:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
-    
     .form-toggle-group { display: flex; gap: 16px; margin-bottom: 32px; }
     .form-toggle-btn { flex: 1; padding: 16px; text-align: center; border-radius: 12px; border: 2px solid var(--border-light); background: white; color: #64748B; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px;}
     .form-toggle-btn svg { width: 24px; height: 24px; fill: #64748B; transition: fill 0.2s; }
     .form-toggle-btn.active { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
     .form-toggle-btn.active svg { fill: var(--primary); }
-
     .hidden { display: none; }
-    
-    .lang-switcher button {
-        background: transparent;
-        border: 1px solid var(--border-light);
-        color: var(--text-muted);
-        padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500;
-    }
+    .lang-switcher button { background: transparent; border: 1px solid var(--border-light); color: var(--text-muted); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500; }
     .lang-switcher button:hover { border-color: var(--primary); color: var(--primary); }
     .lang-switcher button.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-    /* ===== 5. 深色頁尾 ===== */
-    .dark-footer {
-        background-color: var(--bg-dark-footer);
-        color: var(--text-muted);
-        padding: 80px 0 30px;
-        margin-top: 80px;
-    }
-    .footer-grid {
-        display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px;
-    }
+    .dark-footer { background-color: var(--bg-dark-footer); color: var(--text-muted); padding: 80px 0 30px; margin-top: 80px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px; }
     .footer-logo { color: white; font-size: 1.5rem; font-weight: 900; margin-bottom: 20px; display: inline-block;}
     .footer-col h5 { color: white; margin-bottom: 25px; font-size: 1.1rem; }
     .footer-links { list-style: none; }
     .footer-links li { margin-bottom: 15px; }
     .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--primary); }
-    .footer-bottom {
-        text-align: center;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        padding-top: 30px; font-size: 0.9rem;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-      .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-      .hero-section h1 { font-size: 3.8rem; }
-    }
-    @media (max-width: 1024px) {
-        .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 767px) {
-      .feature-grid { grid-template-columns: 1fr; gap: 40px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-      .api-badge { padding: 12px 24px; font-size: 0.9rem; }
-    }
+    .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.9rem; }
+    @media (min-width: 768px) { .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; } .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; } .hero-section h1 { font-size: 3.8rem; } }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 767px) { .feature-grid { grid-template-columns: 1fr; gap: 40px; } .footer-grid { grid-template-columns: 1fr; gap: 40px; } .api-badge { padding: 12px 24px; font-size: 0.9rem; } }
   </style>
 </head>
-
 <body>
-
   <header id="main-header">
     <div class="container header-content">
       <div class="logo"><div class="logo-icon">C</div> CAR CAR GO</div>
@@ -223,18 +100,14 @@
       </div>
     </div>
   </header>
-
   <main>
     <section class="hero-section">
       <div class="container" style="padding: 80px 24px 60px;">
-        
         <div class="hero-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z"></path></svg>
             <span data-i18n="hero_badge">AI-Powered Booking Engine</span>
         </div>
-        
         <h1 data-i18n="hero_title">AI Ready 機場接送與包車服務</h1>
-        
         <p class="subtitle" data-i18n="hero_subtitle">支援 AI Agent 代訂・規則透明・安全可靠</p>
         <div class="btn-group">
           <a href="#booking-section" class="btn" data-i18n="btn_book_web">立即預約 (Web/AI)</a>
@@ -246,7 +119,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,229.3C640,245,800,267,960,266.7C1120,267,1280,245,1360,234.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
       </div>
     </section>
-
     <div style="background-color: var(--bg-content-gray);">
         <section class="section-padding container">
         <h2 class="section-title" data-i18n="service_title">Our Services</h2>
@@ -268,7 +140,6 @@
             </div>
         </div>
         </section>
-
         <section class="section-padding container" style="padding-top:0;">
         <h2 class="section-title" data-i18n="why_title">Why Choose CAR CAR GO</h2>
         <p class="section-subtitle" data-i18n="why_subtitle">Modern technology meets reliable service</p>
@@ -294,7 +165,6 @@
             <p data-i18n="why_4_desc">Direct booking</p>
             </div>
         </div>
-        
         <div class="api-badge-container">
             <div class="api-badge">
                 API INTEGRATION AVAILABLE. DOCUMENTATION READY.
@@ -302,7 +172,6 @@
         </div>
         </section>
     </div>
-
     <section class="container section-padding" style="padding-bottom:0;">
       <div class="ai-box">
         <h3 data-i18n="ai_title">🤖 AI Agent 代訂說明</h3>
@@ -314,7 +183,6 @@
         </code>
       </div>
     </section>
-
     <section class="section-padding container">
       <h2 class="section-title" data-i18n="rules_title">Rules & Fees</h2>
       <div class="grid-2" style="margin-top: 40px;">
@@ -325,7 +193,6 @@
              <li data-i18n="rule_p_1">遲到 10 分鐘以上，本次行程免費。</li>
              <li data-i18n="rule_p_2">依據航班實際落地時間接機。</li>
           </ul>
-          
           <h4 style="margin-top: 30px;" data-i18n="rule_waiting_title">接機等待規則</h4>
           <table class="styled-table">
              <tr><td data-i18n="wait_free">免費等待</td><td data-i18n="wait_free_desc">航班抵達後 90 分鐘</td></tr>
@@ -333,7 +200,6 @@
              <tr><td data-i18n="wait_calc">計算方式</td><td data-i18n="wait_calc_desc">未滿一小時以一小時計</td></tr>
           </table>
         </div>
-
         <div class="rule-card">
           <h4 data-i18n="addon_title">加值服務</h4>
           <table class="styled-table">
@@ -342,7 +208,6 @@
              <tr><td data-i18n="add_stop">額外停靠</td><td class="price-tag">NT$200 起</td></tr>
           </table>
           <p style="font-size: 0.9rem; margin-top: 10px;" data-i18n="add_seat">👶 兒童座椅：需提前預約</p>
-
           <h4 style="margin-top: 30px;" data-i18n="safe_title">安全與保障</h4>
           <ul class="check-list">
             <li data-i18n="safe_1">乘客險每人最高 <strong>500 萬</strong>。</li>
@@ -352,11 +217,9 @@
         </div>
       </div>
     </section>
-
     <section id="booking-section" class="section-padding container" style="padding-top:0;">
       <h2 class="section-title" data-i18n="form_title">Book Your Ride</h2>
       <p class="section-subtitle" data-i18n="form_subtitle">Fill in the details below to complete your booking</p>
-      
       <div class="booking-card">
         <form id="booking-form" method="POST" action="/.netlify/functions/submit">
           <label data-i18n="f_svc_title">Service Type *</label>
@@ -371,14 +234,12 @@
             </div>
           </div>
           <input type="hidden" name="service_type" id="service_type_hidden" value="airport">
-
           <h4 style="margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_personal">Personal Information</h4>
           <div class="grid-2">
             <div><label data-i18n="f_name">Full Name *</label><input type="text" name="full_name" required placeholder="John Doe" /></div>
             <div><label data-i18n="f_email">Email Address *</label><input type="email" name="email" required placeholder="john@example.com" /></div>
           </div>
           <label data-i18n="f_contact">Contact Number *</label><input type="text" name="contact" placeholder="+1 234 567 8900" />
-
           <h4 style="margin-top: 20px; margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_trip">Trip Details</h4>
           <div id="airport-fields">
             <label data-i18n="f_flight">Flight Number</label><input type="text" name="flight" placeholder="AA123" />
@@ -397,7 +258,6 @@
             </select>
             <label data-i18n="f_c_plan">Planned Areas</label><input type="text" name="areas" placeholder="City Tour..." />
           </div>
-
           <div class="grid-2">
             <div><label data-i18n="f_passengers">Passengers</label><input type="number" name="passengers" placeholder="0" /></div>
             <div><label data-i18n="f_luggage">Luggage</label><input type="number" name="luggage" placeholder="0" /></div>
@@ -407,7 +267,6 @@
         </form>
       </div>
     </section>
-
     <div id="success-message" class="container hidden" style="margin: 60px auto; text-align: center;">
       <div style="background: #ECFDF5; padding: 40px; border-radius: 20px; border: 1px solid #10B981; display: inline-block;">
         <h3 style="color: #059669; font-size: 1.8rem;" data-i18n="succ_title">Booking Submitted!</h3>
@@ -415,7 +274,6 @@
       </div>
     </div>
   </main>
-
   <footer class="dark-footer">
       <div class="container">
           <div class="footer-grid">
@@ -453,18 +311,11 @@
           </div>
       </div>
   </footer>
-
   <script>
-    // Header 捲動效果
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+        if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
     });
-
     const T = {
       zh: {
         hero_badge: "AI 驅動的預約引擎",
@@ -751,7 +602,6 @@
         succ_desc1: "접수되었습니다."
       }
     };
-
     function setLang(lang) {
       document.documentElement.lang = lang === 'zh' ? 'zh-TW' : lang;
       document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -764,12 +614,10 @@
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
     }
     setLang("zh");
-
     const toggleBtns = document.querySelectorAll('.form-toggle-btn');
     const hiddenInput = document.getElementById('service_type_hidden');
     const airportFields = document.getElementById("airport-fields");
     const charterFields = document.getElementById("charter-fields");
-
     toggleBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         toggleBtns.forEach(b => b.classList.remove('active'));
@@ -781,17 +629,50 @@
       });
     });
 
+    // ===== 智慧傳送表單邏輯 (AJAX) =====
     const form = document.getElementById("booking-form");
     const success = document.getElementById("success-message");
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    form.addEventListener("submit", () => {
-      setTimeout(() => {
-        form.style.display = "none";
-        success.style.display = "block";
-        success.scrollIntoView({ behavior: "smooth" });
-      }, 500);
+    form.addEventListener("submit", async (e) => {
+      // 1. 阻止預設行為 (不要換頁)
+      e.preventDefault();
+
+      // 2. 鎖定按鈕，避免重複按
+      const originalBtnText = submitBtn.innerText;
+      submitBtn.innerText = "Processing...";
+      submitBtn.disabled = true;
+
+      // 3. 準備資料
+      const formData = new FormData(form);
+      const data = new URLSearchParams(formData);
+
+      try {
+        // 4. 背景傳送資料到 Netlify Function
+        const response = await fetch('/.netlify/functions/submit', {
+          method: 'POST',
+          body: data
+        });
+
+        if (response.ok) {
+          // 5. 成功：顯示綠色訊息
+          form.style.display = "none";
+          success.style.display = "block";
+          success.scrollIntoView({ behavior: "smooth" });
+        } else {
+          // 失敗：顯示警告
+          alert("預約系統忙線中，請稍後再試，或直接使用 LINE 聯繫我們。");
+          submitBtn.innerText = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      } catch (error) {
+        // 網路錯誤
+        console.error(error);
+        alert("網路連線錯誤，請檢查您的網路狀況。");
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+      }
     });
   </script>
-
 </body>
 </html>
