@@ -60,27 +60,26 @@
     .btn.secondary:hover { background-color: var(--primary); color: white; }
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* ===== 3. Header & Hero (修正重點) ===== */
+    /* ===== 3. Header & Hero ===== */
     
     /* Header: 初始狀態為純白色 */
     header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: var(--bg-light-main); /* 純白色背景 */
-      border-bottom: 1px solid var(--border-light); /* 淺色邊框 */
+      background: var(--bg-light-main);
+      border-bottom: 1px solid var(--border-light);
       padding: 15px 0;
       transition: all 0.3s ease;
     }
     
     /* Header: 捲動狀態為半透明白色 */
     header.scrolled {
-        background: rgba(255, 255, 255, 0.85); /* 半透明白色 */
-        backdrop-filter: blur(10px); /* 毛玻璃效果 */
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* 輕微陰影 */
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         border-bottom-color: transparent;
     }
     
     .header-content { display: flex; justify-content: space-between; align-items: center; }
-    /* Logo 文字顏色改回深色，以便在白底上顯示 */
     .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
     .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
 
@@ -113,7 +112,6 @@
     .wave-container svg { display: block; width: 100%; height: auto; fill: var(--bg-content-gray); }
 
     /* ===== 4. 內容區塊 ===== */
-    /* 服務卡片 */
     .service-card {
       background: white; border: 1px solid var(--border-light); border-radius: 16px; padding: 40px;
       transition: all 0.3s ease; height: 100%; text-align: left;
@@ -127,12 +125,10 @@
     }
     .icon-square svg { width: 32px; height: 32px; fill: white; }
 
-    /* Why Choose & API Badge */
     .feature-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
     .feature-item { text-align: center; padding: 20px; }
     .icon-square.center { margin-left: auto; margin-right: auto; }
     
-    /* API 宣告橢圓區塊 */
     .api-badge-container { text-align: center; margin-top: 60px; }
     .api-badge {
         display: inline-block;
@@ -142,7 +138,6 @@
         letter-spacing: 0.05em;
     }
 
-    /* 規則與表格 */
     .rule-card { background: white; padding: 30px; border-radius: 16px; border: 1px solid var(--border-light); height: 100%; }
     .styled-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; background: #F8FAFC; border-radius: 8px; overflow: hidden; }
     .styled-table td { padding: 12px 16px; border-bottom: 1px solid #E2E8F0; font-size: 0.95rem; }
@@ -151,7 +146,6 @@
     ul.check-list li { margin-bottom: 10px; padding-left: 28px; position: relative; font-size: 0.95rem; }
     ul.check-list li::before { content: "✓"; color: var(--accent-green); position: absolute; left: 0; font-weight: bold; }
 
-    /* AI 說明 */
     .ai-box { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 16px; padding: 30px; margin-bottom: 30px; }
     .ai-box code { display: block; background: #064E3B; padding: 15px; border-radius: 8px; font-family: monospace; color: #A7F3D0; margin-top: 15px; font-size: 0.9rem; }
 
@@ -169,11 +163,10 @@
 
     .hidden { display: none; }
     
-    /* 語言切換按鈕 (適應白色背景) */
     .lang-switcher button {
         background: transparent;
-        border: 1px solid var(--border-light); /* 淺色邊框 */
-        color: var(--text-muted); /* 深灰色文字 */
+        border: 1px solid var(--border-light);
+        color: var(--text-muted);
         padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500;
     }
     .lang-switcher button:hover { border-color: var(--primary); color: var(--primary); }
@@ -201,7 +194,6 @@
         padding-top: 30px; font-size: 0.9rem;
     }
 
-    /* RWD */
     @media (min-width: 768px) {
       .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
       .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -269,7 +261,7 @@
             </div>
             <div class="service-card">
             <div class="icon-square">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
             </div>
             <h3 data-i18n="svc_charter_title">Charter Service</h3>
             <p data-i18n="svc_charter_desc">Flexible private car rental by hour for your business or leisure</p>
@@ -366,7 +358,7 @@
       <p class="section-subtitle" data-i18n="form_subtitle">Fill in the details below to complete your booking</p>
       
       <div class="booking-card">
-        <form id="booking-form" method="POST" action="https://hook.us2.make.com/65zne6577aajqcrxw2pqt9ayo81qza85">
+        <form id="booking-form" method="POST" action="/.netlify/functions/submit">
           <label data-i18n="f_svc_title">Service Type *</label>
           <div class="form-toggle-group">
             <div class="form-toggle-btn active" data-value="airport">
