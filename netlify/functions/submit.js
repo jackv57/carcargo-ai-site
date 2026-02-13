@@ -1,9 +1,7 @@
 exports.handler = async (event) => {
-  const method =
-    event.httpMethod ||
-    event.requestContext?.http?.method;
+  console.log("Incoming event:", event);
 
-  if (method !== "POST") {
+  if (event.rawMethod !== "POST") {
     return {
       statusCode: 405,
       body: "Method Not Allowed",
@@ -28,18 +26,13 @@ exports.handler = async (event) => {
       body: event.body,
     });
 
-    if (response.ok) {
-      return {
-        statusCode: 200,
-        body: "Success",
-      };
-    } else {
-      return {
-        statusCode: 500,
-        body: "Make error",
-      };
-    }
+    return {
+      statusCode: 200,
+      body: "Success",
+    };
+
   } catch (error) {
+    console.error(error);
     return {
       statusCode: 500,
       body: "Server error",
