@@ -65,11 +65,14 @@
     label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
     input, select, textarea { width: 100%; padding: 12px 16px; background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; margin-bottom: 24px; outline: none; transition: all 0.2s; }
     input:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
-    .form-toggle-group { display: flex; gap: 16px; margin-bottom: 32px; }
-    .form-toggle-btn { flex: 1; padding: 16px; text-align: center; border-radius: 12px; border: 2px solid var(--border-light); background: white; color: #64748B; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px;}
+    
+    /* 調整表單切換按鈕，支援 3 個按鈕 */
+    .form-toggle-group { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .form-toggle-btn { flex: 1; padding: 16px; text-align: center; border-radius: 12px; border: 2px solid var(--border-light); background: white; color: #64748B; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 100px; }
     .form-toggle-btn svg { width: 24px; height: 24px; fill: #64748B; transition: fill 0.2s; }
     .form-toggle-btn.active { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
     .form-toggle-btn.active svg { fill: var(--primary); }
+    
     .hidden { display: none; }
     .lang-switcher button { background: transparent; border: 1px solid var(--border-light); color: var(--text-muted); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-left: 4px; font-size: 0.85rem; transition: all 0.2s; font-weight: 500; }
     .lang-switcher button:hover { border-color: var(--primary); color: var(--primary); }
@@ -83,9 +86,21 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--primary); }
     .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.9rem; }
-    @media (min-width: 768px) { .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; } .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; } .hero-section h1 { font-size: 3.8rem; } }
+    
+    /* 響應式調整 */
+    @media (min-width: 768px) { 
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; } 
+      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; } /* 新增三欄排版 */
+      .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; } 
+      .hero-section h1 { font-size: 3.8rem; } 
+    }
     @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 767px) { .feature-grid { grid-template-columns: 1fr; gap: 40px; } .footer-grid { grid-template-columns: 1fr; gap: 40px; } .api-badge { padding: 12px 24px; font-size: 0.9rem; } }
+    @media (max-width: 767px) { 
+        .feature-grid { grid-template-columns: 1fr; gap: 40px; } 
+        .footer-grid { grid-template-columns: 1fr; gap: 40px; } 
+        .api-badge { padding: 12px 24px; font-size: 0.9rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 24px; } /* 手機版改回單欄 */
+    }
   </style>
 </head>
 <body>
@@ -123,23 +138,31 @@
         <section class="section-padding container">
         <h2 class="section-title" data-i18n="service_title">Our Services</h2>
         <p class="section-subtitle" data-i18n="service_subtitle">Choose the service that fits your travel needs</p>
-        <div class="grid-2">
+        <div class="grid-3">
             <div class="service-card">
-            <div class="icon-square">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 16v-2l-8.5-5V3.5C13.5 2.67 12.83 2 12 2s-1.5.67-1.5 1.5V9L2 14v2l8.5-2.5V19L8 20.5V22l4-1 4 1v-1.5L13.5 19v-5.5L22 16z"/></svg>
-            </div>
-            <h3 data-i18n="svc_airport_title">Airport Transfer</h3>
-            <p data-i18n="svc_airport_desc">Professional pickup and drop-off service from/to any airport</p>
+                <div class="icon-square">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5,19H21.5V21H2.5V19M22.07,9.64C21.86,9.4 17.5,5.1 17.5,5.1L16.07,6.54L17.84,8.31L13,11.08V6.31L14,5.31V3.5H9.5V5.31L10.5,6.31V11.08L5.67,8.31L7.43,6.54L6,5.1L1.44,9.64C1.19,9.88 1.19,10.28 1.44,10.53L6,15.1L7.43,13.63L5.67,11.87L10.5,9.08V17H13V9.08L17.84,11.87L16.07,13.63L17.5,15.1C17.5,15.1 21.86,10.74 22.07,10.53C22.32,10.28 22.32,9.88 22.07,9.64Z"/></svg>
+                </div>
+                <h3 data-i18n="svc_dropoff_title">Airport Drop-off</h3>
+                <p data-i18n="svc_dropoff_desc">Reliable service from your door to the airport terminal.</p>
             </div>
             <div class="service-card">
-            <div class="icon-square">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+                <div class="icon-square">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5,19H21.5V21H2.5V19M22.07,9.64C21.86,9.4 17.5,5.1 17.5,5.1L16.07,6.54L17.84,8.31L13,11.08V6.31L14,5.31V3.5H9.5V5.31L10.5,6.31V11.08L5.67,8.31L7.43,6.54L6,5.1L1.44,9.64C1.19,9.88 1.19,10.28 1.44,10.53L6,15.1L7.43,13.63L5.67,11.87L10.5,9.08V17H13V9.08L17.84,11.87L16.07,13.63L17.5,15.1C17.5,15.1 21.86,10.74 22.07,10.53C22.32,10.28 22.32,9.88 22.07,9.64Z" transform="rotate(180 12 12)"/></svg>
+                </div>
+                <h3 data-i18n="svc_pickup_title">Airport Pickup</h3>
+                <p data-i18n="svc_pickup_desc">We wait for your flight arrival with punctuality.</p>
             </div>
-            <h3 data-i18n="svc_charter_title">Charter Service</h3>
-            <p data-i18n="svc_charter_desc">Flexible private car rental by hour for your business or leisure</p>
+            <div class="service-card">
+                <div class="icon-square">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+                </div>
+                <h3 data-i18n="svc_charter_title">Charter Service</h3>
+                <p data-i18n="svc_charter_desc">Flexible private car rental by hour for your business or leisure</p>
             </div>
         </div>
         </section>
+        
         <section class="section-padding container" style="padding-top:0;">
         <h2 class="section-title" data-i18n="why_title">Why Choose CAR CAR GO</h2>
         <p class="section-subtitle" data-i18n="why_subtitle">Modern technology meets reliable service</p>
@@ -172,6 +195,7 @@
         </div>
         </section>
     </div>
+    
     <section class="container section-padding" style="padding-bottom:0;">
       <div class="ai-box">
         <h3 data-i18n="ai_title">🤖 AI Agent 代訂說明</h3>
@@ -183,6 +207,7 @@
         </code>
       </div>
     </section>
+    
     <section class="section-padding container">
       <h2 class="section-title" data-i18n="rules_title">Rules & Fees</h2>
       <div class="grid-2" style="margin-top: 40px;">
@@ -217,38 +242,49 @@
         </div>
       </div>
     </section>
+
     <section id="booking-section" class="section-padding container" style="padding-top:0;">
       <h2 class="section-title" data-i18n="form_title">Book Your Ride</h2>
       <p class="section-subtitle" data-i18n="form_subtitle">Fill in the details below to complete your booking</p>
       <div class="booking-card">
         <form id="booking-form">
           <label data-i18n="f_svc_title">Service Type *</label>
+          
           <div class="form-toggle-group">
-            <div class="form-toggle-btn active" data-value="airport">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 16v-2l-8.5-5V3.5C13.5 2.67 12.83 2 12 2s-1.5.67-1.5 1.5V9L2 14v2l8.5-2.5V19L8 20.5V22l4-1 4 1v-1.5L13.5 19v-5.5L22 16z"/></svg>
-              <span data-i18n="opt_airport">Airport Transfer</span>
+            <div class="form-toggle-btn active" data-value="dropoff">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5,19H21.5V21H2.5V19M22.07,9.64C21.86,9.4 17.5,5.1 17.5,5.1L16.07,6.54L17.84,8.31L13,11.08V6.31L14,5.31V3.5H9.5V5.31L10.5,6.31V11.08L5.67,8.31L7.43,6.54L6,5.1L1.44,9.64C1.19,9.88 1.19,10.28 1.44,10.53L6,15.1L7.43,13.63L5.67,11.87L10.5,9.08V17H13V9.08L17.84,11.87L16.07,13.63L17.5,15.1C17.5,15.1 21.86,10.74 22.07,10.53C22.32,10.28 22.32,9.88 22.07,9.64Z"/></svg>
+                <span data-i18n="opt_dropoff">Airport Drop-off</span>
+            </div>
+            <div class="form-toggle-btn" data-value="pickup">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5,19H21.5V21H2.5V19M22.07,9.64C21.86,9.4 17.5,5.1 17.5,5.1L16.07,6.54L17.84,8.31L13,11.08V6.31L14,5.31V3.5H9.5V5.31L10.5,6.31V11.08L5.67,8.31L7.43,6.54L6,5.1L1.44,9.64C1.19,9.88 1.19,10.28 1.44,10.53L6,15.1L7.43,13.63L5.67,11.87L10.5,9.08V17H13V9.08L17.84,11.87L16.07,13.63L17.5,15.1C17.5,15.1 21.86,10.74 22.07,10.53C22.32,10.28 22.32,9.88 22.07,9.64Z" transform="rotate(180 12 12)"/></svg>
+                <span data-i18n="opt_pickup">Airport Pickup</span>
             </div>
             <div class="form-toggle-btn" data-value="charter">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
               <span data-i18n="opt_charter">Charter Service</span>
             </div>
           </div>
-          <input type="hidden" name="service_type" id="service_type_hidden" value="airport">
+          
+          <input type="hidden" name="service_type" id="service_type_hidden" value="dropoff">
+          
           <h4 style="margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_personal">Personal Information</h4>
           <div class="grid-2">
             <div><label data-i18n="f_name">Full Name *</label><input type="text" name="full_name" required placeholder="John Doe" /></div>
             <div><label data-i18n="f_email">Email Address *</label><input type="email" name="email" required placeholder="john@example.com" /></div>
           </div>
           <label data-i18n="f_contact">Contact Number *</label><input type="text" name="contact" placeholder="+1 234 567 8900" />
+          
           <h4 style="margin-top: 20px; margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;" data-i18n="sec_trip">Trip Details</h4>
+          
           <div id="airport-fields">
             <label data-i18n="f_flight">Flight Number</label><input type="text" name="flight" placeholder="AA123" />
             <label data-i18n="f_time">Pickup Date & Time</label><input type="datetime-local" name="datetime" />
             <div class="grid-2">
-              <div><label data-i18n="f_pickup">Pickup Location *</label><input type="text" name="pickup" placeholder="Terminal" /></div>
-              <div><label data-i18n="f_dropoff">Drop-off Location *</label><input type="text" name="dropoff" placeholder="Hotel" /></div>
+              <div><label data-i18n="f_pickup">Pickup Location *</label><input type="text" name="pickup" placeholder="Location/Airport" /></div>
+              <div><label data-i18n="f_dropoff">Drop-off Location *</label><input type="text" name="dropoff" placeholder="Location/Airport" /></div>
             </div>
           </div>
+          
           <div id="charter-fields" class="hidden">
             <label data-i18n="f_c_date">Date</label><input type="date" name="charter_date" />
             <label data-i18n="f_c_hours">Duration</label>
@@ -258,6 +294,7 @@
             </select>
             <label data-i18n="f_c_plan">Planned Areas</label><input type="text" name="areas" placeholder="City Tour..." />
           </div>
+          
           <div class="grid-2">
             <div><label data-i18n="f_passengers">Passengers</label><input type="number" name="passengers" placeholder="0" /></div>
             <div><label data-i18n="f_luggage">Luggage</label><input type="number" name="luggage" placeholder="0" /></div>
@@ -267,6 +304,7 @@
         </form>
       </div>
     </section>
+    
     <div id="success-message" class="container hidden" style="margin: 60px auto; text-align: center;">
       <div style="background: #ECFDF5; padding: 40px; border-radius: 20px; border: 1px solid #10B981; display: inline-block;">
         <h3 style="color: #059669; font-size: 1.8rem;" data-i18n="succ_title">Booking Submitted!</h3>
@@ -274,6 +312,7 @@
       </div>
     </div>
   </main>
+  
   <footer class="dark-footer">
       <div class="container">
           <div class="footer-grid">
@@ -311,11 +350,14 @@
           </div>
       </div>
   </footer>
+  
   <script>
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
     });
+    
+    // 更新翻譯物件，加入 送機/接機 的翻譯
     const T = {
       zh: {
         hero_badge: "AI 驅動的預約引擎",
@@ -326,8 +368,10 @@
         hero_note: "* 兩種方式皆可，AI 助理請使用網頁表單。",
         service_title: "服務項目",
         service_subtitle: "選擇適合您的旅遊服務",
-        svc_airport_title: "機場接送",
-        svc_airport_desc: "往返全台主要機場的專業接送服務，準時可靠。",
+        svc_dropoff_title: "機場送機",
+        svc_dropoff_desc: "從指定地點前往機場，準時可靠。",
+        svc_pickup_title: "機場接機",
+        svc_pickup_desc: "專人舉牌接機，依據航班時間彈性調整。",
         svc_charter_title: "包車服務",
         svc_charter_desc: "彈性時數包車，商務差旅或家庭旅遊的最佳選擇。",
         why_title: "為什麼選擇 CAR CAR GO",
@@ -365,7 +409,8 @@
         form_title: "立即預約行程",
         form_subtitle: "請填寫下方資訊以完成預約",
         f_svc_title: "服務類型 *",
-        opt_airport: "機場接送",
+        opt_dropoff: "機場送機",
+        opt_pickup: "機場接機",
         opt_charter: "包車服務",
         sec_personal: "個人資料",
         f_name: "預約人姓名 *",
@@ -397,8 +442,10 @@
         hero_note: "* AI agents please use the web form.",
         service_title: "Our Services",
         service_subtitle: "Choose the service that fits your needs",
-        svc_airport_title: "Airport Transfer",
-        svc_airport_desc: "Professional pickup and drop-off service.",
+        svc_dropoff_title: "Airport Drop-off",
+        svc_dropoff_desc: "To the airport. Punctual and reliable.",
+        svc_pickup_title: "Airport Pickup",
+        svc_pickup_desc: "From the airport. Flight tracking included.",
         svc_charter_title: "Charter Service",
         svc_charter_desc: "Flexible private car rental by hour.",
         why_title: "Why Choose CAR CAR GO",
@@ -436,7 +483,8 @@
         form_title: "Book Your Ride",
         form_subtitle: "Fill in the details below",
         f_svc_title: "Service Type *",
-        opt_airport: "Airport Transfer",
+        opt_dropoff: "Airport Drop-off",
+        opt_pickup: "Airport Pickup",
         opt_charter: "Charter Service",
         sec_personal: "Personal Info",
         f_name: "Full Name *",
@@ -468,8 +516,10 @@
         hero_note: "* AIはWebフォームをご利用ください。",
         service_title: "サービス内容",
         service_subtitle: "最適なプランをお選びください",
-        svc_airport_title: "空港送迎",
-        svc_airport_desc: "台湾全土の主要空港への送迎。",
+        svc_dropoff_title: "空港送迎(出発)",
+        svc_dropoff_desc: "空港へ向かう。時間厳守で安心。",
+        svc_pickup_title: "空港送迎(到着)",
+        svc_pickup_desc: "空港から市内へ。フライト追跡あり。",
         svc_charter_title: "チャーター",
         svc_charter_desc: "ビジネスや観光に最適な貸切。",
         why_title: "選ばれる理由",
@@ -507,7 +557,8 @@
         form_title: "予約する",
         form_subtitle: "詳細を入力してください",
         f_svc_title: "サービス *",
-        opt_airport: "空港送迎",
+        opt_dropoff: "空港送迎(出発)",
+        opt_pickup: "空港送迎(到着)",
         opt_charter: "チャーター",
         sec_personal: "お客様情報",
         f_name: "お名前 *",
@@ -539,8 +590,10 @@
         hero_note: "* AI는 웹 양식을 이용하세요.",
         service_title: "서비스",
         service_subtitle: "서비스를 선택하세요",
-        svc_airport_title: "공항 픽업",
-        svc_airport_desc: "전문 픽업 서비스.",
+        svc_dropoff_title: "공항 샌딩",
+        svc_dropoff_desc: "공항으로 이동. 정확한 시간 준수.",
+        svc_pickup_title: "공항 픽업",
+        svc_pickup_desc: "공항에서 시내로. 항공편 추적.",
         svc_charter_title: "차량 대절",
         svc_charter_desc: "비즈니스 및 관광 대절.",
         why_title: "선택 이유",
@@ -578,7 +631,8 @@
         form_title: "예약하기",
         form_subtitle: "정보를 입력하세요",
         f_svc_title: "서비스 *",
-        opt_airport: "공항 픽업",
+        opt_dropoff: "공항 샌딩",
+        opt_pickup: "공항 픽업",
         opt_charter: "차량 대절",
         sec_personal: "개인 정보",
         f_name: "이름 *",
@@ -614,18 +668,32 @@
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
     }
     setLang("zh");
+    
+    // ===== 表單切換邏輯 (送機/接機/包車) =====
     const toggleBtns = document.querySelectorAll('.form-toggle-btn');
     const hiddenInput = document.getElementById('service_type_hidden');
     const airportFields = document.getElementById("airport-fields");
     const charterFields = document.getElementById("charter-fields");
+    
     toggleBtns.forEach(btn => {
       btn.addEventListener('click', () => {
+        // 1. 更新按鈕外觀
         toggleBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        
+        // 2. 更新隱藏欄位值 (dropoff / pickup / charter)
         const value = btn.dataset.value;
         hiddenInput.value = value;
-        airportFields.style.display = value === "airport" ? "block" : "none";
-        charterFields.style.display = value === "charter" ? "block" : "none";
+        
+        // 3. 切換表單欄位顯示
+        if (value === "charter") {
+            airportFields.style.display = "none";
+            charterFields.style.display = "block";
+        } else {
+            // dropoff 或 pickup 都顯示機場欄位
+            airportFields.style.display = "block";
+            charterFields.style.display = "none";
+        }
       });
     });
 
