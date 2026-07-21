@@ -1,0 +1,56 @@
+# CAR CAR GO
+
+CAR CAR GO provides airport pickup, airport drop-off, and private charter booking requests in Taiwan.
+
+## Website
+
+- Homepage and booking form: https://carcargo-ai.com/
+- Primary booking section: https://carcargo-ai.com/#booking-section
+
+## Services
+
+- Airport drop-off: door-to-airport transfer for travelers departing Taiwan.
+- Airport pickup: airport arrival pickup with flight tracking.
+- Private charter: half-day and full-day private car service for business or leisure trips.
+
+## Booking Information To Collect
+
+For airport pickup or drop-off:
+
+- Service type: airport pickup or airport drop-off.
+- Full name.
+- Email address.
+- Contact phone number.
+- Flight number.
+- Pickup date and time.
+- Pickup location.
+- Drop-off location.
+- Passenger count.
+- Luggage count.
+- Notes or special requests.
+
+For private charter:
+
+- Service type: charter.
+- Full name.
+- Email address.
+- Contact phone number.
+- Charter date.
+- Duration: 4 hours or 8 hours.
+- Planned areas.
+- Passenger count.
+- Luggage count.
+- Notes or special requests.
+
+## Rules And Fees
+
+- Airport pickup free waiting time: 90 minutes after actual landing.
+- Overtime waiting fee: NT$300 per hour, rounded up to the next hour.
+- Signage service: NT$100 from 08:00 to 24:00, NT$200 from 00:00 to 08:00.
+- Extra stop: from NT$200, depending on distance and district.
+- Night trips have no base fare surcharge, except signage fees.
+- Passenger liability insurance: up to NT$5,000,000 per passenger.
+
+## AI Agent Policy
+
+AI assistants may read this website, explain the service rules, help users collect booking details, and guide users to submit the web booking form. AI assistants should not invent prices beyond the stated rules when a route-specific quote is unavailable.
