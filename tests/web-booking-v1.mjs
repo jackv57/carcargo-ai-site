@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash, webcrypto } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { buildPublic } from "../scripts/build-public.mjs";
 import { stripTypeScriptTypes } from "node:module";
 import { createContext, runInContext, runInThisContext } from "node:vm";
 
@@ -31,7 +35,7 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     const calls = [];
     const targets = [];
     const envReads = [];
-    const values = { MAKE_WEBHOOK_URL: url };
+    const values = { MAKE_WEBHOOK_URL: url, BOOKING_PRODUCTION_ENABLED: "true" };
     if (pin) values.MAKE_4066738_WEBHOOK_SHA256 = createHash("sha256").update(url).digest("hex");
     const submit = build(createHash, { env: { get: name => { envReads.push(name); return values[name]; } } }, (target, options) => {
       assert.ok([url, previewUrl].includes(target));
@@ -110,6 +114,13 @@ export async function runTests(root = new URL("../", import.meta.url)) {
       assert.equal((await s.send(sample, context)).status, 503);
     }
     assert.equal(s.calls.length, 0);
+  });
+  test("production stays closed until explicitly enabled", async () => {
+    const s = server();
+    delete s.values.BOOKING_PRODUCTION_ENABLED;
+    assert.equal((await s.send()).status, 503);
+    assert.equal(s.targets.length, 0);
+    assert.equal(s.envReads.includes("MAKE_WEBHOOK_URL"), false);
   });
   test("validates required fields, enums and string types", async () => {
     const s = server();
@@ -208,8 +219,10 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     get("success-message").hidden = true;
     const calls = [];
     const { request_id, ...formData } = draft;
+    const clipboard = [];
     const context = createContext({
       document: { getElementById: get, querySelector: () => element(), querySelectorAll: () => [], documentElement: {} },
+      navigator: { clipboard: { async writeText(value) { clipboard.push(value); } } },
       window: element(), crypto: webcrypto, TextEncoder, Uint8Array, URLSearchParams, AbortSignal,
       FormData: class { constructor() { return Object.entries(formData); } },
       sessionStorage: { getItem: k => storage.get(k), setItem: (k, v) => storage.set(k, v), removeItem: k => storage.delete(k) },
@@ -221,14 +234,18 @@ export async function runTests(root = new URL("../", import.meta.url)) {
       },
     });
     runInContext(client, context);
-    return { get, calls, submit: () => get("booking-form").listeners.submit({ preventDefault() {} }), context };
+    return { get, calls, clipboard, submit: () => get("booking-form").listeners.submit({ preventDefault() {} }), context };
   }
 
+  test("native form fallback cannot put booking details in a URL", () => {
+    assert.match(markup, /<form id="booking-form" method="post" action="\/\.netlify\/functions\/submit">/);
+    assert.match(markup, /<meta name="referrer" content="no-referrer"/);
+  });
   test("front end supports four locale strings and phone copy", () => {
     const p = page();
     for (const [lang, tag] of Object.entries({ zh: "zh-TW", en: "en", jp: "ja", kr: "ko" })) {
       assert.equal(runInContext(`setLang("${lang}"); document.documentElement.lang`, p.context), tag);
-      assert.ok(runInContext(`T.${lang}.request_conflict && T.${lang}.succ_retry && T.${lang}.retry_blocked`, p.context));
+      assert.ok(runInContext(`T.${lang}.request_conflict && T.${lang}.succ_retry && T.${lang}.retry_blocked && T.${lang}.succ_pending_title !== T.${lang}.succ_title`, p.context));
     }
     p.get("booking-contact").value = sample.contact;
     p.get("same-contact").checked = true;
@@ -244,6 +261,7 @@ export async function runTests(root = new URL("../", import.meta.url)) {
       number ||= p.get("number").textContent;
       assert.equal(p.get("number").textContent, number);
       assert.equal(p.get("booking-processing").hidden, true);
+      assert.equal(p.get("booking-result-title").dataset.i18n, "succ_title");
     }
   });
   test("front end 202 allows same-data retry and hides the order number", async () => {
@@ -251,6 +269,9 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     await p.submit();
     assert.equal(p.get("booking-number").hidden, true);
     assert.equal(p.get("booking-processing").hidden, false);
+    assert.equal(p.get("booking-result-title").dataset.i18n, "succ_pending_title");
+    assert.equal(p.get("reference-value").textContent, p.calls[0].request_id);
+    assert.equal(p.get("booking-reference").hidden, false);
     p.get("booking-retry").listeners.click();
     await p.submit();
     assert.equal(p.calls[0].request_id, p.calls[1].request_id);
@@ -260,6 +281,7 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     const p = page(storage, data => receipt(409, "conflict", "", data.request_id));
     await p.submit();
     assert.equal(p.get("booking-error").dataset.i18n, "request_conflict");
+    assert.equal(p.get("reference-value").textContent, p.calls[0].request_id);
     const changed = page(storage, null, { ...sample, notes: "changed" });
     await changed.submit();
     assert.equal(changed.get("booking-error").dataset.i18n, "retry_blocked");
@@ -270,7 +292,9 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     const first = page(storage, () => { throw Error("mock network failure"); });
     await first.submit();
     assert.equal(first.get("booking-error").dataset.i18n, "delivery_unknown");
+    assert.equal(first.get("reference-value").textContent, first.calls[0].request_id);
     const next = page(storage, data => receipt(200, "recorded", "CCG-" + data.request_id, data.request_id));
+    assert.equal(next.get("reference-value").textContent, first.calls[0].request_id);
     await next.submit();
     assert.equal(first.calls[0].request_id, next.calls[0].request_id);
   });
@@ -285,6 +309,39 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     assert.equal(blocked.get("booking-error").dataset.i18n, "retry_storage");
   });
 
+  test("exception reference can be copied without adding booking details to contact URLs", async () => {
+    const p = page(new Map(), data => receipt(409, "conflict", "", data.request_id));
+    await p.submit();
+    await p.get("copy-reference").listeners.click();
+    assert.deepEqual(p.clipboard, [p.calls[0].request_id]);
+    assert.match(markup, /href="mailto:support@carcargo-ai\.com"/);
+    const contactLinks = [...markup.matchAll(/href="((?:mailto:|https:\/\/lin\.ee)[^"]+)"/g)];
+    assert.ok(contactLinks.every(([, url]) => !url.includes("?")));
+    assert.doesNotMatch(client, /\.href\s*=/);
+  });
+
+  test("static build publishes only public paths and rejects stray output", async () => {
+    const target = await mkdtemp(join(tmpdir(), "ccg-public-test-"));
+    try {
+      await buildPublic(fileURLToPath(root), target);
+      assert.equal((await readdir(target)).sort().join(","), "assets,index.html,llms.txt,robots.txt,sitemap.xml");
+      await writeFile(join(target, "unexpected.private"), "");
+      await assert.rejects(buildPublic(fileURLToPath(root), target), /Unexpected item/);
+    } finally {
+      await rm(target, { recursive: true, force: true });
+    }
+  });
+  test("brand assets keep the entire 4:3 source and valid icon dimensions", async () => {
+    for (const [name, width, height] of [["carcargo-logo-original", 1448, 1086],
+      ["carcargo-logo", 256, 192], ["favicon", 48, 48], ["apple-touch-icon", 180, 180], ["carcargo-share", 1200, 630]]) {
+      const png = await readFile(new URL("assets/" + name + ".png", root));
+      assert.equal(png.toString("ascii", 12, 16), "IHDR");
+      assert.equal(png.readUInt32BE(16), width);
+      assert.equal(png.readUInt32BE(20), height);
+    }
+    assert.equal((markup.match(/src="assets\/carcargo-logo.png" width="256" height="192" alt="CAR CAR GO"/g) ?? []).length, 2);
+    assert.match(markup, /\.brand-image \{[^}]*height: auto/);
+  });
   const results = [];
   for (const [name, run] of tests) {
     await run();

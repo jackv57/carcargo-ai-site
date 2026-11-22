@@ -162,3 +162,7 @@ curl -sS -i -H 'Content-Type: application/json' --data '{}' "${PREVIEW_ORIGIN}/.
 - [ ] 原 UUID、原資料重送預期 `200 recorded`、原編號；使用相同 UUID 改一個欄位預期 `409 conflict`。同 UUID 並行請求後，Sheets 仍只有一列；其中一次可能在寫入尚未完成時回 202。
 - [ ] 用隔離流程的受控測試分支模擬待處理、逾時或壞回執。預期 `202 processing` 或 `502 delivery_unknown`，畫面不顯示編號；重新整理後用原資料重試沿用原 UUID，對帳完成後回原編號，沒有新增列。
 - [ ] 記錄 Preview SHA、測試 UUID、HTTP 狀態、測試表列數及對帳結果。停用測試場景，重查 Production Deploy ID 與 SHA 仍一致，保留 Draft PR 等待下一次授權。
+
+### 正式收單啟用條件
+
+更新版 Function 在 Production 預設回 503。只有個資告知及條款核定、人工流程完成演練並另行授權後，才可在 Production 的 Functions scope 設定 `BOOKING_PRODUCTION_ENABLED=true` 並重新部署。部署設定不應讓這項開關流入 Preview。正式 Make 場景的啟用另需授權。網站以 POST 傳送，異常畫面顯示可複製的原需求參考碼，客服連結本身不帶參考碼或旅客欄位。

@@ -2,43 +2,25 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CAR CAR GO – AI Ready Airport Transfer & Charter</title>
-  <meta name="description" content="CAR CAR GO 提供台灣機場接送、接機、送機與包車服務，支援旅客與 AI Agent 使用網頁表單整理並送出預約需求。" />
+  <title>CAR CAR GO｜Airport Transfer & Charter Requests</title>
+  <meta name="description" content="全年可提交台灣機場接送與包車預約需求，行程、報價及服務安排由人工確認。" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://carcargo-ai.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://carcargo-ai.com/" />
-  <meta property="og:title" content="CAR CAR GO – AI Ready 機場接送與包車服務" />
-  <meta property="og:description" content="台灣機場接送與包車服務，支援 AI Agent 代訂、航班追蹤、透明規則與網頁預約。" />
+  <meta property="og:title" content="CAR CAR GO｜機場接送與包車預約需求" />
+  <meta property="og:description" content="全年可提交台灣機場接送與包車預約需求，行程、報價及服務安排由人工確認。" />
   <meta property="og:site_name" content="CAR CAR GO" />
-  <meta name="twitter:card" content="summary" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TaxiService",
-    "name": "CAR CAR GO",
-    "url": "https://carcargo-ai.com/",
-    "description": "AI Ready 台灣機場接送、接機、送機與包車服務。",
-    "areaServed": [
-      {"@type": "Country", "name": "Taiwan"},
-      {"@type": "Airport", "name": "Taiwan Taoyuan International Airport"},
-      {"@type": "Airport", "name": "Taipei Songshan Airport"}
-    ],
-    "serviceType": ["Airport pickup", "Airport drop-off", "Private charter"],
-    "availableLanguage": ["zh-TW", "en", "ja", "ko"],
-    "potentialAction": {
-      "@type": "ReserveAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://carcargo-ai.com/#booking-section",
-        "inLanguage": ["zh-TW", "en", "ja", "ko"],
-        "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
-      },
-      "result": {"@type": "Reservation", "name": "Airport transfer or charter booking request"}
-    }
-  }
-  </script>
+  <meta property="og:image" content="https://carcargo-ai.com/assets/carcargo-share.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="CAR CAR GO" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://carcargo-ai.com/assets/carcargo-share.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -68,8 +50,16 @@
     header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: var(--bg-light-main); border-bottom: 1px solid var(--border-light); padding: 15px 0; transition: all 0.3s ease; }
     header.scrolled { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border-bottom-color: transparent; }
     .header-content { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
-    .logo-icon { background: var(--primary); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
+    .logo { display: block; flex: 0 0 auto; }
+    .brand-image { display: block; width: clamp(80px, 18vw, 108px); height: auto; }
+    .footer-logo .brand-image { width: 128px; }
+    .header-content { gap: 10px; }
+    #booking-section, #support, #faq, #privacy-status, #terms-status { scroll-margin-top: 130px; }
+    #booking-reference { margin: 1rem auto; text-align: center; }
+    #reference-value { display: block; overflow-wrap: anywhere; margin: 0.5rem 0; }
+    .policy-links { max-width: 760px; margin: auto; }
+    .policy-links details, .policy-links article { margin-block: 16px; }
+    .policy-links summary { cursor: pointer; font-weight: 600; }
     .hero-section { position: relative; background-color: var(--bg-deep-purple); background-image: url("assets/hero-airport-transfer.jpg"); background-position: center; background-size: cover; padding-bottom: 0; text-align: center; color: var(--text-light-on-dark); overflow: hidden; }
     .hero-section::before { content: ""; position: absolute; inset: 0; background: rgba(30, 27, 75, 0.66); }
     .hero-section > * { position: relative; }
@@ -107,6 +97,7 @@
     .same-contact input { width: auto; margin: 0; }
     .booking-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
     #booking-retry[hidden] { display: none; }
+    #booking-reference[hidden] { display: none; }
     .booking-links a { text-decoration: underline; padding: 8px; }
     input:focus, select:focus, textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
     
@@ -150,7 +141,7 @@
 <body>
   <header id="main-header">
     <div class="container header-content">
-      <div class="logo"><div class="logo-icon">C</div> CAR CAR GO</div>
+      <a href="/" class="logo"><img class="brand-image" src="assets/carcargo-logo.png" width="256" height="192" alt="CAR CAR GO" fetchpriority="high" /></a>
       <div class="lang-switcher">
         <button onclick="setLang('zh')" class="active">中文</button>
         <button onclick="setLang('en')">EN</button>
@@ -164,15 +155,14 @@
       <div class="container" style="padding: 80px 24px 60px;">
         <div class="hero-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z"></path></svg>
-            <span data-i18n="hero_badge">AI-Powered Booking Engine</span>
+            <span data-i18n="announcement_title">全年開放預約需求</span>
         </div>
-        <h1 data-i18n="hero_title">AI Ready 機場接送與包車服務</h1>
-        <p class="subtitle" data-i18n="hero_subtitle">支援 AI Agent 代訂・規則透明・安全可靠</p>
+        <h1 data-i18n="hero_title">機場接送與包車預約需求</h1>
+        <p class="subtitle" data-i18n="hero_subtitle">提交需求後由人工確認行程、報價及車輛供應。</p>
         <div class="btn-group">
-          <a href="#booking-section" class="btn" data-i18n="btn_book_web">立即預約 (Web/AI)</a>
-          <a href="https://lin.ee/qgqAwyP" target="_blank" rel="noopener" class="btn secondary" data-i18n="btn_book_line">LINE 自動化預約</a>
+          <a href="#booking-section" class="btn" data-i18n="btn_book_web">提交預約需求</a>
+          <a href="https://lin.ee/qgqAwyP" target="_blank" rel="noopener" class="btn secondary" data-i18n="btn_book_line">LINE 聯絡客服</a>
         </div>
-        <p class="hero-note" style="text-align: center; margin-top: 16px; font-size: 0.9rem;" data-i18n="hero_note">* 兩種方式皆可，AI 助理請使用網頁表單。</p>
       </div>
       <div class="wave-container">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,192L80,197.3C160,203,320,213,480,229.3C640,245,800,267,960,266.7C1120,267,1280,245,1360,234.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
@@ -188,110 +178,43 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="飛機起飛"><g transform="rotate(-17 12 12)"><path d="M3.6 10.8h14.6c2.2 0 3.9 1.1 3.9 2.5s-1.7 2.5-3.9 2.5H3.6c-.8 0-1.4-.6-1.4-1.4v-2.2c0-.8.6-1.4 1.4-1.4z"/><path d="m5.9 10.9-1.6-5c-.2-.6.3-1.1.9-.9l2.5.8 3.4 5.1z"/><path d="m12.2 15.7-2.4 4.4c-.3.6.2 1.2.9 1l2.5-.8 3.1-4.6z"/><path d="m13.3 10.9.5-3.6c.1-.6.7-.9 1.2-.6l1.3.8 2.6 3.4z"/></g><path d="M2 20h9v1H2z"/></svg>
                 </div>
                 <h3 data-i18n="svc_dropoff_title">Airport Drop-off</h3>
-                <p data-i18n="svc_dropoff_desc">Reliable service from your door to the airport terminal.</p>
+                <p data-i18n="svc_dropoff_desc">Request transportation to the airport from your pickup location.</p>
             </div>
             <div class="service-card">
                 <div class="icon-square flight-icon-square">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="飛機抵達"><g transform="rotate(17 12 12)"><path d="M3.6 10.8h14.6c2.2 0 3.9 1.1 3.9 2.5s-1.7 2.5-3.9 2.5H3.6c-.8 0-1.4-.6-1.4-1.4v-2.2c0-.8.6-1.4 1.4-1.4z"/><path d="m5.9 10.9-1.6-5c-.2-.6.3-1.1.9-.9l2.5.8 3.4 5.1z"/><path d="m12.2 15.7-2.4 4.4c-.3.6.2 1.2.9 1l2.5-.8 3.1-4.6z"/><path d="m13.3 10.9.5-3.6c.1-.6.7-.9 1.2-.6l1.3.8 2.6 3.4z"/></g><path d="M2 20h20v1H2z"/></svg>
                 </div>
                 <h3 data-i18n="svc_pickup_title">Airport Pickup</h3>
-                <p data-i18n="svc_pickup_desc">We wait for your flight arrival with punctuality.</p>
+                <p data-i18n="svc_pickup_desc">Request transportation from the airport.</p>
             </div>
             <div class="service-card">
                 <div class="icon-square">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
                 </div>
                 <h3 data-i18n="svc_charter_title">Charter Service</h3>
-                <p data-i18n="svc_charter_desc">Flexible private car rental by hour for your business or leisure</p>
+                <p data-i18n="svc_charter_desc">Request a charter date, duration and itinerary.</p>
             </div>
         </div>
         </section>
         
-        <section class="section-padding container" style="padding-top:0;">
-        <h2 class="section-title" data-i18n="why_title">Why Choose CAR CAR GO</h2>
-        <p class="section-subtitle" data-i18n="why_subtitle">Modern technology meets reliable service</p>
-        <div class="grid-4 feature-grid">
-            <div class="feature-item">
-            <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
-            <h4 data-i18n="why_1_title">API Key Secured</h4>
-            <p data-i18n="why_1_desc">Bank-level encryption</p>
-            </div>
-            <div class="feature-item">
-            <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 13h-2.18c-.37-3.95-3.52-7.1-7.47-7.48V2h-4.7v3.52C3.7 5.9 0.55 9.05 0.18 13H0v6h22v-6z"/></svg></div>
-            <h4 data-i18n="why_2_title">AI Agent Supported</h4>
-            <p data-i18n="why_2_desc">Seamless integration</p>
-            </div>
-            <div class="feature-item">
-            <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2z"/></svg></div>
-            <h4 data-i18n="why_3_title">Global Booking</h4>
-            <p data-i18n="why_3_desc">24/7 support</p>
-            </div>
-            <div class="feature-item">
-            <div class="icon-square center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99z"/></svg></div>
-            <h4 data-i18n="why_4_title">No LINE Required</h4>
-            <p data-i18n="why_4_desc">Direct booking</p>
-            </div>
-        </div>
-        <div class="api-badge-container">
-            <div class="api-badge">
-                API INTEGRATION AVAILABLE. DOCUMENTATION READY.
-            </div>
-        </div>
-        </section>
     </div>
-    
-    <section class="container section-padding" style="padding-bottom:0;">
-      <div class="ai-box">
-        <h3 data-i18n="ai_title">🤖 AI Agent 代訂說明</h3>
-        <p data-i18n="ai_desc">本網站明確授權 AI Agent 代理使用者讀取規則、計算費用並「整理預約資訊」。</p>
-        <code>
-          Task: Assist user with airport transfer booking.<br>
-          Actions: Validate flight, confirm luggage, estimate costs.<br>
-          Policy: No hidden fees, API ready.
-        </code>
-      </div>
-    </section>
-    
-    <section class="section-padding container">
-      <h2 class="section-title" data-i18n="rules_title">Rules & Fees</h2>
-      <div class="grid-2" style="margin-top: 40px;">
-        <div class="rule-card">
-          <h4 data-i18n="rule_punctuality_title">準時保證</h4>
-          <p data-i18n="rule_punctuality_desc">司機將於約定時間前抵達待命。</p>
-          <ul class="check-list">
-             <li data-i18n="rule_p_1">遲到 10 分鐘以上，本次行程免費。</li>
-             <li data-i18n="rule_p_2">依據航班實際落地時間接機。</li>
-          </ul>
-          <h4 style="margin-top: 30px;" data-i18n="rule_waiting_title">接機等待規則</h4>
-          <table class="styled-table">
-             <tr><td data-i18n="wait_free">免費等待</td><td data-i18n="wait_free_desc">航班抵達後 90 分鐘</td></tr>
-             <tr><td data-i18n="wait_overtime">超時費用</td><td><span class="price-tag">NT$300</span> / hr</td></tr>
-             <tr><td data-i18n="wait_calc">計算方式</td><td data-i18n="wait_calc_desc">未滿一小時以一小時計</td></tr>
-          </table>
-        </div>
-        <div class="rule-card">
-          <h4 data-i18n="addon_title">加值服務</h4>
-          <table class="styled-table">
-             <tr><td data-i18n="add_sign_day">舉牌 (08-24)</td><td class="price-tag">NT$100</td></tr>
-             <tr><td data-i18n="add_sign_night">舉牌 (00-08)</td><td class="price-tag">NT$200</td></tr>
-             <tr><td data-i18n="add_stop">額外停靠</td><td class="price-tag">NT$200 起</td></tr>
-          </table>
-          <p style="font-size: 0.9rem; margin-top: 10px;" data-i18n="add_seat">👶 兒童座椅：需提前預約</p>
-          <h4 style="margin-top: 30px;" data-i18n="safe_title">安全與保障</h4>
-          <ul class="check-list">
-            <li data-i18n="safe_1">乘客險每人最高 <strong>500 萬</strong>。</li>
-            <li data-i18n="safe_2">嚴禁疲勞駕駛，夜間不加價。</li>
-            <li data-i18n="safe_3">車內提供免費瓶裝水。</li>
-          </ul>
-        </div>
+
+    <section id="support" class="section-padding container">
+      <h2 class="section-title" data-i18n="announcement_title">全年開放預約需求</h2>
+      <div class="policy-links">
+        <p data-i18n="announcement_body">CAR CAR GO 提供機場接送與包車旅遊預約需求服務。您可隨時透過網站提交需求，我們將由人工進一步確認行程、報價與服務安排。</p>
+        <p data-i18n="announcement_receipt">預約需求提交成功不代表訂單已核定、車輛已安排或租賃契約已成立。</p>
+        <p data-i18n="announcement_line">您也可以透過 CAR CAR GO 官方 LINE 聯絡我們。</p>
+        <p><span data-i18n="support_email">客服信箱：</span> <a href="mailto:support@carcargo-ai.com">support@carcargo-ai.com</a></p>
       </div>
     </section>
 
     <section id="booking-section" class="section-padding container" style="padding-top:0;">
       <h2 class="section-title" data-i18n="form_title">Book Your Ride</h2>
-      <p class="section-subtitle" data-i18n="form_subtitle">Fill in the details below to complete your booking</p>
+      <p class="section-subtitle" data-i18n="form_subtitle">Submit your travel details for manual confirmation.</p>
+      <p class="policy-links" data-i18n="intake_status">正式收單尚未開放。請勿在預覽環境輸入真實旅客資料。</p>
       <div class="booking-card">
-        <form id="booking-form">
+        <form id="booking-form" method="post" action="/.netlify/functions/submit">
           <label data-i18n="f_svc_title">Service Type *</label>
           
           <div class="form-toggle-group">
@@ -370,54 +293,75 @@
     
     <div id="success-message" class="container" hidden tabindex="-1" style="margin: 60px auto; text-align: center;">
       <div style="background: #ECFDF5; padding: 40px; border-radius: 20px; border: 1px solid #10B981; display: inline-block;">
-        <h3 style="color: #059669; font-size: 1.8rem;" data-i18n="succ_title">Booking Request Received</h3>
+        <h3 style="color: #059669; font-size: 1.8rem;" id="booking-result-title" data-i18n="succ_title">Booking Request Received</h3>
         <p id="booking-number" hidden><span data-i18n="succ_order">Order number</span> <strong></strong></p>
-        <p data-i18n="succ_status">Booking status: Pending manual confirmation</p>
+        <p data-i18n="succ_status">Booking status: Pending manual confirmation. This receipt does not confirm a vehicle assignment, an approved booking, or a rental agreement.</p>
         <p id="booking-processing" data-i18n="succ_processing">Your details are being processed. Your order number is not yet confirmed.</p>
         <button id="booking-retry" class="btn" type="button" hidden data-i18n="succ_retry">Return to the form to retry</button>
         <div class="booking-links">
-          <a id="booking-line" href="https://lin.ee/qgqAwyP" data-official-id="" target="_blank" rel="noopener noreferrer" data-i18n="succ_line">Contact us on LINE</a>
-          <a id="booking-wa" data-official-number="" target="_blank" rel="noopener noreferrer" data-i18n="succ_wa">WhatsApp Contact Us</a>
-          <a id="booking-mail" href="mailto:viscont57@gmail.com" data-i18n="succ_mail">Contact us by email</a>
+          <a id="booking-line" href="https://lin.ee/qgqAwyP" target="_blank" rel="noopener noreferrer" data-i18n="succ_line">Contact us on LINE</a>
+          <a id="booking-mail" href="mailto:support@carcargo-ai.com" data-i18n="succ_mail">Contact us by email</a>
         </div>
-        <p id="booking-wa-unavailable" data-i18n="succ_wa_unavailable">WhatsApp support is currently unavailable.</p>
       </div>
     </div>
+    <div id="booking-reference" class="container" hidden>
+      <p data-i18n="reference_label">需求參考碼</p>
+      <code id="reference-value"></code>
+      <button id="copy-reference" class="btn" type="button" data-i18n="reference_copy">複製需求參考碼</button>
+      <a href="mailto:support@carcargo-ai.com" data-i18n="succ_mail">Email 聯繫</a>
+      <p id="reference-copy-status" role="status" hidden></p>
+    </div>
+    <section id="faq" class="section-padding container">
+      <h2 class="section-title" data-i18n="faq_title">常見問題</h2>
+      <div class="policy-links">
+        <details><summary data-i18n="faq_confirm">送出後就已確認行程嗎？</summary><p data-i18n="announcement_receipt">預約需求提交成功不代表訂單已核定、車輛已安排或租賃契約已成立。</p></details>
+        <details><summary data-i18n="faq_change">如何變更或取消需求？</summary><p data-i18n="faq_change_answer">請聯繫客服。如有需求參考碼，請提供該碼。變更、取消及可能費用均須人工確認。</p><a href="mailto:support@carcargo-ai.com">support@carcargo-ai.com</a></details>
+        <article id="privacy-status">
+          <h3 data-i18n="privacy_title">隱私權政策</h3>
+          <p data-i18n="privacy_status">正式個資告知與隱私權政策仍待核定，正式收單尚未開放。個資相關問題請來信客服。</p>
+          <a href="mailto:support@carcargo-ai.com">support@carcargo-ai.com</a>
+        </article>
+        <article id="terms-status">
+          <h3 data-i18n="terms_title">服務條款</h3>
+          <p data-i18n="terms_status">正式服務條款仍待核定。報價、車輛、合作租賃業者、契約及出租單均須依人工確認結果及業者程序辦理。</p>
+        </article>
+      </div>
+    </section>
   </main>
   
   <footer class="dark-footer">
       <div class="container">
           <div class="footer-grid">
               <div class="footer-col">
-                  <a href="#" class="footer-logo">CAR CAR GO</a>
-                  <p>AI Ready 機場接送與包車服務首選。支援全球旅客與 AI Agent 的專業移動解決方案。</p>
+                  <a href="/" class="footer-logo"><img class="brand-image" src="assets/carcargo-logo.png" width="256" height="192" alt="CAR CAR GO" loading="lazy" decoding="async" /></a>
+                  <p data-i18n="hero_title">機場接送與包車預約需求</p>
               </div>
               <div class="footer-col">
-                  <h5>服務項目</h5>
+                  <h5 data-i18n="service_title">服務項目</h5>
                   <ul class="footer-links">
-                      <li><a href="#booking-section">機場接送</a></li>
-                      <li><a href="#booking-section">包車旅遊</a></li>
-                      <li><a href="#booking-section">商務差旅</a></li>
+                      <li><a href="#booking-section" data-i18n="opt_pickup">機場接機</a></li>
+                      <li><a href="#booking-section" data-i18n="opt_charter">包車旅遊</a></li>
+                      <li><a href="#booking-section" data-i18n="opt_dropoff">機場送機</a></li>
                   </ul>
               </div>
               <div class="footer-col">
-                  <h5>客戶支援</h5>
+                  <h5 data-i18n="footer_support">客戶支援</h5>
                   <ul class="footer-links">
-                      <li><a href="#">常見問題 (FAQ)</a></li>
-                      <li><a href="#">服務條款</a></li>
-                      <li><a href="#">隱私權政策</a></li>
+                      <li><a href="#faq" data-i18n="faq_title">常見問題</a></li>
+                      <li><a href="#terms-status" data-i18n="terms_title">服務條款</a></li>
+                      <li><a href="#privacy-status" data-i18n="privacy_title">隱私權政策</a></li>
                   </ul>
               </div>
               <div class="footer-col">
-                  <h5>聯繫我們</h5>
+                  <h5 data-i18n="footer_contact">聯繫我們</h5>
                   <ul class="footer-links">
-                      <li>Email: <a href="mailto:viscont57@gmail.com">viscont57@gmail.com</a></li>
-                      <li>LINE: <a href="https://lin.ee/qgqAwyP" target="_blank" rel="noopener">加入官方帳號</a></li>
+                      <li><span data-i18n="support_email">客服信箱：</span> <a href="mailto:support@carcargo-ai.com">support@carcargo-ai.com</a></li>
+                      <li>LINE: <a href="https://lin.ee/qgqAwyP" target="_blank" rel="noopener" data-i18n="btn_book_line">LINE 聯絡客服</a></li>
                   </ul>
               </div>
           </div>
           <div class="footer-bottom">
-              <p>&copy; 2026 CAR CAR GO. All rights reserved. Powered by AI Automation.</p>
+              <p>&copy; 2026 CAR CAR GO. All rights reserved.</p>
           </div>
       </div>
   </footer>
@@ -431,54 +375,40 @@
     // 更新翻譯物件，加入 送機/接機 的翻譯
     const T = {
       zh: {
-        hero_badge: "AI 驅動的預約引擎",
-        hero_title: "AI Ready <span class='text-accent'>機場接送與包車服務</span>",
-        hero_subtitle: "支援 AI Agent 代訂・規則透明・安全可靠",
-        btn_book_web: "立即預約 (Web/AI)",
-        btn_book_line: "LINE 自動化預約",
-        hero_note: "* 兩種方式皆可，AI 助理請使用網頁表單。",
+        intake_status: "正式收單尚未開放。請勿在預覽環境輸入真實旅客資料。",
+        announcement_title: "全年開放預約需求",
+        announcement_body: "CAR CAR GO 提供機場接送與包車旅遊預約需求服務。您可隨時透過網站提交需求，我們將由人工進一步確認行程、報價與服務安排。",
+        announcement_receipt: "預約需求提交成功不代表訂單已核定、車輛已安排或租賃契約已成立。",
+        announcement_line: "您也可以透過 CAR CAR GO 官方 LINE 聯絡我們。",
+        support_email: "客服信箱：",
+        faq_title: "常見問題",
+        faq_confirm: "送出後就已確認行程嗎？",
+        faq_change: "如何變更或取消需求？",
+        faq_change_answer: "請聯繫客服。如有需求參考碼，請提供該碼。變更、取消及可能費用均須人工確認。",
+        privacy_title: "隱私權政策",
+        privacy_status: "正式個資告知與隱私權政策仍待核定，正式收單尚未開放。個資相關問題請來信客服。",
+        terms_title: "服務條款",
+        terms_status: "正式服務條款仍待核定。報價、車輛、合作租賃業者、契約及出租單均須依人工確認結果及業者程序辦理。",
+        reference_label: "需求參考碼",
+        reference_copy: "複製需求參考碼",
+        reference_copied: "已複製需求參考碼。",
+        reference_copy_fallback: "請選取畫面上的參考碼並手動複製。",
+        footer_support: "客戶支援",
+        footer_contact: "聯繫我們",
+        hero_title: "機場接送與包車預約需求",
+        hero_subtitle: "提交需求後由人工確認行程、報價及車輛供應。",
+        btn_book_web: "提交預約需求",
+        btn_book_line: "LINE 聯絡客服",
+        svc_pickup_desc: "提交抵達機場後的接送需求。",
+        svc_dropoff_desc: "提交由指定地點前往機場的接送需求。",
+        svc_charter_desc: "提交包車日期、時數與行程需求。",
         service_title: "服務項目",
         service_subtitle: "選擇適合您的旅遊服務",
         svc_dropoff_title: "機場送機",
-        svc_dropoff_desc: "從指定地點前往機場，準時可靠。",
         svc_pickup_title: "機場接機",
-        svc_pickup_desc: "專人舉牌接機，依據航班時間彈性調整。",
         svc_charter_title: "包車服務",
-        svc_charter_desc: "彈性時數包車，商務差旅或家庭旅遊的最佳選擇。",
-        why_title: "為什麼選擇 CAR CAR GO",
-        why_subtitle: "現代科技結合可靠服務",
-        why_1_title: "API 金鑰安全",
-        why_1_desc: "銀行級加密保護",
-        why_2_title: "AI Agent 支援",
-        why_2_desc: "完美整合 AI 自動化",
-        why_3_title: "全球預約",
-        why_3_desc: "24小時服務",
-        why_4_title: "免用 LINE",
-        why_4_desc: "網頁直接預約",
-        ai_title: "🤖 AI Agent 代訂說明",
-        ai_desc: "本網站明確授權 AI Agent 代理使用者讀取規則、計算費用並「整理預約資訊」。",
-        rules_title: "規則與費用",
-        rule_punctuality_title: "準時保證",
-        rule_punctuality_desc: "司機早到待命。",
-        rule_p_1: "遲到 10 分鐘以上，本次行程免費。",
-        rule_p_2: "依據航班實際落地時間接機。",
-        rule_waiting_title: "接機等待規則",
-        wait_free: "免費等待",
-        wait_free_desc: "落地後 90 分鐘",
-        wait_overtime: "超時費用",
-        wait_calc: "計算方式",
-        wait_calc_desc: "未滿一小時以一小時計",
-        addon_title: "加值服務",
-        add_sign_day: "舉牌 (08-24)",
-        add_sign_night: "舉牌 (00-08)",
-        add_stop: "額外停靠",
-        add_seat: "👶 兒童座椅：需提前預約",
-        safe_title: "安全與保障",
-        safe_1: "乘客險每人最高 500 萬。",
-        safe_2: "嚴禁疲勞駕駛，夜間不加價。",
-        safe_3: "車內提供免費瓶裝水。",
         form_title: "立即預約行程",
-        form_subtitle: "請填寫下方資訊以完成預約",
+        form_subtitle: "請填寫下方資訊送出預約需求，行程須經人工確認。",
         f_svc_title: "服務類型 *",
         opt_dropoff: "機場送機",
         opt_pickup: "機場接機",
@@ -507,13 +437,12 @@
         f_choose: "請選擇聯繫方式",
         f_phone: "電話",
         succ_title: "預約需求已收到",
+        succ_pending_title: "預約需求處理中",
         succ_order: "訂單編號",
-        succ_status: "預約狀態：待人工確認",
+        succ_status: "預約狀態：待人工確認。此回執不代表已安排車輛、已核定預約或已成立租賃契約。",
         succ_processing: "資料處理中，訂單編號尚未確認。",
         succ_line: "LINE 聯繫客服",
-        succ_wa: "WhatsApp 聯繫客服",
         succ_mail: "Email 聯繫",
-        succ_wa_unavailable: "目前尚未提供 WhatsApp 客服。",
         submitting: "送出中…",
         invalid_fields: "請檢查聯絡電話、Email 及必填欄位。",
         delivery_unknown: "無法確認送單結果。請使用相同資料重試，或聯繫客服。",
@@ -524,54 +453,40 @@
         booking_unavailable: "預約暫時無法送出，請聯繫客服。"
       },
       en: {
-        hero_badge: "AI-Powered Booking Engine",
-        hero_title: "AI-Ready <span class='text-accent'>Airport Transfer & Charter</span>",
-        hero_subtitle: "AI Friendly · Safe & Reliable",
-        btn_book_web: "Book Now (Web/AI)",
-        btn_book_line: "LINE Booking",
-        hero_note: "* AI agents please use the web form.",
+        intake_status: "Live intake is closed. Please keep real traveler data out of the preview environment.",
+        announcement_title: "Booking requests open year-round",
+        announcement_body: "CAR CAR GO accepts airport transfer and charter travel requests. You can submit a request on the website at any time. Our staff will review your itinerary, quote and service arrangements.",
+        announcement_receipt: "Submitting a request successfully does not mean your booking is approved, a vehicle is assigned, or a rental agreement is in place.",
+        announcement_line: "You can also contact us through the official CAR CAR GO LINE account.",
+        support_email: "Support email:",
+        faq_title: "Frequently asked questions",
+        faq_confirm: "Is my trip confirmed when I submit?",
+        faq_change: "How do I change or cancel a request?",
+        faq_change_answer: "Contact support with your request reference if available. Changes, cancellations and any fees require manual confirmation.",
+        privacy_title: "Privacy policy",
+        privacy_status: "The privacy notice and policy are pending approval. Live intake is closed. Email support for privacy questions.",
+        terms_title: "Terms of service",
+        terms_status: "The terms are pending approval. Quotes, vehicles, rental providers, agreements and rental forms follow manual confirmation and the provider’s procedures.",
+        reference_label: "Request reference",
+        reference_copy: "Copy request reference",
+        reference_copied: "Request reference copied.",
+        reference_copy_fallback: "Select the reference shown and copy it manually.",
+        footer_support: "Customer support",
+        footer_contact: "Contact us",
+        hero_title: "Airport transfer and charter requests",
+        hero_subtitle: "Our staff will confirm your itinerary, quote and vehicle availability.",
+        btn_book_web: "Submit a booking request",
+        btn_book_line: "Contact us on LINE",
+        svc_pickup_desc: "Request transportation from the airport.",
+        svc_dropoff_desc: "Request transportation to the airport from your pickup location.",
+        svc_charter_desc: "Request a charter date, duration and itinerary.",
         service_title: "Our Services",
         service_subtitle: "Choose the service that fits your needs",
         svc_dropoff_title: "Airport Drop-off",
-        svc_dropoff_desc: "To the airport. Punctual and reliable.",
         svc_pickup_title: "Airport Pickup",
-        svc_pickup_desc: "From the airport. Flight tracking included.",
         svc_charter_title: "Charter Service",
-        svc_charter_desc: "Flexible private car rental by hour.",
-        why_title: "Why Choose CAR CAR GO",
-        why_subtitle: "Modern technology meets reliability",
-        why_1_title: "API Secured",
-        why_1_desc: "Bank-level encryption",
-        why_2_title: "AI Supported",
-        why_2_desc: "Seamless integration",
-        why_3_title: "Global Booking",
-        why_3_desc: "24/7 support",
-        why_4_title: "No LINE Required",
-        why_4_desc: "Book via web",
-        ai_title: "🤖 AI Agent Instructions",
-        ai_desc: "Authorized for AI Agents to read rules and book.",
-        rules_title: "Rules & Fees",
-        rule_punctuality_title: "Punctuality Guarantee",
-        rule_punctuality_desc: "Drivers arrive early.",
-        rule_p_1: "Late > 10 mins = Free Trip.",
-        rule_p_2: "Tracking actual flight time.",
-        rule_waiting_title: "Waiting Rules",
-        wait_free: "Free Waiting",
-        wait_free_desc: "90 mins after landing",
-        wait_overtime: "Overtime",
-        wait_calc: "Calculation",
-        wait_calc_desc: "Less than 1 hr = 1 hr",
-        addon_title: "Add-ons",
-        add_sign_day: "Signage (Day)",
-        add_sign_night: "Signage (Night)",
-        add_stop: "Extra Stop",
-        add_seat: "👶 Child Seat: Upon request",
-        safe_title: "Safety & Security",
-        safe_1: "Insurance up to 5 Million NTD.",
-        safe_2: "No night surcharge.",
-        safe_3: "Free bottled water.",
         form_title: "Book Your Ride",
-        form_subtitle: "Fill in the details below",
+        form_subtitle: "Submit your travel details for manual confirmation.",
         f_svc_title: "Service Type *",
         opt_dropoff: "Airport Drop-off",
         opt_pickup: "Airport Pickup",
@@ -600,13 +515,12 @@
         f_choose: "Choose a contact method",
         f_phone: "Phone",
         succ_title: "Booking Request Received",
+        succ_pending_title: "Booking Request Processing",
         succ_order: "Order number",
-        succ_status: "Booking status: Pending manual confirmation",
+        succ_status: "Booking status: Pending manual confirmation. This receipt does not confirm a vehicle assignment, an approved booking, or a rental agreement.",
         succ_processing: "Your details are being processed. Your order number is not yet confirmed.",
         succ_line: "Contact us on LINE",
-        succ_wa: "WhatsApp Contact Us",
         succ_mail: "Contact us by email",
-        succ_wa_unavailable: "WhatsApp support is currently unavailable.",
         submitting: "Submitting…",
         invalid_fields: "Check the phone numbers, email and required fields.",
         delivery_unknown: "We could not confirm delivery. Retry with the same details or contact support.",
@@ -617,54 +531,40 @@
         booking_unavailable: "Booking submission is temporarily unavailable. Please contact support."
       },
       jp: {
-        hero_badge: "AI駆動型予約エンジン",
-        hero_title: "AI対応 <span class='text-accent'>空港送迎＆チャーター</span>",
-        hero_subtitle: "AI予約対応・安全安心",
-        btn_book_web: "今すぐ予約",
-        btn_book_line: "LINE 自動予約",
-        hero_note: "* AIはWebフォームをご利用ください。",
+        intake_status: "正式な受付は開始していません。プレビュー環境に実際の旅行者情報を入力しないでください。",
+        announcement_title: "予約リクエストは通年受付",
+        announcement_body: "CAR CAR GOでは空港送迎やチャーターの予約リクエストを受け付けています。ウェブサイトからいつでも送信できます。行程、見積もり、サービス手配は担当者が確認します。",
+        announcement_receipt: "送信が完了しても、予約の確定、車両の手配、レンタル契約の成立を意味するものではありません。",
+        announcement_line: "CAR CAR GOの公式LINEからもお問い合わせいただけます。",
+        support_email: "お問い合わせメール：",
+        faq_title: "よくある質問",
+        faq_confirm: "送信すると行程は確定しますか？",
+        faq_change: "変更やキャンセルはどうすればよいですか？",
+        faq_change_answer: "サポートにお問い合わせください。照会番号がある場合はお伝えください。変更、キャンセルおよび費用は担当者が確認します。",
+        privacy_title: "プライバシーポリシー",
+        privacy_status: "個人情報の告知とプライバシーポリシーは承認待ちです。正式な受付は開始していません。個人情報についてはメールでお問い合わせください。",
+        terms_title: "利用規約",
+        terms_status: "正式な利用規約は承認待ちです。見積もり、車両、提携レンタル事業者、契約書および貸渡書は担当者の確認と事業者の手続きに従います。",
+        reference_label: "照会番号",
+        reference_copy: "照会番号をコピー",
+        reference_copied: "照会番号をコピーしました。",
+        reference_copy_fallback: "表示された照会番号を選択してコピーしてください。",
+        footer_support: "サポート",
+        footer_contact: "お問い合わせ",
+        hero_title: "空港送迎・チャーターの予約リクエスト",
+        hero_subtitle: "行程、見積もりと車両の空き状況は担当者が確認します。",
+        btn_book_web: "予約リクエストを送信",
+        btn_book_line: "LINEで問い合わせる",
+        svc_pickup_desc: "空港からの送迎をリクエストできます。",
+        svc_dropoff_desc: "指定場所から空港への送迎をリクエストできます。",
+        svc_charter_desc: "チャーターの日付、時間、行程をお知らせください。",
         service_title: "サービス内容",
         service_subtitle: "最適なプランをお選びください",
         svc_dropoff_title: "空港送迎(出発)",
-        svc_dropoff_desc: "空港へ向かう。時間厳守で安心。",
         svc_pickup_title: "空港送迎(到着)",
-        svc_pickup_desc: "空港から市内へ。フライト追跡あり。",
         svc_charter_title: "チャーター",
-        svc_charter_desc: "ビジネスや観光に最適な貸切。",
-        why_title: "選ばれる理由",
-        why_subtitle: "最新技術と信頼",
-        why_1_title: "セキュリティ",
-        why_1_desc: "銀行レベルの暗号化",
-        why_2_title: "AI対応",
-        why_2_desc: "スムーズな統合",
-        why_3_title: "グローバル",
-        why_3_desc: "24時間対応",
-        why_4_title: "LINE不要",
-        why_4_desc: "Webから直接予約",
-        ai_title: "🤖 AI予約説明",
-        ai_desc: "AIエージェントによる代理予約を許可。",
-        rules_title: "ルールと料金",
-        rule_punctuality_title: "時間厳守",
-        rule_punctuality_desc: "早めに到着します。",
-        rule_p_1: "10分遅刻で無料。",
-        rule_p_2: "実際の着陸時間に対応。",
-        rule_waiting_title: "待機ルール",
-        wait_free: "無料待機",
-        wait_free_desc: "着陸後90分",
-        wait_overtime: "延長料金",
-        wait_calc: "計算",
-        wait_calc_desc: "1時間未満は1時間",
-        addon_title: "オプション",
-        add_sign_day: "看板 (昼)",
-        add_sign_night: "看板 (夜)",
-        add_stop: "追加停車",
-        add_seat: "👶 チャイルドシート：要予約",
-        safe_title: "安全保証",
-        safe_1: "保険最高500万台湾ドル。",
-        safe_2: "夜間割増なし。",
-        safe_3: "無料ミネラルウォーター。",
         form_title: "予約する",
-        form_subtitle: "詳細を入力してください",
+        form_subtitle: "ご希望の行程を送信してください。担当者が内容を確認します。",
         f_svc_title: "サービス *",
         opt_dropoff: "空港送迎(出発)",
         opt_pickup: "空港送迎(到着)",
@@ -693,13 +593,12 @@
         f_choose: "連絡方法を選択してください",
         f_phone: "電話",
         succ_title: "予約リクエストを受け付けました",
+        succ_pending_title: "予約リクエストを処理中です",
         succ_order: "予約番号",
-        succ_status: "予約状況：担当者による確認待ち",
+        succ_status: "予約状況：担当者による確認待ちです。この受領通知は、車両の手配、予約の確定、またはレンタル契約の成立を示すものではありません。",
         succ_processing: "処理中です。予約番号はまだ確定していません。",
         succ_line: "LINEで問い合わせる",
-        succ_wa: "WhatsAppで問い合わせる",
         succ_mail: "メールで問い合わせる",
-        succ_wa_unavailable: "現在WhatsAppでのお問い合わせはご利用いただけません。",
         submitting: "送信中…",
         invalid_fields: "電話番号、メールアドレス、必須項目をご確認ください。",
         delivery_unknown: "送信結果を確認できませんでした。同じ内容で再試行するか、お問い合わせください。",
@@ -710,54 +609,40 @@
         booking_unavailable: "現在ご予約を送信できません。お問い合わせください。"
       },
       kr: {
-        hero_badge: "AI 기반 예약 엔진",
-        hero_title: "AI 지원 <span class='text-accent'>공항 픽업 & 차량 대절</span>",
-        hero_subtitle: "AI 예약 지원 · 안전",
-        btn_book_web: "지금 예약",
-        btn_book_line: "LINE 예약",
-        hero_note: "* AI는 웹 양식을 이용하세요.",
+        intake_status: "정식 접수는 시작되지 않았습니다. 미리보기 환경에 실제 여행자 정보를 입력하지 마세요.",
+        announcement_title: "연중 예약 요청 접수",
+        announcement_body: "CAR CAR GO는 공항 이동 및 전세 차량 여행의 예약 요청을 받습니다. 웹사이트에서 언제든 요청을 제출할 수 있으며, 일정과 견적, 서비스 준비는 담당자가 확인합니다.",
+        announcement_receipt: "요청을 제출했다고 해서 예약 승인, 차량 배정 또는 차량 임대 계약이 확정된 것은 아닙니다.",
+        announcement_line: "CAR CAR GO 공식 LINE으로도 문의하실 수 있습니다.",
+        support_email: "고객지원 이메일:",
+        faq_title: "자주 묻는 질문",
+        faq_confirm: "요청을 제출하면 일정이 확정되나요?",
+        faq_change: "요청을 변경하거나 취소하려면 어떻게 하나요?",
+        faq_change_answer: "고객센터에 문의해 주세요. 요청 참조 코드가 있다면 알려 주세요. 변경, 취소 및 비용은 담당자가 확인합니다.",
+        privacy_title: "개인정보 처리방침",
+        privacy_status: "개인정보 고지와 처리방침은 승인 대기 중이며 정식 접수는 시작되지 않았습니다. 개인정보 관련 문의는 이메일로 보내 주세요.",
+        terms_title: "이용약관",
+        terms_status: "정식 이용약관은 승인 대기 중입니다. 견적, 차량, 제휴 렌터카 업체, 계약서 및 대여 서류는 담당자 확인 및 업체 절차에 따릅니다.",
+        reference_label: "요청 참조 코드",
+        reference_copy: "요청 참조 코드 복사",
+        reference_copied: "요청 참조 코드를 복사했습니다.",
+        reference_copy_fallback: "표시된 참조 코드를 선택하여 직접 복사해 주세요.",
+        footer_support: "고객지원",
+        footer_contact: "문의하기",
+        hero_title: "공항 이동 및 전세 차량 예약 요청",
+        hero_subtitle: "일정, 견적 및 차량 이용 가능 여부는 담당자가 확인합니다.",
+        btn_book_web: "예약 요청 제출",
+        btn_book_line: "LINE으로 문의",
+        svc_pickup_desc: "공항에서 출발하는 이동을 요청하세요.",
+        svc_dropoff_desc: "지정 장소에서 공항까지 이동을 요청하세요.",
+        svc_charter_desc: "전세 차량의 날짜, 이용 시간과 일정을 알려 주세요.",
         service_title: "서비스",
         service_subtitle: "서비스를 선택하세요",
         svc_dropoff_title: "공항 샌딩",
-        svc_dropoff_desc: "공항으로 이동. 정확한 시간 준수.",
         svc_pickup_title: "공항 픽업",
-        svc_pickup_desc: "공항에서 시내로. 항공편 추적.",
         svc_charter_title: "차량 대절",
-        svc_charter_desc: "비즈니스 및 관광 대절.",
-        why_title: "선택 이유",
-        why_subtitle: "기술과 신뢰",
-        why_1_title: "보안",
-        why_1_desc: "데이터 암호화",
-        why_2_title: "AI 지원",
-        why_2_desc: "완벽한 통합",
-        why_3_title: "글로벌",
-        why_3_desc: "24시간 지원",
-        why_4_title: "LINE 불필요",
-        why_4_desc: "직접 예약",
-        ai_title: "🤖 AI 안내",
-        ai_desc: "AI 에이전트 대리 예약 허용.",
-        rules_title: "규칙 및 요금",
-        rule_punctuality_title: "정시 보장",
-        rule_punctuality_desc: "기사 조기 도착.",
-        rule_p_1: "10분 지각 시 무료.",
-        rule_p_2: "실제 착륙 시간 기준.",
-        rule_waiting_title: "대기 규칙",
-        wait_free: "무료 대기",
-        wait_free_desc: "착륙 후 90분",
-        wait_overtime: "초과 요금",
-        wait_calc: "계산",
-        wait_calc_desc: "1시간 미만은 1시간",
-        addon_title: "추가 옵션",
-        add_sign_day: "피켓 (주간)",
-        add_sign_night: "피켓 (야간)",
-        add_stop: "추가 정차",
-        add_seat: "👶 카시트: 예약 필요",
-        safe_title: "안전 보장",
-        safe_1: "보험 500만 대만달러.",
-        safe_2: "야간 할증 없음.",
-        safe_3: "무료 생수.",
         form_title: "예약하기",
-        form_subtitle: "정보를 입력하세요",
+        form_subtitle: "여정 정보를 보내 주세요. 담당자가 확인합니다.",
         f_svc_title: "서비스 *",
         opt_dropoff: "공항 샌딩",
         opt_pickup: "공항 픽업",
@@ -786,13 +671,12 @@
         f_choose: "연락 방법을 선택하세요",
         f_phone: "전화",
         succ_title: "예약 요청이 접수되었습니다",
+        succ_pending_title: "예약 요청을 처리 중입니다",
         succ_order: "예약 번호",
-        succ_status: "예약 상태: 담당자 확인 대기",
+        succ_status: "예약 상태: 담당자 확인 대기 중입니다. 이 안내는 차량 배정, 예약 확정 또는 차량 임대 계약의 성립을 의미하지 않습니다.",
         succ_processing: "요청을 처리 중입니다. 예약 번호는 아직 확인되지 않았습니다.",
         succ_line: "LINE으로 문의",
-        succ_wa: "WhatsApp으로 문의",
         succ_mail: "이메일로 문의",
-        succ_wa_unavailable: "현재 WhatsApp 문의를 이용할 수 없습니다.",
         submitting: "전송 중…",
         invalid_fields: "전화번호, 이메일 및 필수 항목을 확인해 주세요.",
         delivery_unknown: "전송 결과를 확인할 수 없습니다. 같은 정보로 다시 시도하거나 고객센터에 문의해 주세요.",
@@ -815,7 +699,6 @@
       });
       document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
-      updateContactLinks();
     }
 
     
@@ -872,7 +755,6 @@
       form.hidden = false;
       submitBtn.focus();
     });
-    let orderId = "";
 
     function syncWhatsApp() {
       whatsapp.readOnly = sameContact.checked;
@@ -882,23 +764,29 @@
     contact.addEventListener("input", syncWhatsApp);
     window.addEventListener("pageshow", syncWhatsApp);
 
-    const lineLink = document.getElementById("booking-line");
-    const waLink = document.getElementById("booking-wa");
-    const mailLink = document.getElementById("booking-mail");
-    const waNumber = waLink.dataset.officialNumber;
-    const hasWhatsApp = /^[1-9][0-9]{6,14}$/.test(waNumber);
-    waLink.hidden = !hasWhatsApp;
-    document.getElementById("booking-wa-unavailable").hidden = hasWhatsApp;
+    const reference = document.getElementById("booking-reference");
+    const referenceValue = document.getElementById("reference-value");
+    const copyStatus = document.getElementById("reference-copy-status");
 
-    function updateContactLinks() {
-      const message = orderId ? encodeURIComponent(T[currentLang].succ_order + " " + orderId) : "";
-      const lineId = lineLink.dataset.officialId;
-      if (/^@[A-Za-z0-9_.-]+$/.test(lineId)) {
-        lineLink.href = "https://line.me/R/oaMessage/" + encodeURIComponent(lineId) + (message ? "/?" + message : "");
-      }
-      if (hasWhatsApp) waLink.href = "https://wa.me/" + waNumber + (message ? "?text=" + message : "");
-      if (message) mailLink.href = mailLink.href.split("?")[0] + "?subject=" + message;
+    function showReference(id) {
+      referenceValue.textContent = id;
+      reference.hidden = !id;
+      copyStatus.hidden = true;
+      delete copyStatus.dataset.i18n;
     }
+
+    document.getElementById("copy-reference").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(referenceValue.textContent);
+        copyStatus.dataset.i18n = "reference_copied";
+      } catch {
+        copyStatus.dataset.i18n = "reference_copy_fallback";
+      }
+      copyStatus.textContent = T[currentLang][copyStatus.dataset.i18n];
+      copyStatus.hidden = false;
+    });
+
+    try { showReference(sessionStorage.getItem("booking-v1:sent") || ""); } catch {}
 
     async function requestIdFor(data) {
       // Store only a digest and UUID. Write before the first network request.
@@ -925,6 +813,7 @@
       errorMessage.hidden = true;
       delete errorMessage.dataset.i18n;
 
+      let attemptId = "";
       try {
         syncWhatsApp();
         const data = new URLSearchParams(new FormData(form));
@@ -948,6 +837,7 @@
           return;
         }
 
+        attemptId = requestId;
         const hadPriorAttempt = sessionStorage.getItem("booking-v1:sent") === requestId;
         sessionStorage.setItem("booking-v1:sent", requestId);
         const response = await fetch("/.netlify/functions/submit", {
@@ -965,21 +855,25 @@
         const conflict = matchingReceipt && code === 409 && receipt.status === "conflict" && receipt.order_id === "";
 
         if (recorded || processing) {
+          showReference(processing ? requestId : "");
           if (recorded) {
             sessionStorage.removeItem(pendingKey);
             sessionStorage.removeItem("booking-v1:sent");
           }
-          orderId = recorded ? receipt.order_id : "";
+          const resultTitle = document.getElementById("booking-result-title");
+          const titleKey = recorded ? "succ_title" : "succ_pending_title";
+          resultTitle.dataset.i18n = titleKey;
+          resultTitle.textContent = T[currentLang][titleKey];
           const bookingNumber = document.getElementById("booking-number");
-          bookingNumber.querySelector("strong").textContent = orderId;
+          bookingNumber.querySelector("strong").textContent = recorded ? receipt.order_id : "";
           bookingNumber.hidden = !recorded;
           document.getElementById("booking-processing").hidden = !processing;
           retryButton.hidden = !processing;
-          updateContactLinks();
-          form.hidden = true;
+              form.hidden = true;
           success.hidden = false;
           success.focus();
         } else if (conflict) {
+          showReference(requestId);
           errorMessage.dataset.i18n = "request_conflict";
         } else if (receipt?.error === "invalid_fields" || receipt?.error === "payload_too_large" ||
                    receipt?.error === "booking_unavailable") {
@@ -989,13 +883,16 @@
             if (!hadPriorAttempt) {
               sessionStorage.removeItem(pendingKey);
               sessionStorage.removeItem("booking-v1:sent");
+              showReference("");
             }
           }
           errorMessage.dataset.i18n = receipt.error === "payload_too_large" ? "invalid_fields" : receipt.error;
         } else {
+          showReference(attemptId);
           errorMessage.dataset.i18n = "delivery_unknown";
         }
       } catch {
+        if (attemptId) showReference(attemptId);
         errorMessage.dataset.i18n = "delivery_unknown";
       } finally {
         submitBtn.disabled = false;

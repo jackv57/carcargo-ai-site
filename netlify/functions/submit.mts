@@ -117,6 +117,10 @@ export default async (request: Request, context?: { deploy?: { context?: string 
   const preview = deployContext === "deploy-preview";
   if (!preview && deployContext !== "production") return json({ error: "booking_unavailable" }, 503);
 
+  if (!preview && Netlify.env.get("BOOKING_PRODUCTION_ENABLED") !== "true") {
+    return json({ error: "booking_unavailable" }, 503);
+  }
+
   const url = Netlify.env.get(preview ? "MAKE_PREVIEW_WEBHOOK_URL" : "MAKE_WEBHOOK_URL")?.trim();
   const pin = Netlify.env.get(preview ? "MAKE_PREVIEW_WEBHOOK_SHA256" : "MAKE_4066738_WEBHOOK_SHA256");
   // Require canonical Make host casing so the same receiver cannot have two URL digests.

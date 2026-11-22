@@ -1,6 +1,17 @@
 [build]
-  publish = "."
+  command = "node scripts/build-public.mjs"
+  publish = "public-site"
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/AI網站/*"
+  to = "/#booking-section"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
