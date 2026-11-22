@@ -8,22 +8,22 @@
 
 [[redirects]]
   from = "/AI%E7%B6%B2%E7%AB%99"
-  to = "/#booking-section"
+  to = "/#support"
   status = 301
 
 [[redirects]]
   from = "/AI%E7%B6%B2%E7%AB%99/*"
-  to = "/#booking-section"
+  to = "/#support"
   status = 301
 
 [[redirects]]
   from = "/ai%E7%B6%B2%E7%AB%99"
-  to = "/#booking-section"
+  to = "/#support"
   status = 301
 
 [[redirects]]
   from = "/ai%E7%B6%B2%E7%AB%99/*"
-  to = "/#booking-section"
+  to = "/#support"
   status = 301
 
 [[headers]]

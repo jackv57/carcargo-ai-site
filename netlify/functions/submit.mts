@@ -54,6 +54,14 @@ async function sendToMake(url: string, payload: string, requestId: string) {
 export default async (request: Request, context?: { deploy?: { context?: string } }) => {
   if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405);
 
+  const deployContext = context?.deploy?.context;
+  const preview = deployContext === "deploy-preview";
+  if (!preview && deployContext !== "production") return json({ error: "booking_unavailable" }, 503);
+
+  if (!preview && Netlify.env.get("BOOKING_PRODUCTION_ENABLED") !== "true") {
+    return json({ error: "booking_unavailable" }, 503);
+  }
+
   let incoming: Record<string, unknown>;
   try {
     if (request.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") {
@@ -111,14 +119,6 @@ export default async (request: Request, context?: { deploy?: { context?: string 
     if (value && (!/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)) || Number(value) < min)) {
       return json({ error: "invalid_fields" }, 400);
     }
-  }
-
-  const deployContext = context?.deploy?.context;
-  const preview = deployContext === "deploy-preview";
-  if (!preview && deployContext !== "production") return json({ error: "booking_unavailable" }, 503);
-
-  if (!preview && Netlify.env.get("BOOKING_PRODUCTION_ENABLED") !== "true") {
-    return json({ error: "booking_unavailable" }, 503);
   }
 
   const url = Netlify.env.get(preview ? "MAKE_PREVIEW_WEBHOOK_URL" : "MAKE_WEBHOOK_URL")?.trim();

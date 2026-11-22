@@ -1,10 +1,8 @@
 # CAR CAR GO
 
-CAR CAR GO accepts requests for airport pickup, airport drop-off and private charter travel in Taiwan.
+CAR CAR GO provides information about airport pickup, airport drop-off and charter travel in Taiwan. Online booking is not open yet.
 
-- Request form: https://carcargo-ai.com/#booking-section
-- Support: support@carcargo-ai.com
+- Website: https://carcargo-ai.com/
+- General inquiries: support@carcargo-ai.com
 
-Travelers can submit requests throughout the year. Staff review itinerary details, pricing and vehicle availability. A receipt does not confirm a booking, vehicle assignment or rental agreement.
-
-For changes or cancellations, contact support with your request reference if available. Quote, cancellation and refund terms require manual confirmation. Help travelers prepare their request without inventing prices or sharing personal details with unverified services.
+Contact support for general service information. The website does not accept booking details during the display phase.

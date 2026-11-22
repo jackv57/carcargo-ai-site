@@ -4,7 +4,7 @@ import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildPublic } from "../scripts/build-public.mjs";
+import { buildPublic, renderPublicPage } from "../scripts/build-public.mjs";
 import { stripTypeScriptTypes } from "node:module";
 import { createContext, runInContext, runInThisContext } from "node:vm";
 
@@ -27,7 +27,8 @@ export async function runTests(root = new URL("../", import.meta.url)) {
   const build = runInThisContext("(createHash, Netlify, fetch, AbortSignal) => {" +
     source.replace(/^import[^\n]+\n/, "").replace("export default", "return") + "}");
   const markup = await file("index.html");
-  const client = markup.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const scripts = html => [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(([, body]) => body).join("\n");
+  const client = scripts(renderPublicPage(markup, "deploy-preview"));
   const tests = [];
   const test = (name, fn) => tests.push([name, fn]);
 
@@ -46,7 +47,7 @@ export async function runTests(root = new URL("../", import.meta.url)) {
       targets.push(target);
       return upstream(data, options);
     }, { timeout: ms => { assert.equal(ms, 12_000); return AbortSignal.timeout(10); } });
-    return { calls, targets, values, envReads, send: (data = sample, context = { deploy: { context: "production" } }) => submit(new Request("http://localhost/submit", {
+    return { calls, targets, values, envReads, submit, send: (data = sample, context = { deploy: { context: "production" } }) => submit(new Request("http://localhost/submit", {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data),
     }), context) };
   }
@@ -121,6 +122,20 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     assert.equal((await s.send()).status, 503);
     assert.equal(s.targets.length, 0);
     assert.equal(s.envReads.includes("MAKE_WEBHOOK_URL"), false);
+  });
+  test("closed production and unknown contexts reject POST before reading its body", async () => {
+    const s = server();
+    let reads = 0;
+    const request = { method: "POST", async text() { reads++; throw Error("Unexpected body read"); } };
+    for (const flag of [undefined, "false", "TRUE"]) {
+      s.values.BOOKING_PRODUCTION_ENABLED = flag;
+      assert.equal((await s.submit(request, { deploy: { context: "production" } })).status, 503);
+    }
+    s.values.BOOKING_PRODUCTION_ENABLED = "true";
+    assert.equal((await s.submit(request, { deploy: { context: "unknown" } })).status, 503);
+    assert.equal(reads, 0);
+    assert.ok(s.envReads.every(key => key === "BOOKING_PRODUCTION_ENABLED"));
+    assert.equal(s.targets.length, 0);
   });
   test("validates required fields, enums and string types", async () => {
     const s = server();
@@ -240,6 +255,8 @@ export async function runTests(root = new URL("../", import.meta.url)) {
   test("native form fallback cannot put booking details in a URL", () => {
     assert.match(markup, /<form id="booking-form" method="post" action="\/\.netlify\/functions\/submit">/);
     assert.match(markup, /<meta name="referrer" content="no-referrer"/);
+    assert.match(renderPublicPage(markup, "deploy-preview"), /<form[^>]+>\s*<fieldset id="booking-fields" disabled>/);
+    assert.match(client, /document\.getElementById\("booking-fields"\)\.disabled = false/);
   });
   test("front end supports four locale strings and phone copy", () => {
     const p = page();
@@ -320,6 +337,32 @@ export async function runTests(root = new URL("../", import.meta.url)) {
     assert.doesNotMatch(client, /\.href\s*=/);
   });
 
+  test("only explicit Deploy Preview renders booking inputs and submission script", () => {
+    for (const context of [undefined, "production", "branch-deploy", "dev", "deploy-preview ", "unknown"]) {
+      const html = renderPublicPage(markup, context);
+      assert.doesNotMatch(html, /<form\b|<input\b|<textarea\b|\/\.netlify\/functions\/submit|preview-booking-markup/);
+      assert.match(html, /data-i18n="announcement_title">線上預約尚未開放/);
+      for (const key of ["support", "services"]) assert.match(html, new RegExp(`id="${key}"`));
+    }
+    const preview = renderPublicPage(markup, "deploy-preview");
+    assert.match(preview, /id="booking-form"/);
+    assert.match(preview, /data-i18n="intake_status">這是測試預覽，請勿輸入真實旅客資料/);
+    assert.doesNotMatch(preview, /<template|MAKE_(?:PREVIEW_|4066738_)?WEBHOOK|https:\/\/hook\./);
+  });
+  test("display and Preview have consistent closed notices and all supported translations", () => {
+    const display = renderPublicPage(markup, "production");
+    const preview = renderPublicPage(markup, "deploy-preview");
+    const dictionary = runInThisContext(scripts(display).match(/const T = ([\s\S]*?);\s*let currentLang/)[1].replace(/^\{/, "({") + ")");
+    const closed = { zh: "線上預約尚未開放", en: "Online booking is not open yet", jp: "オンライン予約はまだ開始していません", kr: "온라인 예약은 아직 열리지 않았습니다" };
+    const warnings = { zh: "真實旅客資料", en: "real traveler data", jp: "実際の旅行者情報", kr: "실제 여행자 정보" };
+    for (const [lang, message] of Object.entries(closed)) {
+      assert.equal(dictionary[lang].announcement_title, message);
+      assert.ok(dictionary[lang].intake_status.includes(warnings[lang]));
+      for (const html of [display, preview]) {
+        for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(dictionary[lang][key], `${lang}: ${key}`);
+      }
+    }
+  });
   test("static build publishes only public paths and rejects stray output", async () => {
     const target = await mkdtemp(join(tmpdir(), "ccg-public-test-"));
     try {

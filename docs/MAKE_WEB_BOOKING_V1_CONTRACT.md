@@ -166,3 +166,11 @@ curl -sS -i -H 'Content-Type: application/json' --data '{}' "${PREVIEW_ORIGIN}/.
 ### 正式收單啟用條件
 
 更新版 Function 在 Production 預設回 503。只有個資告知及條款核定、人工流程完成演練並另行授權後，才可在 Production 的 Functions scope 設定 `BOOKING_PRODUCTION_ENABLED=true` 並重新部署。部署設定不應讓這項開關流入 Preview。正式 Make 場景的啟用另需授權。網站以 POST 傳送，異常畫面顯示可複製的原需求參考碼，客服連結本身不帶參考碼或旅客欄位。
+
+## 展示模式發布驗收清單（待另行授權）
+
+1. **核准發布範圍。** 此版正式網站只展示品牌、服務與客服資訊。Netlify 建置階段的 `CONTEXT` 必須恰為 `deploy-preview` 才會產生測試表單與送單程式。Production、Branch Deploy、本機預設與未知情境均產出展示頁。建置僅讀取情境，無需 Webhook URL 或 Token。 [Netlify 建置環境變數](https://docs.netlify.com/build/configure-builds/environment-variables/)
+2. **檢查展示產物。** 正式預覽產物應有 Logo、三種服務、四語「線上預約尚未開放」、客服 Email 與既有 LINE。頁面原始碼不可含預約欄位、送出按鈕或送單腳本。停用 JavaScript 後重查。FAQ 與隱私／條款待核定狀態仍可查閱。
+3. **檢查 Preview。** 只有 Preview 出現測試表單及四語「勿輸入真實旅客資料」警語。關閉 JavaScript 後所有輸入與送出控制均保持停用。欄位與回執用 Mock 核對。對已授權的 Preview 可探測 GET 405 與空 JSON 400，不送出有效資料。
+4. **檢查正式後端。** 保持 `BOOKING_PRODUCTION_ENABLED` 未設定或停用。Function 以 Netlify 執行階段 `context.deploy.context` 驗證情境。正式停用或未知情境的 POST 直接回 503，在讀取正文或 Webhook 設定前結束。另行批准發布後，可先用 GET 及空 JSON 確認正式 Function 路由與 503 門檻，禁止用真實旅客資料探測。
+5. **切換至正式收單。** 這次的正式建置始終只展示。第二階段須提供已核准的個資告知、服務條款、合作租賃業者責任資訊與人工接單驗收結果，再審核包含正式表單及適用文字的發布版本。取得另行授權後才可設定 Production Functions 的 `BOOKING_PRODUCTION_ENABLED=true`，依既有部署流程發布。保留 Preview 及正式接收端與指紋各自隔離。僅修改前端不能打開後端；僅設定後端開關也不會使本版展示頁出現表單。

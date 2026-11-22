@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CAR CAR GO｜Airport Transfer & Charter Requests</title>
-  <meta name="description" content="全年可提交台灣機場接送與包車預約需求，行程、報價及服務安排由人工確認。" />
+  <title>CAR CAR GO｜Airport Transfer & Charter</title>
+  <meta name="description" content="CAR CAR GO 台灣機場接送與包車旅遊服務介紹。線上預約尚未開放，可透過客服諮詢。" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://carcargo-ai.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://carcargo-ai.com/" />
-  <meta property="og:title" content="CAR CAR GO｜機場接送與包車預約需求" />
-  <meta property="og:description" content="全年可提交台灣機場接送與包車預約需求，行程、報價及服務安排由人工確認。" />
+  <meta property="og:title" content="CAR CAR GO｜機場接送與包車旅遊" />
+  <meta property="og:description" content="CAR CAR GO 台灣機場接送與包車旅遊服務介紹。線上預約尚未開放，可透過客服諮詢。" />
   <meta property="og:site_name" content="CAR CAR GO" />
   <meta property="og:image" content="https://carcargo-ai.com/assets/carcargo-share.png" />
   <meta property="og:image:width" content="1200" />
@@ -54,7 +54,9 @@
     .brand-image { display: block; width: clamp(80px, 18vw, 108px); height: auto; }
     .footer-logo .brand-image { width: 128px; }
     .header-content { gap: 10px; }
-    #booking-section, #support, #faq, #privacy-status, #terms-status { scroll-margin-top: 130px; }
+    #booking-fields { border: 0; min-inline-size: 0; margin: 0; padding: 0; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    #services, #booking-section, #support, #faq, #privacy-status, #terms-status { scroll-margin-top: 130px; }
     #booking-reference { margin: 1rem auto; text-align: center; }
     #reference-value { display: block; overflow-wrap: anywhere; margin: 0.5rem 0; }
     .policy-links { max-width: 760px; margin: auto; }
@@ -155,12 +157,12 @@
       <div class="container" style="padding: 80px 24px 60px;">
         <div class="hero-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z"></path></svg>
-            <span data-i18n="announcement_title">全年開放預約需求</span>
+            <span data-i18n="announcement_title">線上預約尚未開放</span>
         </div>
-        <h1 data-i18n="hero_title">機場接送與包車預約需求</h1>
-        <p class="subtitle" data-i18n="hero_subtitle">提交需求後由人工確認行程、報價及車輛供應。</p>
+        <h1 data-i18n="hero_title">機場接送與包車旅遊</h1>
+        <p class="subtitle" data-i18n="hero_subtitle">了解送機、接機與包車旅遊服務。一般問題可聯繫客服。</p>
         <div class="btn-group">
-          <a href="#booking-section" class="btn" data-i18n="btn_book_web">提交預約需求</a>
+          <a href="#support" class="btn" data-i18n="btn_contact">客服諮詢</a>
           <a href="https://lin.ee/qgqAwyP" target="_blank" rel="noopener" class="btn secondary" data-i18n="btn_book_line">LINE 聯絡客服</a>
         </div>
       </div>
@@ -169,7 +171,7 @@
       </div>
     </section>
     <div style="background-color: var(--bg-content-gray);">
-        <section class="section-padding container">
+        <section id="services" class="section-padding container">
         <h2 class="section-title" data-i18n="service_title">Our Services</h2>
         <p class="section-subtitle" data-i18n="service_subtitle">Choose the service that fits your travel needs</p>
         <div class="grid-3">
@@ -200,21 +202,23 @@
     </div>
 
     <section id="support" class="section-padding container">
-      <h2 class="section-title" data-i18n="announcement_title">全年開放預約需求</h2>
+      <h2 class="section-title" data-i18n="announcement_title">線上預約尚未開放</h2>
       <div class="policy-links">
-        <p data-i18n="announcement_body">CAR CAR GO 提供機場接送與包車旅遊預約需求服務。您可隨時透過網站提交需求，我們將由人工進一步確認行程、報價與服務安排。</p>
-        <p data-i18n="announcement_receipt">預約需求提交成功不代表訂單已核定、車輛已安排或租賃契約已成立。</p>
+        <p data-i18n="announcement_body">目前網站提供機場送機、接機及包車旅遊資訊。線上預約尚未開放；一般服務問題請聯繫客服。</p>
         <p data-i18n="announcement_line">您也可以透過 CAR CAR GO 官方 LINE 聯絡我們。</p>
         <p><span data-i18n="support_email">客服信箱：</span> <a href="mailto:support@carcargo-ai.com">support@carcargo-ai.com</a></p>
       </div>
     </section>
 
+    <template id="preview-booking-markup">
     <section id="booking-section" class="section-padding container" style="padding-top:0;">
-      <h2 class="section-title" data-i18n="form_title">Book Your Ride</h2>
+      <h2 class="section-title" data-i18n="form_title">預覽測試表單</h2>
       <p class="section-subtitle" data-i18n="form_subtitle">Submit your travel details for manual confirmation.</p>
-      <p class="policy-links" data-i18n="intake_status">正式收單尚未開放。請勿在預覽環境輸入真實旅客資料。</p>
+      <p class="policy-links" data-i18n="intake_status">這是測試預覽，請勿輸入真實旅客資料。</p>
       <div class="booking-card">
         <form id="booking-form" method="post" action="/.netlify/functions/submit">
+          <fieldset id="booking-fields" disabled>
+          <legend class="visually-hidden" data-i18n="form_title">預覽測試表單</legend>
           <label data-i18n="f_svc_title">Service Type *</label>
           
           <div class="form-toggle-group">
@@ -287,7 +291,9 @@
           <label data-i18n="f_notes">Notes</label><textarea name="notes" rows="3" placeholder="Special requests..."></textarea>
           <button type="submit" class="btn" style="width: 100%;" data-i18n="btn_submit">Submit Booking</button>
           <p id="booking-error" role="alert" hidden></p>
+          </fieldset>
         </form>
+        <noscript><p>測試表單需要 JavaScript。目前無法填寫或送出。 JavaScript is required to use the test form.</p></noscript>
       </div>
     </section>
     
@@ -311,6 +317,7 @@
       <a href="mailto:support@carcargo-ai.com" data-i18n="succ_mail">Email 聯繫</a>
       <p id="reference-copy-status" role="status" hidden></p>
     </div>
+    </template>
     <section id="faq" class="section-padding container">
       <h2 class="section-title" data-i18n="faq_title">常見問題</h2>
       <div class="policy-links">
@@ -334,14 +341,14 @@
           <div class="footer-grid">
               <div class="footer-col">
                   <a href="/" class="footer-logo"><img class="brand-image" src="assets/carcargo-logo.png" width="256" height="192" alt="CAR CAR GO" loading="lazy" decoding="async" /></a>
-                  <p data-i18n="hero_title">機場接送與包車預約需求</p>
+                  <p data-i18n="hero_title">機場接送與包車旅遊</p>
               </div>
               <div class="footer-col">
                   <h5 data-i18n="service_title">服務項目</h5>
                   <ul class="footer-links">
-                      <li><a href="#booking-section" data-i18n="opt_pickup">機場接機</a></li>
-                      <li><a href="#booking-section" data-i18n="opt_charter">包車旅遊</a></li>
-                      <li><a href="#booking-section" data-i18n="opt_dropoff">機場送機</a></li>
+                      <li><a href="#services" data-i18n="opt_pickup">機場接機</a></li>
+                      <li><a href="#services" data-i18n="opt_charter">包車旅遊</a></li>
+                      <li><a href="#services" data-i18n="opt_dropoff">機場送機</a></li>
                   </ul>
               </div>
               <div class="footer-col">
@@ -375,9 +382,13 @@
     // 更新翻譯物件，加入 送機/接機 的翻譯
     const T = {
       zh: {
-        intake_status: "正式收單尚未開放。請勿在預覽環境輸入真實旅客資料。",
-        announcement_title: "全年開放預約需求",
-        announcement_body: "CAR CAR GO 提供機場接送與包車旅遊預約需求服務。您可隨時透過網站提交需求，我們將由人工進一步確認行程、報價與服務安排。",
+        announcement_title: "線上預約尚未開放",
+        announcement_body: "目前網站提供機場送機、接機及包車旅遊資訊。線上預約尚未開放；一般服務問題請聯繫客服。",
+        hero_title: "機場接送與包車旅遊",
+        hero_subtitle: "了解送機、接機與包車旅遊服務。一般問題可聯繫客服。",
+        btn_contact: "客服諮詢",
+        intake_status: "這是測試預覽，請勿輸入真實旅客資料。",
+        form_title: "預覽測試表單",
         announcement_receipt: "預約需求提交成功不代表訂單已核定、車輛已安排或租賃契約已成立。",
         announcement_line: "您也可以透過 CAR CAR GO 官方 LINE 聯絡我們。",
         support_email: "客服信箱：",
@@ -395,9 +406,6 @@
         reference_copy_fallback: "請選取畫面上的參考碼並手動複製。",
         footer_support: "客戶支援",
         footer_contact: "聯繫我們",
-        hero_title: "機場接送與包車預約需求",
-        hero_subtitle: "提交需求後由人工確認行程、報價及車輛供應。",
-        btn_book_web: "提交預約需求",
         btn_book_line: "LINE 聯絡客服",
         svc_pickup_desc: "提交抵達機場後的接送需求。",
         svc_dropoff_desc: "提交由指定地點前往機場的接送需求。",
@@ -407,7 +415,6 @@
         svc_dropoff_title: "機場送機",
         svc_pickup_title: "機場接機",
         svc_charter_title: "包車服務",
-        form_title: "立即預約行程",
         form_subtitle: "請填寫下方資訊送出預約需求，行程須經人工確認。",
         f_svc_title: "服務類型 *",
         opt_dropoff: "機場送機",
@@ -453,9 +460,13 @@
         booking_unavailable: "預約暫時無法送出，請聯繫客服。"
       },
       en: {
-        intake_status: "Live intake is closed. Please keep real traveler data out of the preview environment.",
-        announcement_title: "Booking requests open year-round",
-        announcement_body: "CAR CAR GO accepts airport transfer and charter travel requests. You can submit a request on the website at any time. Our staff will review your itinerary, quote and service arrangements.",
+        announcement_title: "Online booking is not open yet",
+        announcement_body: "Explore airport drop-off, airport pickup and charter travel. Online booking is not open yet. Contact support for general questions.",
+        hero_title: "Airport transfer and charter travel",
+        hero_subtitle: "Explore airport drop-off, airport pickup and charter travel. Contact support with any questions.",
+        btn_contact: "Contact support",
+        intake_status: "This is a test preview. Do not enter real traveler data.",
+        form_title: "Preview test form",
         announcement_receipt: "Submitting a request successfully does not mean your booking is approved, a vehicle is assigned, or a rental agreement is in place.",
         announcement_line: "You can also contact us through the official CAR CAR GO LINE account.",
         support_email: "Support email:",
@@ -473,9 +484,6 @@
         reference_copy_fallback: "Select the reference shown and copy it manually.",
         footer_support: "Customer support",
         footer_contact: "Contact us",
-        hero_title: "Airport transfer and charter requests",
-        hero_subtitle: "Our staff will confirm your itinerary, quote and vehicle availability.",
-        btn_book_web: "Submit a booking request",
         btn_book_line: "Contact us on LINE",
         svc_pickup_desc: "Request transportation from the airport.",
         svc_dropoff_desc: "Request transportation to the airport from your pickup location.",
@@ -485,7 +493,6 @@
         svc_dropoff_title: "Airport Drop-off",
         svc_pickup_title: "Airport Pickup",
         svc_charter_title: "Charter Service",
-        form_title: "Book Your Ride",
         form_subtitle: "Submit your travel details for manual confirmation.",
         f_svc_title: "Service Type *",
         opt_dropoff: "Airport Drop-off",
@@ -531,9 +538,13 @@
         booking_unavailable: "Booking submission is temporarily unavailable. Please contact support."
       },
       jp: {
-        intake_status: "正式な受付は開始していません。プレビュー環境に実際の旅行者情報を入力しないでください。",
-        announcement_title: "予約リクエストは通年受付",
-        announcement_body: "CAR CAR GOでは空港送迎やチャーターの予約リクエストを受け付けています。ウェブサイトからいつでも送信できます。行程、見積もり、サービス手配は担当者が確認します。",
+        announcement_title: "オンライン予約はまだ開始していません",
+        announcement_body: "空港への送迎、空港でのお迎え、チャーターのサービスをご案内します。オンライン予約はまだ開始していません。一般的なご質問はサポートまでお問い合わせください。",
+        hero_title: "空港送迎・チャーター",
+        hero_subtitle: "空港送迎とチャーターのサービスをご案内します。ご質問はサポートまでお問い合わせください。",
+        btn_contact: "サポートに問い合わせる",
+        intake_status: "これはテスト用プレビューです。実際の旅行者情報は入力しないでください。",
+        form_title: "プレビューテストフォーム",
         announcement_receipt: "送信が完了しても、予約の確定、車両の手配、レンタル契約の成立を意味するものではありません。",
         announcement_line: "CAR CAR GOの公式LINEからもお問い合わせいただけます。",
         support_email: "お問い合わせメール：",
@@ -551,9 +562,6 @@
         reference_copy_fallback: "表示された照会番号を選択してコピーしてください。",
         footer_support: "サポート",
         footer_contact: "お問い合わせ",
-        hero_title: "空港送迎・チャーターの予約リクエスト",
-        hero_subtitle: "行程、見積もりと車両の空き状況は担当者が確認します。",
-        btn_book_web: "予約リクエストを送信",
         btn_book_line: "LINEで問い合わせる",
         svc_pickup_desc: "空港からの送迎をリクエストできます。",
         svc_dropoff_desc: "指定場所から空港への送迎をリクエストできます。",
@@ -563,7 +571,6 @@
         svc_dropoff_title: "空港送迎(出発)",
         svc_pickup_title: "空港送迎(到着)",
         svc_charter_title: "チャーター",
-        form_title: "予約する",
         form_subtitle: "ご希望の行程を送信してください。担当者が内容を確認します。",
         f_svc_title: "サービス *",
         opt_dropoff: "空港送迎(出発)",
@@ -609,9 +616,13 @@
         booking_unavailable: "現在ご予約を送信できません。お問い合わせください。"
       },
       kr: {
-        intake_status: "정식 접수는 시작되지 않았습니다. 미리보기 환경에 실제 여행자 정보를 입력하지 마세요.",
-        announcement_title: "연중 예약 요청 접수",
-        announcement_body: "CAR CAR GO는 공항 이동 및 전세 차량 여행의 예약 요청을 받습니다. 웹사이트에서 언제든 요청을 제출할 수 있으며, 일정과 견적, 서비스 준비는 담당자가 확인합니다.",
+        announcement_title: "온라인 예약은 아직 열리지 않았습니다",
+        announcement_body: "공항 샌딩, 공항 픽업 및 전세 차량 서비스를 안내합니다. 온라인 예약은 아직 열리지 않았습니다. 일반 문의는 고객센터에 연락해 주세요.",
+        hero_title: "공항 이동 및 전세 차량",
+        hero_subtitle: "공항 이동 및 전세 차량 서비스를 확인해 보세요. 문의는 고객센터로 연락해 주세요.",
+        btn_contact: "고객센터 문의",
+        intake_status: "테스트용 미리보기입니다. 실제 여행자 정보를 입력하지 마세요.",
+        form_title: "미리보기 테스트 양식",
         announcement_receipt: "요청을 제출했다고 해서 예약 승인, 차량 배정 또는 차량 임대 계약이 확정된 것은 아닙니다.",
         announcement_line: "CAR CAR GO 공식 LINE으로도 문의하실 수 있습니다.",
         support_email: "고객지원 이메일:",
@@ -629,9 +640,6 @@
         reference_copy_fallback: "표시된 참조 코드를 선택하여 직접 복사해 주세요.",
         footer_support: "고객지원",
         footer_contact: "문의하기",
-        hero_title: "공항 이동 및 전세 차량 예약 요청",
-        hero_subtitle: "일정, 견적 및 차량 이용 가능 여부는 담당자가 확인합니다.",
-        btn_book_web: "예약 요청 제출",
         btn_book_line: "LINE으로 문의",
         svc_pickup_desc: "공항에서 출발하는 이동을 요청하세요.",
         svc_dropoff_desc: "지정 장소에서 공항까지 이동을 요청하세요.",
@@ -641,7 +649,6 @@
         svc_dropoff_title: "공항 샌딩",
         svc_pickup_title: "공항 픽업",
         svc_charter_title: "차량 대절",
-        form_title: "예약하기",
         form_subtitle: "여정 정보를 보내 주세요. 담당자가 확인합니다.",
         f_svc_title: "서비스 *",
         opt_dropoff: "공항 샌딩",
@@ -701,7 +708,10 @@
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
     }
 
-    
+    setLang("zh");
+  </script>
+  <template id="preview-booking-script">
+  <script>
     // ===== 表單切換邏輯 (送機/接機/包車) =====
     const toggleBtns = document.querySelectorAll('.form-toggle-btn');
     const hiddenInput = document.getElementById('service_type_hidden');
@@ -802,7 +812,6 @@
       return id;
     }
 
-    setLang("zh");
     form.addEventListener("submit", async event => {
       event.preventDefault();
       if (submitBtn.disabled || !success.hidden) return;
@@ -904,6 +913,8 @@
         }
       }
     });
+    document.getElementById("booking-fields").disabled = false;
   </script>
+  </template>
 </body>
 </html>
